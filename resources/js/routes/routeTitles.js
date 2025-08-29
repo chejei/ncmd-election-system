@@ -1,0 +1,37 @@
+// central place for route titles
+const routeTitles = {
+  "/admin": "Dashboard",
+  "/admin/candidate": "Candidate",
+  "/admin/candidate/add": "Add Candidate",
+  "/admin/candidate/edit/:candidateId": "Edit Candidate",
+  "/admin/candidate/view/:candidateId": "View Candidate",
+  "/admin/candidate/position": "Position",
+  "/admin/candidate/position/add": "Add Position",
+  "/admin/candidate/position/edit/:positionId": "Edit Position",
+  "/admin/candidate/churches": "Churches",
+  "/admin/candidate/churches/add": "Add Church",
+  "/admin/candidate/churches/edit/:churchId": "Edit Church",
+  "/admin/candidate/questions": "Questions",
+  "/admin/candidate/questions/add": "Add Question",
+  "/admin/candidate/questions/edit/:questionId": "Edit Question",
+  "/admin/voters": "Voters",
+  "/admin/voters/add": "Add Voter",
+  "/admin/voters/edit/:voterId": "Edit Voter",
+  "/admin/voters/view/:voterId": "View Voter",
+  "/admin/voters/import": "Bulk Import",
+  "/admin/settings": "Settings",
+  "/":"NCMD Elections 2025",
+  "/election-result": "Elections Result",
+  "/candidates":"Candidates",
+  "/candidate/:slug":"Candidate",
+  "/thank-you": "Thank you!",
+  "/login": "Admin's Portal",
+  "/voter": "Voter's Portal",
+  "/vote": "Dashboard",
+  "/vote/ballot": "Voter's Ballot",
+  "/terms-and-conditions": "Terms and Conditions",
+  "/privacy-policy": "Privacy Policy",
+  "/guidelines": "Guidelines"
+};
+
+export default routeTitles;

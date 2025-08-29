@@ -1,0 +1,22 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-Ci1WdGR8.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-N0ZOmP7l.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true
+  },
+  "resources/js/assets/ncmd-logo.png": {
+    "file": "assets/ncmd-logo-CvZn_fKs.png",
+    "src": "resources/js/assets/ncmd-logo.png"
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-CzPeo1kp.css",
+    "src": "resources/sass/app.scss",
+    "isEntry": true
+  }
+}
