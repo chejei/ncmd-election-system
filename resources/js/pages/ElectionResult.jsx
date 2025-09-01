@@ -68,14 +68,14 @@ export default function ElectionResult() {
     <>
     <section id="candidates-result" className="bg-white overlay-wrapper">
           <div className="mx-auto sm:px-7 px-4 py-10 lg:py-20 max-w-screen-xl overlay-text">
-                <div className="flex items-center">
+                <div className="flex flex-col gap-4 sm:gap-0 sm:flex-row items-center">
                     <div className="flex-1">
                         <h1 id="typing" className="font-sans font-semibold text-black lg:col-span-12">
                             Alliance Youth of the Philippines
                         </h1>
                         <div className="mt-1 text-white lg:col-span-8 lg:mt-3">
                             <h2 className="text-5xl font-medium lg:text-6xl">
-                                    <span className="text-yellow-500">North Central <br/>Mindanao District</span>  
+                                    <span className="text-yellow-500">North Central <br/>Mindanao District </span>  
                                 <br className="max-sm:hidden lg:hidden xl:block" /> 
                                 <span className="text-red-500 font-bold">Elections</span> 
                                 <span className="text-blue-500"> 2025</span>

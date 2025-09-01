@@ -446,6 +446,8 @@ ul{
     z-index: 0;
     transform: translateY(-50%);
     overflow-y: hidden;
+    right: 0;
+    left: 0;
   }
 
 
@@ -499,4 +501,50 @@ ul{
 .bg-opacity{
   background-color: rgba(255, 255, 255, 0.85);
   background-blend-mode: lighten;
+}
+
+
+.nav-menu{  
+  @include respond(sm) {
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  } 
+     
+  &.open{
+      position: absolute;
+      display: block;
+      top: 130px;
+      left: 0;
+      z-index: 99;
+      background-color: #fff;
+      width: 100%;
+      text-align: center;
+      padding-bottom: 20px;
+
+      @include respond(sm) {
+        top: 160px;
+      }
+
+      li{
+        flex: 0 0 1;
+        margin-bottom: 10px;
+        a:not(.btn){
+          display: block;
+          padding: 10px 0px;
+
+        }
+
+        &:hover{
+          
+
+          a:not(.btn){
+            background-color: var(--color-blue-500);
+            color: #fff;
+          }
+        }
+
+
+      }
+
+    }
 }
