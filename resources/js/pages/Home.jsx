@@ -14,28 +14,28 @@ export default function Home() {
     <>
         <section id="hero" className="bg-gradient-to-b from-black to-slate-950 overlay-wrapper">
           <div className="mx-auto sm:px-7 px-4 max-w-screen-xl overlay-text">
-              <div className="gap-x-6 px-4 py-16 pb-64 mx-auto lg:grid xl:px-0 lg:grid-cols-12">
+              <div className="gap-x-6 px-0 lg:px-4 py-16 pb-20 sm:pb-45 lg:pb-64 mx-auto lg:grid xl:px-0 lg:grid-cols-12">
                   <h1 id="typing" className="font-sans font-semibold text-white lg:col-span-12">
                       Alliance Youth of the Philippines
                   </h1>
                   <div className="mt-1 text-white lg:col-span-8 lg:mt-3">
                       <h2 className="text-5xl font-medium lg:text-7xl">
-                            <span className="text-yellow-500">North Central Mindanao District</span>  
-                          <br className="max-sm:hidden lg:hidden xl:block" /> 
-                          <span className="text-red-500 font-bold">Elections</span> 
-                          <span className="text-blue-500"> 2025</span>
+                            <span className="text-yellow-500">North Central Mindanao District </span>  
+                            <br className="max-sm:hidden lg:hidden xl:block" /> 
+                            <span className="text-red-500 font-bold">Elections</span> 
+                            <span className="text-blue-500"> 2025</span>
                       </h2>
                   </div>
                   
               </div>
           </div>
           <div className='overlay-img'>
-            <img src={homeBanner} />
+            <img src={homeBanner} className='object-contain'/>
           </div>
       </section>
       <section id="imageHero" className="bg-white py-10">
           <div className="mx-auto sm:px-7 px-4 max-w-screen-xl">      
-              <div className="flex flex-col text-center pb-20 pt-20 lg:pt-28 pb-10 text-black max-w-screen-md mx-auto">
+              <div className="max-w-screen-md mx-auto flex flex-col text-center text-black pb-10 pt-0 sm:pb-20 sm:pt-20 lg:pt-28">
                   <h2 className="text-4xl font-medium lg:text-6xl">Electing <span className="text-red-500 font-bold"
                           >Servant</span> Leader</h2>
                   <span className="text-gray-600 pt-5 text-[20px] leading-[26px]">
@@ -64,7 +64,7 @@ export default function Home() {
       </section>
       <section id="image" className="bg-gradient-to-b from-black to-slate-950  bg-black overlay-wrapper">
           <div className="max-w-screen-xl sm:px-7 px-4 py-10 lg:py-20 mx-auto overlay-text">
-              <div className="p-10 lg:p-20 bg-opacity rounded-lg">
+              <div className="p-10 md:p-15 lg:p-20 bg-opacity rounded-lg">
                     <h2 className="text-4xl font-medium lg:text-7xl">Get to Know Your your <span className="text-blue-500 font-bold">Candidates</span>!</h2>
                     <p className="text-gray-600 pt-4 pb-6 text-[20px] leading-[26px]">Before casting your vote, take time to learn about the candidates—their background, values, and commitment to servant leadership. An informed choice builds a stronger future for NCMD.
                           </p>
@@ -74,8 +74,8 @@ export default function Home() {
                     </a>
               </div>
           </div>
-          <div className='overlay-img w-full'>
-            <img className="object-cover w-full" src={ctaOverlay1} />
+          <div className='overlay-img h-[100%]'>
+            <img className="object-cover sm:w-full h-[100%]" src={ctaOverlay1} />
           </div>
       </section>
       <section id="guidelines" className="bg-white text-black gradiant-articles">
@@ -163,8 +163,8 @@ export default function Home() {
                   </div>
               </div>
           </div>
-          <div className='overlay-img'>
-            <img className='opacity-75' src={ctaOverlay} />
+          <div className='overlay-img h-[100%]'>
+            <img className='opacity-75 object-cover sm:w-full h-[100%]' src={ctaOverlay} />
           </div>
       </section>
     </>

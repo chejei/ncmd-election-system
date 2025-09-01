@@ -164,8 +164,7 @@ export default function Settings() {
           <div>
             {activeTab === "settings" && (
                <div className="p-4">
-                  <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-                     {/* Name */}
+                  <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 sm:gap-4">
                      <div className="mb-3">
                      <label className="block text-sm font-medium text-gray-700">Election Name</label>
                      <input
@@ -177,9 +176,7 @@ export default function Settings() {
                         className="w-full border rounded px-3 py-2"
                      />
                      </div>
-
-                     {/* Photo */}
-                     <div className="mb-3 row-span-3">
+                     <div className="mb-3 sm:row-span-3">
                         <div className="flex items-center justify-center w-full">
                            <label
                               htmlFor="site_logo"
@@ -211,8 +208,6 @@ export default function Settings() {
                            </label>
                         </div>
                      </div>
-
-                     {/* Start Date */}
                      <div className="mb-3">
                      <label className="block text-sm font-medium text-gray-700">Start Date</label>
                      <input
@@ -225,8 +220,6 @@ export default function Settings() {
                         className="w-full border rounded px-3 py-2"
                      />
                      </div>
-
-                     {/* End Date */}
                      <div className="mb-3">
                      <label className="block text-sm font-medium text-gray-700">End Date</label>
                      <input
@@ -239,8 +232,7 @@ export default function Settings() {
                         className="w-full border rounded px-3 py-2"
                      />
                      </div>
-                     {/* Submit */}
-                     <div className="col-span-2 flex justify-end">
+                     <div className="col-span-1 sm:col-span-2 flex justify-end">
                         <button
                         type="submit"
                         className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
@@ -254,7 +246,6 @@ export default function Settings() {
             {activeTab === "account" && (
                <div className="p-4">
                   <form onSubmit={handleSubmitUser} className="space-y-4 max-w-md">
-                     {/* Username */}
                      <div>
                      <label className="block text-sm font-medium text-gray-700">Username</label>
                      <input
@@ -267,7 +258,6 @@ export default function Settings() {
                      />
                      </div>
                      <span className="text-sm text-red-600 italic"><span className="font-semibold">Note:</span> Leave the password field empty if you don’t want to make any changes.</span>
-                     {/* Password */}
                      <div>
                      <label className="block text-sm font-medium text-gray-700">New Password</label>
                      <input
@@ -279,8 +269,6 @@ export default function Settings() {
                         className="w-full border rounded px-3 py-2"
                      />
                      </div>
-
-                     {/* Confirm Password */}
                      <div>
                      <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
                      <input

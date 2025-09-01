@@ -39,7 +39,7 @@ export default function Candidates() {
                     {/* Position Title */}
                     <h2 className="text-3xl font-semibold mb-4">{pos.title}</h2>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {pos.candidates.map((cand) => (
                             <div
                             key={cand.id}
@@ -69,29 +69,29 @@ export default function Candidates() {
           </div>
       </section>
       <section id="CTA" className='bg-gradient-to-b from-black to-slate-950 overlay-wrapper'>
-          <div className="max-w-screen-xl sm:px-7 px-4 py-10 lg:py-20 mx-auto overlay-text">
-              <div className="p-10 lg:p-20 bg-gradient-to-b from-white to-gray-300 rounded-lg">
-                  <div className="lg:grid lg:grid-cols-12 items-center">
-                      <div className="text-black lg:col-span-8 flex flex-col">
-                          <h2 className="font-semibold text-gray-400 lg:col-span-12">Be Part of Choosing Servant Leaders.</h2>
-                          <h2 className="text-4xl font-medium lg:text-7xl">Don't wait,<br/> your <span className="text-red-500 font-bold"
-                                  >vote</span> matters!</h2>
-                          <span className="text-gray-600 pt-4 text-[20px] leading-[26px]">Every vote is a step toward raising leaders who serve first, lead with compassion, and guide with faith.
-                          </span>
-                      </div>
-                      <div className="mt-10 lg:mt-0 lg:col-start-9 lg:col-span-4 flex">
-                          <a href=""
-                              className="ml-0 lg:ml-auto bg-red-500 text-white font-bold py-2 px-8 rounded-3xl text-2xl hover:bg-blue-500">
-                             Vote Now
-                          </a>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div className='overlay-img'>
-            <img className='opacity-75' src={ctaOverlay} />
-          </div>
-      </section>
+                <div className="max-w-screen-xl sm:px-7 px-4 py-10 lg:py-20 mx-auto overlay-text">
+                    <div className="p-10 lg:p-20 bg-gradient-to-b from-white to-gray-300 rounded-lg">
+                        <div className="lg:grid lg:grid-cols-12 items-center">
+                            <div className="text-black lg:col-span-8 flex flex-col">
+                                <h2 className="font-semibold text-gray-400 lg:col-span-12">Be Part of Choosing Servant Leaders.</h2>
+                                <h2 className="text-4xl font-medium lg:text-7xl">Don't wait,<br/> your <span className="text-red-500 font-bold"
+                                        >vote</span> matters!</h2>
+                                <span className="text-gray-600 pt-4 text-[20px] leading-[26px]">Every vote is a step toward raising leaders who serve first, lead with compassion, and guide with faith.
+                                </span>
+                            </div>
+                            <div className="mt-10 lg:mt-0 lg:col-start-9 lg:col-span-4 flex">
+                                <a href=""
+                                    className="ml-0 lg:ml-auto bg-red-500 text-white font-bold py-2 px-8 rounded-3xl text-2xl hover:bg-blue-500">
+                                   Vote Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='overlay-img h-[100%]'>
+                  <img className='opacity-75 object-cover sm:w-full h-[100%]' src={ctaOverlay} />
+                </div>
+            </section>
     </>
   );
 }

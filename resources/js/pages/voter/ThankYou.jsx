@@ -10,13 +10,11 @@ export default function ThankYouPage() {
   useEffect(() => {
     if (!voter) return;
     if (!voter.voted_photo && !voter.restrict) {
-      // Voter has restrict=true but no photo → hasn't completed voting
       navigate("/vote/ballot");
     } else if (voter.restrict && voter.voted_photo) {
-      // Voter has already voted and has a photo → redirect to /vote
       navigate("/vote");
     } else if (!voter.restrict && voter.voted_photo) {
-      // Mark voter as having voted
+       window.scrollTo({ top: 0, behavior: "smooth" });
       const updatedVoter = { ...voter, restrict: true };
       localStorage.setItem("user", JSON.stringify(updatedVoter));
     }

@@ -120,6 +120,7 @@ export default function Ballot() {
       handleSubmit();
     } else {
       setCurrentStep(currentStep + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
