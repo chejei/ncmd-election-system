@@ -55,10 +55,11 @@ export default function AdminSidebar({ isOpen }) {
             <a className="flex items-center justify-center" href="/">
                 <img
                     className={`object-contain py-4 h-[120px]  
-                ${isOpen ? "w-100" : "w-[36px]"}
-              `}
+                        ${isOpen ? "w-100" : "w-[36px]"}
+                    `}
                     src={siteLogo ? `/storage/${siteLogo}` : logo}
                     alt={siteName}
+                    title={siteName}
                 />
             </a>
 
@@ -67,7 +68,7 @@ export default function AdminSidebar({ isOpen }) {
                     <li className="mb-5">
                         <Link
                             to="/admin"
-                            className="flex items-center py-4 px-3"
+                            className="flex items-center py-4 px-3 group"
                         >
                             <HomeIcon />
                             <span
@@ -76,6 +77,11 @@ export default function AdminSidebar({ isOpen }) {
                             >
                                 Dashboard
                             </span>
+                            {!isOpen && (
+                                <span className="absolute left-full ml-2 px-2 py-1 text-xs text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition">
+                                    Dashboard
+                                </span>
+                            )}
                         </Link>
                     </li>
                     <li
@@ -88,7 +94,7 @@ export default function AdminSidebar({ isOpen }) {
                         <div className="flex items-center justify-between">
                             <Link
                                 to="/admin/candidate"
-                                className="flex items-center py-4 px-3 sidebar-dropdown-toggle flex-1"
+                                className="flex items-center py-4 px-3 sidebar-dropdown-toggle flex-1 group"
                             >
                                 <UserIcon />
                                 <span
@@ -98,6 +104,11 @@ export default function AdminSidebar({ isOpen }) {
                                 >
                                     Candidates
                                 </span>
+                                {!isOpen && (
+                                    <span className="absolute left-0 top-[-20px] ml-2 px-2 py-1 text-xs text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition">
+                                        Candidates
+                                    </span>
+                                )}
                             </Link>
                             <button
                                 className={`btn-submenu flex-none h-full cursor-pointer 
@@ -149,30 +160,39 @@ export default function AdminSidebar({ isOpen }) {
                         onMouseEnter={() => !isOpen && toggleDropdown("voter")}
                         onMouseLeave={() => !isOpen && toggleDropdown(null)}
                     >
-                        <Link
-                            to="/admin/voters"
-                            className="flex items-center py-4 px-3 sidebar-dropdown-toggle flex-1"
-                        >
-                            <ReportIcon />
-                            <span
-                                className={`text-sm 
-                                  ${isOpen ? "" : "hidden"}
-                                `}
+                        <div className="flex items-center justify-between">
+                            <Link
+                                to="/admin/voters"
+                                className="flex items-center py-4 px-3 sidebar-dropdown-toggle flex-1 group"
                             >
-                                Voter
-                            </span>
-                        </Link>
-                        <button
-                            className={`btn-submenu flex-none h-full cursor-pointer 
-                                ${!isOpen ? "hidden" : ""} 
-                                ${
-                                    openDropdown === "voter"
-                                        ? "open-submenu"
-                                        : ""
-                                }
-                            `}
-                            onClick={() => toggleDropdown("voter")}
-                        ></button>
+                                <ReportIcon />
+                                <span
+                                    className={`text-sm 
+                                    ${isOpen ? "" : "hidden"}
+                                    `}
+                                >
+                                    Voter
+                                </span>
+                                {!isOpen && (
+                                    <span className="absolute left-0 top-[-20px] ml-2 px-2 py-1 text-xs text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition">
+                                        Voter
+                                    </span>
+                                )}
+                            </Link>
+                            <button
+                                className={`btn-submenu flex-none h-full cursor-pointer 
+                                    ${!isOpen ? "hidden" : ""} 
+                                    ${
+                                        openDropdown === "voter"
+                                            ? "open-submenu"
+                                            : ""
+                                    }
+                                `}
+                                onClick={() => toggleDropdown("voter")}
+                            >
+                                <CaretIcon />
+                            </button>
+                        </div>
                         <ul
                             className={`submenu mt-2 transition-all duration-300 
                             ${openDropdown === "voter" ? "block" : "hidden"}
@@ -193,7 +213,7 @@ export default function AdminSidebar({ isOpen }) {
                     <li className="mb-5">
                         <Link
                             to="/admin/settings"
-                            className="flex  items-center py-4 px-3"
+                            className="flex  items-center py-4 px-3 group"
                         >
                             <SettingsIcon />
                             <span
@@ -203,12 +223,17 @@ export default function AdminSidebar({ isOpen }) {
                             >
                                 Settings
                             </span>
+                            {!isOpen && (
+                                <span className="absolute left-full ml-2 px-2 py-1 text-xs text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition">
+                                    Settings
+                                </span>
+                            )}
                         </Link>
                     </li>
                     <li>
                         <a
                             onClick={handleLogout}
-                            className="flex  items-center py-4 px-3 cursor-pointer"
+                            className="flex  items-center py-4 px-3 cursor-pointer group relative"
                             target="_blank"
                         >
                             <LogoutIcon />
@@ -219,6 +244,11 @@ export default function AdminSidebar({ isOpen }) {
                             >
                                 Logout
                             </span>
+                            {!isOpen && (
+                                <span className="absolute left-full ml-2 px-2 py-1 text-xs text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 whitespace-nowrap transition">
+                                    Logout
+                                </span>
+                            )}
                         </a>
                     </li>
                 </ul>

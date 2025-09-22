@@ -32,11 +32,13 @@ export default function AdminLayout({ children }) {
     };
     useEffect(() => {
         if (location.pathname === "/admin") {
-            document.title = `${siteName} | Admin Portal`;
+            document.title = siteName
+                ? `${siteName} | Admin Dashboard`
+                : "Admin Dashboard";
         } else {
             document.title = `${heading}`;
         }
-    }, [heading, location.pathname]);
+    }, [heading, location.pathname, siteName]);
 
     return (
         <>

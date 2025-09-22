@@ -5,7 +5,6 @@
 
     .nav-menu {
         height: calc(100% - 120px);
-        // width: 240px;
         margin: auto;
         ul {
             li {
@@ -203,6 +202,18 @@
             * {
                 fill: #fff !important;
             }
+        }
+    }
+}
+.action-preview {
+    svg {
+        height: 24px;
+        width: 24px;
+    }
+    &:hover {
+        path,
+        circle {
+            stroke: #fff !important;
         }
     }
 }
@@ -504,7 +515,7 @@ ul {
 
 .nav-menu {
     @include respond(sm) {
-        overflow: hidden;
+        // overflow: hidden;
         transition: max-height 0.4s ease;
     }
 

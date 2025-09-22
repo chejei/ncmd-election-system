@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "../../../api/axios";
 import CandidateQuestions from "./CandidateQuestions";
 import Tabs from "../../../components/Tabs";
+import { EyeIcon } from "../../../assets/icons/icon";
 
 export default function ViewCandidate() {
     const { candidateId } = useParams();
@@ -42,7 +43,6 @@ export default function ViewCandidate() {
     const tabItems = [
         { key: "profile", label: "Profile" },
         { key: "qa", label: "Questions & Answers" },
-        { key: "vote", label: "Vote Count" },
     ];
 
     return (
@@ -68,10 +68,18 @@ export default function ViewCandidate() {
                                 />
                             </div>
                             <div className="flex-1 p-4">
-                                <div className="mb-2">
-                                    <h2 className="text-xl font-bold leading-none text-gray-900   sm:text-2xl">
+                                <div className="mb-2 flex items-center">
+                                    <h2 className="text-xl font-bold leading-none text-gray-900 sm:text-2xl">
                                         {candidate.full_name || "-"}
                                     </h2>
+                                    <a
+                                        class="bg-transparent action action-preview  hover:bg-blue-500 text-black-50 hover:text-white ml-2 py-1 px-1 border border-black-50 hover:border-transparent rounded"
+                                        href={`/candidate/${candidate.slug}`}
+                                        target="_blank"
+                                        title="Preview"
+                                    >
+                                        <EyeIcon />
+                                    </a>
                                 </div>
                                 <div className="flex">
                                     <div className="py-4 flex-1">
@@ -79,7 +87,7 @@ export default function ViewCandidate() {
                                             <dt className="font-semibold text-gray-900  ">
                                                 Age
                                             </dt>
-                                            <dd className="text-gray-500  ">
+                                            <dd className="text-gray-500">
                                                 {candidate.age || "-"} years old
                                             </dd>
                                         </dl>
@@ -87,7 +95,7 @@ export default function ViewCandidate() {
                                             <dt className="font-semibold text-gray-900  ">
                                                 Email
                                             </dt>
-                                            <dd className="text-gray-500  ">
+                                            <dd className="text-gray-500">
                                                 {candidate.email || "-"}
                                             </dd>
                                         </dl>
@@ -95,7 +103,7 @@ export default function ViewCandidate() {
                                             <dt className="font-semibold text-gray-900  ">
                                                 Phone Number
                                             </dt>
-                                            <dd className="text-gray-500  ">
+                                            <dd className="text-gray-500">
                                                 {candidate.phone_number || "-"}
                                             </dd>
                                         </dl>
@@ -103,7 +111,7 @@ export default function ViewCandidate() {
                                             <dt className="font-semibold text-gray-900  ">
                                                 Address
                                             </dt>
-                                            <dd className="flex text-gray-500  ">
+                                            <dd className="flex text-gray-500">
                                                 <svg
                                                     className="hidden h-5 w-5 shrink-0 text-gray-400 lg:inline"
                                                     aria-hidden="true"

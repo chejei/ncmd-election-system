@@ -18,6 +18,8 @@ export { ReactComponent as RetakeIcon } from './retake.svg?react';
 export { ReactComponent as CheckCircle } from './circle-check.svg?react';
 export { ReactComponent as ResetIcon } from './reset.svg?react';
 export { ReactComponent as ReadMoreIcon } from './arrow-read-more.svg?react';
+export { ReactComponent as EyeIcon } from './Eye.svg?react';
+
 
 
 

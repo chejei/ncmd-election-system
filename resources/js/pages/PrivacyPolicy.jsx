@@ -4,7 +4,6 @@ import headingBanner from "../assets/images/heading-background.png";
 
 export default function PrivacyPolicy() {
     const siteName = useSetting("site_name", "");
-    console.log(siteName);
     return (
         <>
             <section

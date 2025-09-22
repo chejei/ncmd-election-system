@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('option')->unique(); // e.g. site_name, site_logo
+            $table->string('option')->unique();
             $table->text('value')->nullable(); 
             $table->timestamps();
         });

@@ -93,37 +93,53 @@ export default function Dashboard() {
                         </div>
                         {stats.election_count
                             .filter((pos) => pos.candidates.length > 0)
-                            .map((pos) => (
-                                <div key={pos.id} className="mb-6">
-                                    <h5 className="text-sm font-bold">
-                                        {pos.title}
-                                    </h5>
-                                    <ul className="ml-4 list-disc">
-                                        {pos.candidates.map((cand) => {
-                                            const percentage =
-                                                stats.total_voters > 0
-                                                    ? (cand.vote_count /
-                                                          stats.total_voters) *
-                                                      100
-                                                    : 0;
-                                            return (
-                                                <li key={cand.id}>
-                                                    {cand.full_name} –{" "}
-                                                    {cand.vote_count} votes
-                                                    <div className="w-full bg-gray-200 rounded-full h-1.5 mb-4">
-                                                        <div
-                                                            className="bg-blue-600 h-1.5 rounded-full"
-                                                            style={{
-                                                                width: `${percentage}%`,
-                                                            }}
-                                                        ></div>
-                                                    </div>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                </div>
-                            ))}
+                            .map((pos) => {
+                                const sorted = [...pos.candidates].sort(
+                                    (a, b) => b.vote_count - a.vote_count
+                                );
+
+                                let currentRank = 0;
+                                let lastVote = null;
+
+                                const ranked = sorted.map((cand, index) => {
+                                    if (cand.vote_count !== lastVote) {
+                                        currentRank++; // increment rank only when votes differ
+                                    }
+                                    lastVote = cand.vote_count;
+                                    return { ...cand, rank: currentRank };
+                                });
+                                return (
+                                    <div key={pos.id} className="mb-6">
+                                        <h5 className="text-sm font-bold">
+                                            {pos.title}
+                                        </h5>
+                                        <ul className="ml-4 list-disc">
+                                            {ranked.map((cand, index) => {
+                                                const percentage =
+                                                    stats.total_voters > 0
+                                                        ? (cand.vote_count /
+                                                              stats.total_voters) *
+                                                          100
+                                                        : 0;
+                                                return (
+                                                    <li key={cand.id}>
+                                                        {cand.full_name} –{" "}
+                                                        {cand.vote_count} votes
+                                                        <div className="w-full bg-gray-200 rounded-full h-1.5 mb-4">
+                                                            <div
+                                                                className="bg-blue-600 h-1.5 rounded-full"
+                                                                style={{
+                                                                    width: `${percentage}%`,
+                                                                }}
+                                                            ></div>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </div>
+                                );
+                            })}
                     </div>
                 </div>
             </div>

@@ -164,7 +164,7 @@ export default function App() {
                         <Route path="*" element={<NotFound />} />
                     </Route>
 
-                    {/* Voter Portal Routes */}
+                    {/* Voter Routes */}
                     <Route
                         path="/vote"
                         element={

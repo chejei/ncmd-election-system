@@ -26,7 +26,9 @@ export default function FrontendLayout() {
     const location = useLocation();
     useEffect(() => {
         if (location.pathname === "/admin") {
-            document.title = `${siteName} | Admin Portal`;
+            document.title = siteName
+                ? `${siteName} | Admin Dashboard`
+                : "Admin Dashboard";
         } else {
             document.title = `${heading}`;
         }

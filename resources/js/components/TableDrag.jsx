@@ -212,6 +212,7 @@ export default function TableDrag({
                                                                             <Link
                                                                                 to={`${link}/view/${item.id}`}
                                                                                 className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 mx-1 rounded action action-view"
+                                                                                title="View"
                                                                             >
                                                                                 <ViewIcon />
                                                                             </Link>
@@ -220,6 +221,7 @@ export default function TableDrag({
                                                                             <Link
                                                                                 to={`${link}/edit/${item.id}`}
                                                                                 className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 mx-1 rounded inline-block action action-edit"
+                                                                                title="Edit"
                                                                             >
                                                                                 <EditIcon />
                                                                             </Link>
@@ -232,6 +234,7 @@ export default function TableDrag({
                                                                                     )
                                                                                 }
                                                                                 className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 mx-1 rounded action action-delete"
+                                                                                title="Delete"
                                                                             >
                                                                                 <DeleteIcon />
                                                                             </button>

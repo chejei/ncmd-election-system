@@ -21,7 +21,6 @@ class SendPinMail extends Mailable
     {
         $this->pin = $pin;
         $this->voter = $voter;
-        $this->voter = $voter;
         $this->siteName = setting('site_name', 'Default Site');
     }
 

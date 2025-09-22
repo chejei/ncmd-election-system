@@ -187,7 +187,7 @@ export default function Candidate() {
                             </div>
                             <div className="mt-10 lg:mt-0 lg:col-start-9 lg:col-span-4 flex">
                                 <a
-                                    href=""
+                                    href="/vote"
                                     className="ml-0 lg:ml-auto bg-red-500 text-white font-bold py-2 px-8 rounded-3xl text-2xl hover:bg-blue-500"
                                 >
                                     Vote Now

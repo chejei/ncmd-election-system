@@ -14,7 +14,7 @@ use App\Http\Controllers\Api\VoteController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\ElectionController;
-
+use App\Http\Controllers\Api\BackupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,50 +28,49 @@ use App\Http\Controllers\Api\ElectionController;
 */
 
 Route::post('/login', [AuthController::class, 'login']);
-
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/account/update', [AccountController::class, 'update']);
-
-    Route::get('/admin/check', function () {
-        return response()->json(['message' => 'You are admin']);
-    });
-});
-
-
-
 Route::post('/voter/login', [VoterAuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/voter/logout', [VoterAuthController::class, 'logout']);
-});
-
-
-Route::apiResource('candidates', CandidateController::class);
-Route::get('/position-candidates', [CandidateController::class, 'positionCandidates']);
-Route::get('/candidate/{slug}', [CandidateController::class, 'candidateBySlug']);
-
-Route::apiResource('positions', PositionController::class);
-Route::post('/positions/reorder', [PositionController::class, 'reorder']);
+Route::get('/statistics', [ElectionController::class, 'statistics']);
 Route::get('/meet-candidates', [PositionController::class, 'meetCandidates']);
-
-Route::apiResource('churches', ChurchController::class);
-
-Route::apiResource('questions', QuestionController::class);
-Route::get('/questions/active/{candidateId}', [QuestionController::class, 'activeQuestions']);
-
-Route::post('/candidate-answers/bulk', [CandidateAnswerController::class, 'storeBulk']);
-
-Route::apiResource('voters', VoterController::class);
-Route::post('/voters/{id}/send-pin', [VoterController::class, 'sendPin']);
-Route::post('/voters/{id}/reset-pin', [VoterController::class, 'resetPin']);
-Route::post('/voters/import', [VoterController::class, 'import']);
-
-
-Route::post('/submit-ballot', [VoteController::class, 'store']);
+Route::get('/candidate/{slug}', [CandidateController::class, 'candidateBySlug']);
 
 Route::get('/settings', [SettingController::class, 'index']);
 Route::get('/settings/{option}', [SettingController::class, 'show']);
-Route::post('/settings', [SettingController::class, 'store']);
 
-Route::get('/statistics', [ElectionController::class, 'statistics']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    // Admin-related
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/account/update', [AccountController::class, 'update']);
+    Route::get('/admin/check', function () {
+        return response()->json(['message' => 'You are admin']);
+    });
+
+    Route::get('/backup', [BackupController::class, 'createBackup']);
+    Route::apiResource('candidates', CandidateController::class);
+    Route::apiResource('positions', PositionController::class);
+    Route::post('/positions/reorder', [PositionController::class, 'reorder']);
+
+    Route::apiResource('churches', ChurchController::class);
+
+    Route::apiResource('questions', QuestionController::class);
+    Route::get('/questions/active/{candidateId}', [QuestionController::class, 'activeQuestions']);
+
+    Route::post('/candidate-answers/bulk', [CandidateAnswerController::class, 'storeBulk']);
+
+    Route::apiResource('voters', VoterController::class);
+    Route::post('/voters/{id}/send-pin', [VoterController::class, 'sendPin']);
+    Route::post('/voters/{id}/reset-pin', [VoterController::class, 'resetPin']);
+    Route::post('/voters/import', [VoterController::class, 'import']);
+
+    Route::post('/settings', [SettingController::class, 'store']);
+
+    // Voter-related
+    Route::post('/voter/logout', [VoterAuthController::class, 'logout']);
+    Route::post('/submit-ballot', [VoteController::class, 'store']);
+    
+    Route::get('/position-candidates', [CandidateController::class, 'positionCandidates']);
+});
+
+
+
