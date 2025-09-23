@@ -121,7 +121,10 @@ export default function Churches() {
         circuit: "Circuit",
         action: "Action",
     };
-
+    const bulkActions = {
+        add: true,
+        delete: true,
+    };
     const actions = {
         view: false,
         edit: true,
@@ -145,6 +148,7 @@ export default function Churches() {
                     onDeleteSelected={handleDeleteSelected}
                     link="/admin/candidate/churches"
                     actions={actions}
+                    bulkActions={bulkActions}
                 />
             </div>
         </div>

@@ -72,15 +72,18 @@ export default function ViewCandidate() {
                                     <h2 className="text-xl font-bold leading-none text-gray-900 sm:text-2xl">
                                         {candidate.full_name || "-"}
                                     </h2>
-                                    <a
-                                        class="bg-transparent action action-preview  hover:bg-blue-500 text-black-50 hover:text-white ml-2 py-1 px-1 border border-black-50 hover:border-transparent rounded"
-                                        href={`/candidate/${candidate.slug}`}
-                                        target="_blank"
-                                        title="Preview"
-                                    >
-                                        <EyeIcon />
-                                    </a>
+                                    {candidate.status === "approved" && (
+                                        <a
+                                            class="bg-transparent action action-preview  hover:bg-blue-500 text-black-50 hover:text-white ml-2 py-1 px-1 border border-black-50 hover:border-transparent rounded"
+                                            href={`/candidate/${candidate.slug}`}
+                                            target="_blank"
+                                            title="Preview"
+                                        >
+                                            <EyeIcon />
+                                        </a>
+                                    )}
                                 </div>
+
                                 <div className="flex">
                                     <div className="py-4 flex-1">
                                         <dl className="mb-2">
@@ -219,28 +222,6 @@ export default function ViewCandidate() {
                                 }}
                             ></div>
                         </div>
-                        <div className="flex justify-end mt-6">
-                            <button
-                                onClick={() => navigate("/admin/candidate")}
-                                className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
-                            >
-                                {" "}
-                                Back{" "}
-                            </button>
-                            {!candidate.restrict && (
-                                <button
-                                    onClick={() =>
-                                        navigate(
-                                            `/admin/candidate/edit/${candidateId}`
-                                        )
-                                    }
-                                    className="bg-blue-500 text-white px-4 py-2 rounded"
-                                >
-                                    {" "}
-                                    Edit
-                                </button>
-                            )}
-                        </div>
                     </div>
                 )}
                 {activeTab === "qa" && (
@@ -250,6 +231,26 @@ export default function ViewCandidate() {
                             readOnly={true}
                         />
                     </div>
+                )}
+            </div>
+            <div className="flex justify-end mt-6">
+                <button
+                    onClick={() => navigate(-1)}
+                    className="bg-gray-500 text-white px-4 py-2 rounded mr-2"
+                >
+                    {" "}
+                    Back{" "}
+                </button>
+                {!candidate.restrict && candidate.status === "approved" && (
+                    <button
+                        onClick={() =>
+                            navigate(`/admin/candidate/edit/${candidateId}`)
+                        }
+                        className="bg-blue-500 text-white px-4 py-2 rounded"
+                    >
+                        {" "}
+                        Edit
+                    </button>
                 )}
             </div>
         </div>

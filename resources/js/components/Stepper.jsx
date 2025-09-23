@@ -3,7 +3,7 @@ import { CheckIcon } from "../assets/icons/icon";
 
 export default function Stepper({ steps, currentStep }) {
     return (
-        <ol className="lg:flex items-center w-full space-y-4 lg:space-x-8 lg:space-y-0 mb-6">
+        <ol className="lg:flex items-top w-full space-y-4 lg:space-x-8 lg:space-y-0 mb-6">
             {steps.map((step) => {
                 const isCompleted = currentStep > step.number;
                 const isActive = currentStep === step.number;
@@ -36,7 +36,7 @@ export default function Stepper({ steps, currentStep }) {
                                 )}
                             </span>
                             <h4
-                                className={`text-base lg:text-lg
+                                className={`text-base lg:text-sm
                                   ${isActive ? "text-blue-300" : ""}
                                   ${isCompleted ? "text-blue-600" : ""}
                                   ${isUpcoming ? "text-gray-400" : ""}

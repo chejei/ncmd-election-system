@@ -30,6 +30,8 @@ use App\Http\Controllers\Api\BackupController;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/voter/login', [VoterAuthController::class, 'login']);
 
+Route::post('/apply-candidacy', [CandidateController::class, 'store']);
+
 Route::get('/statistics', [ElectionController::class, 'statistics']);
 Route::get('/meet-candidates', [PositionController::class, 'meetCandidates']);
 Route::get('/candidate/{slug}', [CandidateController::class, 'candidateBySlug']);
@@ -55,6 +57,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('questions', QuestionController::class);
     Route::get('/questions/active/{candidateId}', [QuestionController::class, 'activeQuestions']);
+    Route::get('/questions-active', [QuestionController::class, 'enableQuestions']);
 
     Route::post('/candidate-answers/bulk', [CandidateAnswerController::class, 'storeBulk']);
 
@@ -64,6 +67,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/voters/import', [VoterController::class, 'import']);
 
     Route::post('/settings', [SettingController::class, 'store']);
+
+    Route::post('/candidates/{id}/approve', [CandidateController::class, 'approve']);
+    Route::post('/candidates/{id}/reject', [CandidateController::class, 'reject']);
 
     // Voter-related
     Route::post('/voter/logout', [VoterAuthController::class, 'logout']);

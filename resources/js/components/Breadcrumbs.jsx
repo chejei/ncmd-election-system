@@ -28,7 +28,7 @@ export default function Breadcrumbs() {
                     const isLast = index === paths.length - 1;
                     return (
                         title && (
-                            <li key={path} className="flex items-center">
+                            <li key={path} className="flex items-center m-0">
                                 {!isLast ? (
                                     <Link
                                         to={path}

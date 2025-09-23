@@ -5,6 +5,8 @@ import {
     ViewIcon,
     EditIcon,
     DeleteIcon,
+    CheckIcon,
+    CloseIcon,
 } from "../assets/icons/icon";
 
 export default function Table({
@@ -23,6 +25,9 @@ export default function Table({
     link,
     actions,
     onToggleEnable,
+    onStatusChange,
+    bulkActions,
+    handleBulkAction,
 }) {
     const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
     return (
@@ -45,20 +50,43 @@ export default function Table({
                         />
                     </div>
                 </div>
+
                 <div className="flex flex-column justify-end">
-                    <Link
-                        to={`${link}/add`}
-                        className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 mx-1 rounded"
-                    >
-                        Add
-                    </Link>
-                    <button
-                        onClick={onDeleteSelected}
-                        className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 mx-1 rounded"
-                    >
-                        {" "}
-                        Delete{" "}
-                    </button>
+                    {bulkActions?.add && (
+                        <Link
+                            to={`${link}/add`}
+                            className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 mx-1 rounded cursor-pointer"
+                        >
+                            Add
+                        </Link>
+                    )}
+                    {bulkActions?.delete && (
+                        <button
+                            onClick={onDeleteSelected}
+                            className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 mx-1 rounded cursor-pointer"
+                        >
+                            {" "}
+                            Delete{" "}
+                        </button>
+                    )}
+                    {bulkActions?.approve && (
+                        <button
+                            className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 mx-1 rounded cursor-pointer"
+                            onClick={() => handleBulkAction("approve")}
+                            disabled={selectedIds.length === 0}
+                        >
+                            Approve
+                        </button>
+                    )}
+                    {bulkActions?.reject && (
+                        <button
+                            className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 mx-1 rounded cursor-pointer"
+                            onClick={() => handleBulkAction("reject")}
+                            disabled={selectedIds.length === 0}
+                        >
+                            Reject
+                        </button>
+                    )}
                 </div>
             </div>
             <table
@@ -214,6 +242,34 @@ export default function Table({
                                                                 </button>
                                                             )}
                                                         </>
+                                                    )}
+                                                    {actions?.approve && (
+                                                        <button
+                                                            onClick={() =>
+                                                                onStatusChange(
+                                                                    item.id,
+                                                                    "approve"
+                                                                )
+                                                            }
+                                                            className="bg-green-500 hover:bg-green-600 text-white px-1 py-1 mx-1 rounded action action-approve cursor-pointer"
+                                                            title="Approve"
+                                                        >
+                                                            <CheckIcon />
+                                                        </button>
+                                                    )}
+                                                    {actions?.reject && (
+                                                        <button
+                                                            onClick={() =>
+                                                                onStatusChange(
+                                                                    item.id,
+                                                                    "reject"
+                                                                )
+                                                            }
+                                                            className="bg-red-500 hover:bg-red-600 text-white px-1 py-1 mx-1 rounded action action-reject cursor-pointer"
+                                                            title="Reject"
+                                                        >
+                                                            <CloseIcon />
+                                                        </button>
                                                     )}
                                                 </div>
                                             ) : (

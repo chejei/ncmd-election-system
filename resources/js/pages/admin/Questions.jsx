@@ -141,7 +141,10 @@ export default function Questions() {
         enable: "Enable",
         action: "Action",
     };
-
+    const bulkActions = {
+        add: true,
+        delete: true,
+    };
     const actions = {
         view: false,
         edit: true,
@@ -166,6 +169,7 @@ export default function Questions() {
                     link="/admin/candidate/questions"
                     actions={actions}
                     onToggleEnable={handleToggleEnable}
+                    bulkActions={bulkActions}
                 />
             </div>
         </div>

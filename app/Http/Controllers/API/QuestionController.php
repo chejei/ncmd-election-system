@@ -73,4 +73,10 @@ class QuestionController extends Controller
         return response()->json($questions);
     }
 
+    public function enableQuestions()
+    {
+        $questions = Question::where('enable', 1)->get();
+        return response()->json($questions);
+    }
+
 }

@@ -112,13 +112,18 @@ export default function Voters() {
         });
     };
 
+    const bulkActions = {
+        add: true,
+        delete: true,
+    };
+
     const actions = {
         view: true,
         edit: true,
         delete: true,
     };
 
-    // Adjust headers depending on your voters table structure
+    // headers
     const tableHeaders = {
         full_name: "Name",
         email: "Email",
@@ -145,6 +150,7 @@ export default function Voters() {
                         onDeleteSelected={handleDeleteSelected}
                         link="/admin/voters"
                         actions={actions}
+                        bulkActions={bulkActions}
                     />
                 </div>
             </div>

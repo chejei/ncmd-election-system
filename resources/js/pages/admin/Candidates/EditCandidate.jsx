@@ -13,6 +13,8 @@ export default function EditCandidate() {
         handleSubmit,
         setValue,
         watch,
+        trigger,
+        clearErrors,
         formState: { errors },
         reset,
         control,
@@ -22,6 +24,7 @@ export default function EditCandidate() {
     const [originalData, setOriginalData] = useState({});
     const { candidateId } = useParams();
     const [activeTab, setActiveTab] = useState("profile");
+    const [photoPreview, setPhotoPreview] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,6 +38,27 @@ export default function EditCandidate() {
                 const res = await axios.get(`/candidates/${candidateId}`);
                 const data = res.data;
 
+                if (data.status !== "approved") {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Not Approved",
+                        text: "This candidate is not approved yet. Redirecting...",
+                        background: "#fff",
+                        backdrop: `
+                            rgba(0,0,0,0.6)
+                            blur(5px)
+                        `,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        showConfirmButton: false,
+                        timer: 3000, // 3 seconds
+                        timerProgressBar: true,
+                    }).then(() => {
+                        navigate(-1); // redirect to your target page
+                    });
+                    return;
+                }
+
                 if (data.restrict) {
                     Swal.fire({
                         icon: "warning",
@@ -42,9 +66,9 @@ export default function EditCandidate() {
                         text: "You cannot edit candidate details while the election is in progress.",
                         background: "#fff", // optional: clean white bg
                         backdrop: `
-              rgba(0,0,0,0.6)
-              blur(5px)
-            `,
+                                rgba(0,0,0,0.6)
+                                blur(5px)
+                                `,
                         allowOutsideClick: false,
                         allowEscapeKey: false,
                         showConfirmButton: false,
@@ -57,12 +81,15 @@ export default function EditCandidate() {
                 }
                 setOriginalData(data);
 
+                const photoUrl = data.photo
+                    ? `${import.meta.env.VITE_STORAGE_BASE}/${data.photo}`
+                    : "";
+
                 reset({
                     ...data,
-                    photo: data.photo
-                        ? `${import.meta.env.VITE_STORAGE_BASE}/${data.photo}`
-                        : "",
+                    photo: photoUrl,
                 });
+                setPhotoPreview(photoUrl);
             } catch (error) {
                 console.error("Error fetching candidate:", error);
             }
@@ -70,17 +97,32 @@ export default function EditCandidate() {
         fetchCandidate();
     }, [candidateId, reset]);
 
-    const handleFileChange = (e, fieldName, clearErrors) => {
+    const handleFileChange = async (e, fieldName) => {
         const file = e.target.files[0];
+        if (!file) {
+            setValue(fieldName, "", {
+                shouldValidate: true,
+                shouldDirty: true,
+            });
+            await trigger(fieldName);
+            setPhotoPreview(null);
+            return;
+        }
         if (file) {
             const reader = new FileReader();
-            reader.onloadend = () => {
+            reader.onloadend = async () => {
                 setValue(fieldName, reader.result, {
                     shouldValidate: true,
                     shouldDirty: true,
+                    shouldTouch: true,
                 });
+                clearErrors(fieldName);
+                await trigger(fieldName);
+                setPhotoPreview(reader.result);
             };
             reader.readAsDataURL(file);
+        } else {
+            setValue(fieldName, "", { shouldValidate: true }); // clear if no file
         }
     };
 
@@ -231,6 +273,7 @@ export default function EditCandidate() {
             type: "text",
             className: "w-full border rounded px-3 py-2",
             wrapperClass: "mb-3",
+            required: true,
         },
         {
             name: "phone_number",
@@ -238,6 +281,7 @@ export default function EditCandidate() {
             type: "text",
             className: "w-full border rounded px-3 py-2",
             wrapperClass: "mb-3",
+            required: true,
         },
         {
             name: "address",
@@ -372,6 +416,7 @@ export default function EditCandidate() {
                                 watch={watch}
                                 handleFileChange={handleFileChange}
                                 control={control}
+                                photoPreview={photoPreview}
                             />
                             <div className="col-span-3 flex justify-end">
                                 <button

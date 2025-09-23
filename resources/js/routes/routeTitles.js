@@ -5,6 +5,7 @@ const routeTitles = {
   "/admin/candidate/add": "Add Candidate",
   "/admin/candidate/edit/:candidateId": "Edit Candidate",
   "/admin/candidate/view/:candidateId": "View Candidate",
+  "/admin/candidate/applicants": "Applicants",
   "/admin/candidate/position": "Position",
   "/admin/candidate/position/add": "Add Position",
   "/admin/candidate/position/edit/:positionId": "Edit Position",
@@ -31,7 +32,9 @@ const routeTitles = {
   "/vote/ballot": "Voter's Ballot",
   "/terms-and-conditions": "Terms and Conditions",
   "/privacy-policy": "Privacy Policy",
-  "/guidelines": "Guidelines"
+  "/guidelines": "Guidelines",
+  "/apply-candidacy": "Candidacy Application",
+  "/candidacy-acknowledgement": "Candidacy Acknowledgement"
 };
 
 export default routeTitles;

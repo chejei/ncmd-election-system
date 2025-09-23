@@ -11,28 +11,49 @@ export default function AddCandidate() {
         handleSubmit,
         watch,
         setValue,
+        trigger,
+        clearErrors,
         formState: { errors },
         control,
     } = useForm();
     const [churches, setChurches] = useState([]);
     const [positions, setPositions] = useState([]);
+    const [photoPreview, setPhotoPreview] = useState(null);
     const navigate = useNavigate();
-
     useEffect(() => {
         axios.get("/churches").then((res) => setChurches(res.data));
         axios.get("/positions").then((res) => setPositions(res.data));
     }, []);
 
-    // Handle file uploads & update react-hook-form
-    const handleFileChange = (e, fieldName) => {
+    const handleFileChange = async (e, fieldName) => {
         const file = e.target.files[0];
+
+        if (!file) {
+            setValue(fieldName, "", {
+                shouldValidate: true,
+                shouldDirty: true,
+            });
+            await trigger(fieldName);
+            setPhotoPreview(null);
+            return;
+        }
+
         if (file) {
             const reader = new FileReader();
-            reader.onloadend = () => {
+            reader.onloadend = async () => {
                 const base64String = reader.result;
-                setValue(fieldName, base64String);
+                setValue(fieldName, base64String, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                    shouldTouch: true,
+                });
+                clearErrors(fieldName);
+                await trigger(fieldName);
+                setPhotoPreview(base64String);
             };
             reader.readAsDataURL(file);
+        } else {
+            setValue(fieldName, "", { shouldValidate: true }); // clear if no file
         }
     };
 
@@ -95,6 +116,7 @@ export default function AddCandidate() {
             type: "text",
             className: "w-full border rounded px-3 py-2",
             wrapperClass: "mb-3",
+            required: true,
         },
         {
             name: "phone_number",
@@ -102,6 +124,7 @@ export default function AddCandidate() {
             type: "text",
             className: "w-full border rounded px-3 py-2",
             wrapperClass: "mb-3",
+            required: true,
         },
         {
             name: "address",
@@ -270,6 +293,7 @@ export default function AddCandidate() {
                     watch={watch}
                     handleFileChange={handleFileChange}
                     control={control}
+                    photoPreview={photoPreview}
                 />
                 <div className="col-span-3 flex justify-end items-center">
                     <button

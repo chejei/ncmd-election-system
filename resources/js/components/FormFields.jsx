@@ -10,6 +10,7 @@ export default function FormFields({
     watch,
     handleFileChange,
     control,
+    photoPreview,
 }) {
     const formValues = watch();
     return (
@@ -119,9 +120,9 @@ export default function FormFields({
                                                 htmlFor={name}
                                                 className="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
                                             >
-                                                {formValues[name] ? (
+                                                {photoPreview ? (
                                                     <img
-                                                        src={formValues[name]}
+                                                        src={photoPreview}
                                                         alt="Preview"
                                                         className={className}
                                                     />
@@ -142,6 +143,34 @@ export default function FormFields({
                                                     id={name}
                                                     type="file"
                                                     accept="image/*"
+                                                    {...register(name, {
+                                                        validate: (value) => {
+                                                            console.log(value);
+                                                            if (
+                                                                value instanceof
+                                                                FileList
+                                                            ) {
+                                                                if (
+                                                                    value.length ===
+                                                                    0
+                                                                ) {
+                                                                    return "Photo is required";
+                                                                }
+                                                                return true;
+                                                            }
+
+                                                            if (
+                                                                typeof value ===
+                                                                    "string" &&
+                                                                value.trim() !==
+                                                                    ""
+                                                            ) {
+                                                                return true;
+                                                            }
+
+                                                            return "Photo is required";
+                                                        },
+                                                    })}
                                                     onChange={(e) =>
                                                         handleFileChange(
                                                             e,

@@ -36,9 +36,9 @@ export default function EditVoter() {
                         title: "Already Voted",
                         text: "You cannot edit voter details because this voter has already voted.",
                         backdrop: `
-              rgba(0,0,0,0.6)
-              blur(5px)
-            `,
+                                rgba(0,0,0,0.6)
+                                blur(5px)
+                                `,
                         allowOutsideClick: false,
                         allowEscapeKey: false,
                         showConfirmButton: false,

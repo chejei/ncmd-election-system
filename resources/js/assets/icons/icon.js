@@ -13,6 +13,7 @@ export { ReactComponent as FacebookIcon } from './facebook.svg?react';
 export { ReactComponent as EmailIcon } from './email.svg?react';
 export { ReactComponent as PhoneIcon } from './phone.svg?react';
 export { ReactComponent as CheckIcon } from './check.svg?react';
+export { ReactComponent as CloseIcon } from './close.svg?react';
 export { ReactComponent as CameraIcon } from './camera.svg?react';
 export { ReactComponent as RetakeIcon } from './retake.svg?react';
 export { ReactComponent as CheckCircle } from './circle-check.svg?react';

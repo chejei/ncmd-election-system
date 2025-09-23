@@ -13,7 +13,7 @@ export default function Candidate() {
     const fetchCandidates = (page = 1, search = "") => {
         setCandidates([]);
         axios
-            .get(`/candidates?page=${page}&search=${search}&status=approved`)
+            .get(`/candidates?page=${page}&search=${search}&status=pending`)
             .then((response) => {
                 setCandidates(response.data.data);
                 setCurrentPage(response.data.current_page);
@@ -41,7 +41,6 @@ export default function Candidate() {
             if (result.isConfirmed) {
                 try {
                     await axios.delete(`/candidates/${id}`);
-                    // setCandidates(candidates.filter((c) => c.id !== id));
                     fetchCandidates(1, searchTerm);
                     setCurrentPage(1);
 
@@ -116,20 +115,99 @@ export default function Candidate() {
             }
         });
     };
-    const bulkActions = {
-        add: true,
-        delete: true,
+
+    const handleStatusChange = async (id, action) => {
+        const actionText = action === "approve" ? "Approved" : "Rejected";
+        const actionUrl = `/candidates/${id}/${action}`;
+
+        try {
+            await axios.post(actionUrl);
+            fetchCandidates(currentPage, searchTerm);
+
+            Swal.fire({
+                title: `${actionText}!`,
+                text: `Candidate has been ${actionText.toLowerCase()}.`,
+                icon: action === "approve" ? "success" : "info",
+                timer: 1500,
+                showConfirmButton: false,
+            });
+        } catch (error) {
+            Swal.fire(
+                "Error!",
+                `Something went wrong while trying to ${action} candidate.`,
+                "error"
+            );
+        }
     };
+
+    const handleBulkAction = (action) => {
+        if (selectedIds.length === 0) {
+            Swal.fire(
+                "No Selection",
+                "Please select at least one candidate.",
+                "info"
+            );
+            return;
+        }
+
+        const actionText = action === "approve" ? "Approve" : "Reject";
+        const confirmColor = action === "approve" ? "#28a745" : "#d33";
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: `${actionText} ${selectedIds.length} candidate(s)?`,
+            icon: action === "approve" ? "question" : "warning",
+            showCancelButton: true,
+            confirmButtonColor: confirmColor,
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: `Yes, ${actionText.toLowerCase()} them!`,
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await Promise.all(
+                        selectedIds.map((id) =>
+                            axios.post(`/candidates/${id}/${action}`)
+                        )
+                    );
+
+                    fetchCandidates(1, searchTerm);
+                    setCurrentPage(1);
+                    setSelectedIds([]);
+
+                    Swal.fire({
+                        title: `${actionText}d!`,
+                        text: `Selected candidates have been ${actionText.toLowerCase()}d.`,
+                        icon: "success",
+                        timer: 1500,
+                        showConfirmButton: false,
+                    });
+                } catch (error) {
+                    Swal.fire(
+                        "Error!",
+                        `Something went wrong while trying to ${actionText.toLowerCase()}.`,
+                        "error"
+                    );
+                }
+            }
+        });
+    };
+
+    const bulkActions = {
+        add: false,
+        delete: false,
+        approve: true,
+        reject: true,
+    };
+
     const actions = {
+        approve: true,
+        reject: true,
         view: true,
-        edit: true,
-        delete: true,
     };
     const tableHeaders = {
         full_name: "Name",
         church_name: "Church",
         position_title: "Position",
-        photo: "Photo",
         action: "Action",
     };
     return (
@@ -137,10 +215,10 @@ export default function Candidate() {
             <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
                 <div className="bg-white relative overflow-x-auto">
                     <Table
-                        name="candidate"
+                        name="applicants"
                         items={candidates}
                         header={tableHeaders}
-                        tableName="Candidate"
+                        tableName="Applicants"
                         currentPage={currentPage}
                         totalPages={totalPages}
                         onPageChange={setCurrentPage}
@@ -151,7 +229,9 @@ export default function Candidate() {
                         onDeleteSelected={handleDeleteSelected}
                         link="/admin/candidate"
                         actions={actions}
+                        onStatusChange={handleStatusChange}
                         bulkActions={bulkActions}
+                        handleBulkAction={handleBulkAction}
                     />
                 </div>
             </div>

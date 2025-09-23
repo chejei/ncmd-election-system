@@ -8,6 +8,8 @@ import Guidelines from "./pages/Guidelines";
 import Candidates from "./pages/Candidates";
 import CandidateSingle from "./pages/Candidate";
 import ElectionResult from "./pages/ElectionResult";
+import CandidacyApplication from "./pages/CandidacyApplication";
+import CandidacyThankYou from "./pages/CandidacyAcknowledgement";
 
 import VoterLogin from "./pages/voter/VoterLogin";
 import Welcome from "./pages/voter/Welcome";
@@ -24,6 +26,7 @@ import Candidate from "./pages/admin/Candidate";
 import AddCandidate from "./pages/admin/Candidates/AddCandidate";
 import EditCandidate from "./pages/admin/Candidates/EditCandidate";
 import ViewCandidate from "./pages/admin/Candidates/ViewCandidate";
+import Applicants from "./pages/admin/Applicants";
 import Positions from "./pages/admin/Positions";
 import AddPosition from "./pages/admin/Positions/AddPosition";
 import EditPosition from "./pages/admin/Positions/EditPosition";
@@ -63,6 +66,14 @@ export default function App() {
                         <Route
                             path="terms-and-conditions"
                             element={<TermsConditions />}
+                        />
+                        <Route
+                            path="apply-candidacy"
+                            element={<CandidacyApplication />}
+                        />
+                        <Route
+                            path="candidacy-acknowledgement"
+                            element={<CandidacyThankYou />}
                         />
                         <Route path="guidelines" element={<Guidelines />} />
                         <Route path="login" element={<AdminLogin />} />
@@ -105,6 +116,10 @@ export default function App() {
                         <Route
                             path="/admin/candidate/view/:candidateId"
                             element={<ViewCandidate />}
+                        />
+                        <Route
+                            path="/admin/candidate/applicants"
+                            element={<Applicants />}
                         />
                         <Route
                             path="/admin/candidate/position"

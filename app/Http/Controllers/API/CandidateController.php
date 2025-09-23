@@ -18,8 +18,10 @@ class CandidateController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $status = $request->input('status');
 
-        $query = Candidate::query();
+        $query = Candidate::query()
+            ->where('status', $status);
 
         if ($search) {
             $query->leftJoin('churches', 'churches.id', '=', 'candidates.church_id');
@@ -200,4 +202,25 @@ class CandidateController extends Controller
         return response()->json($candidate);
     }
 
+    public function approve($id)
+    {
+        $candidate = Candidate::findOrFail($id);
+        $candidate->status = 'approved';
+        $candidate->approved_at = now();
+        $candidate->rejected_at = null; // clear reject timestamp if re-approved
+        $candidate->save();
+
+        return response()->json(['message' => 'Candidate approved']);
+    }
+
+    public function reject($id)
+    {
+        $candidate = Candidate::findOrFail($id);
+        $candidate->status = 'rejected';
+        $candidate->rejected_at = now();
+        $candidate->approved_at = null; // clear approve timestamp if rejected
+        $candidate->save();
+
+        return response()->json(['message' => 'Candidate rejected']);
+    }
 }
