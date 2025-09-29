@@ -30,6 +30,6 @@ jobs:
 
       - name: Deploy to Railway
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_BACKEND }}
           PROJECT_ID: ${{ secrets.BACKEND_PROJECT_ID }}
-        run: railway up --service ncmd-backend
+        run: railway up --service ncmd-election-system
