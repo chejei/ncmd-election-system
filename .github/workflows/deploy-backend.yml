@@ -32,4 +32,4 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_BACKEND }}
           PROJECT_ID: ${{ secrets.BACKEND_PROJECT_ID }}
-        run: railway up --service ncmd-election-system
+        run: railway up --service ncmd-backend
