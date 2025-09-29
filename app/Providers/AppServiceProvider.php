@@ -28,6 +28,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::share('settings', app('settings')->all());
+        try {
+            // Only attempt to share settings if DB is available
+            View::share('settings', app('settings')->all());
+        } catch (\Exception $e) {
+            // Skip settings during build or when DB is not ready
+            View::share('settings', []);
+            // Optionally log for debugging:
+            // \Log::warning("Settings unavailable during boot: " . $e->getMessage());
+        }
     }
 }
