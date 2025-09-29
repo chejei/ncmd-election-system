@@ -31,7 +31,7 @@ jobs:
 
       - name: Deploy to Railway (Frontend)
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN_FRONTEND }}
           PROJECT_ID: ${{ secrets.FRONTEND_PROJECT_ID }}
         run: |
           railway up --service ncmd-frontend --path public/build
