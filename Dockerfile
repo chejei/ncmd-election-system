@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y \
 # Enable Apache mod_rewrite for Laravel routing
 RUN a2enmod rewrite
 
+# Set a global ServerName to suppress the warning
+RUN echo "ServerName localhost" > /etc/apache2/conf-available/servername.conf \
+    && a2enconf servername
+
 # Set working directory
 WORKDIR /var/www/html
 
