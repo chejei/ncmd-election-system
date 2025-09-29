@@ -13,6 +13,10 @@ RUN a2enmod rewrite
 RUN echo "ServerName localhost" > /etc/apache2/conf-available/servername.conf \
     && a2enconf servername
 
+# Allow .htaccess overrides and set Apache root to public
+RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf \
+    && sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+
 # Set working directory
 WORKDIR /var/www/html
 
@@ -27,6 +31,9 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-di
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Optional: clear Laravel caches for production
+RUN php artisan config:cache && php artisan route:cache
 
 # Expose port 80
 EXPOSE 80
