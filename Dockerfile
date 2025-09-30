@@ -8,12 +8,12 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd mbstring pdo pdo_mysql xml zip
 
+# ✅ Install Composer
+COPY --from=composer:2.5 /usr/bin/composer /usr/bin/composer
+
 # ✅ Install Node.js & npm
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs
-
-# Check versions (optional)
-RUN node -v && npm -v
 
 # Set working directory
 WORKDIR /var/www
