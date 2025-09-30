@@ -76,7 +76,7 @@ echo \"MAIL_USERNAME=${MAIL_USERNAME}\" >> .env && \
 echo \"MAIL_PASSWORD=${MAIL_PASSWORD}\" >> .env && \
 echo \"MAIL_ENCRYPTION=${MAIL_ENCRYPTION:-tls}\" >> .env && \
 echo \"MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS}\" >> .env && \
-echo \"MAIL_FROM_NAME=${MAIL_FROM_NAME}\" >> .env && \
+echo \"MAIL_FROM_NAME=\"${MAIL_FROM_NAME}\"" >> .env && \
 php artisan config:cache && \
 php artisan route:cache && \
 php artisan serve --host=0.0.0.0 --port=${PORT:-8080} \
