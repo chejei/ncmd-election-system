@@ -40,7 +40,7 @@ export default function Questions() {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`/questions/${id}`);
+                    await axios.delete(`/api/questions/${id}`);
                     fetchQuestions(1, searchTerm);
                     setCurrentPage(1);
 
@@ -91,7 +91,7 @@ export default function Questions() {
                 try {
                     await Promise.all(
                         selectedIds.map((id) =>
-                            axios.delete(`/questions/${id}`)
+                            axios.delete(`/api/questions/${id}`)
                         )
                     );
                     fetchQuestions(1, searchTerm);
@@ -118,7 +118,7 @@ export default function Questions() {
 
     const handleToggleEnable = async (item, newValue) => {
         try {
-            await axios.put(`/questions/${item.id}`, {
+            await axios.put(`/api/questions/${item.id}`, {
                 question_text: item.question_text,
                 enable: newValue,
             });

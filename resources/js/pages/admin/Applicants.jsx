@@ -40,7 +40,7 @@ export default function Candidate() {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`/candidates/${id}`);
+                    await axios.delete(`/api/candidates/${id}`);
                     fetchCandidates(1, searchTerm);
                     setCurrentPage(1);
 
@@ -91,7 +91,7 @@ export default function Candidate() {
                 try {
                     await Promise.all(
                         selectedIds.map((id) =>
-                            axios.delete(`/candidates/${id}`)
+                            axios.delete(`/api/candidates/${id}`)
                         )
                     );
                     fetchCandidates(1, searchTerm);
@@ -166,7 +166,7 @@ export default function Candidate() {
                 try {
                     await Promise.all(
                         selectedIds.map((id) =>
-                            axios.post(`/candidates/${id}/${action}`)
+                            axios.post(`/api/candidates/${id}/${action}`)
                         )
                     );
 

@@ -28,14 +28,14 @@ export default function EditCandidate() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("/churches").then((res) => setChurches(res.data));
-        axios.get("/positions").then((res) => setPositions(res.data));
+        axios.get("/api/churches").then((res) => setChurches(res.data));
+        axios.get("/api/positions").then((res) => setPositions(res.data));
     }, []);
 
     useEffect(() => {
         const fetchCandidate = async () => {
             try {
-                const res = await axios.get(`/candidates/${candidateId}`);
+                const res = await axios.get(`/api/candidates/${candidateId}`);
                 const data = res.data;
 
                 if (data.status !== "approved") {

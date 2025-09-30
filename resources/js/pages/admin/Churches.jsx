@@ -38,7 +38,7 @@ export default function Churches() {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`/churches/${id}`);
+                    await axios.delete(`/api/churches/${id}`);
                     fetchChurches(1, searchTerm);
                     setCurrentPage(1);
 
@@ -88,7 +88,9 @@ export default function Churches() {
             if (result.isConfirmed) {
                 try {
                     await Promise.all(
-                        selectedIds.map((id) => axios.delete(`/churches/${id}`))
+                        selectedIds.map((id) =>
+                            axios.delete(`/api/churches/${id}`)
+                        )
                     );
                     fetchChurches(1, searchTerm);
                     setCurrentPage(1);

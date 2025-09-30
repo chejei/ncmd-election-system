@@ -11,7 +11,7 @@ export default function Candidate() {
     useEffect(() => {
         const fetchCandidate = async () => {
             try {
-                const res = await axios.get(`/candidate/${slug}`);
+                const res = await axios.get(`/api/candidate/${slug}`);
                 setCandidate(res.data);
             } catch (err) {
                 console.error(err);

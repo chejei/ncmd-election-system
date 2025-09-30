@@ -41,7 +41,7 @@ export default function VoterLogin() {
         }
 
         try {
-            const res = await axios.post("/voter/login", {
+            const res = await axios.post("/api/voter/login", {
                 last_name: lastName,
                 pin_code: pin,
             });

@@ -38,7 +38,7 @@ export default function Voters() {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`/voters/${id}`);
+                    await axios.delete(`/api/voters/${id}`);
                     fetchVoters(1, searchTerm);
                     setCurrentPage(1);
 
@@ -88,7 +88,9 @@ export default function Voters() {
             if (result.isConfirmed) {
                 try {
                     await Promise.all(
-                        selectedIds.map((id) => axios.delete(`/voters/${id}`))
+                        selectedIds.map((id) =>
+                            axios.delete(`/api/voters/${id}`)
+                        )
                     );
                     fetchVoters(1, searchTerm);
                     setCurrentPage(1);

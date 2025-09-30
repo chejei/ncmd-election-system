@@ -45,7 +45,7 @@ export default function AddQuestion() {
 
     const onSubmit = async (data) => {
         try {
-            const res = await axios.post("/questions", data);
+            const res = await axios.post("/api/questions", data);
             if (res.status === 200 || res.status === 201) {
                 Swal.fire({
                     icon: "success",

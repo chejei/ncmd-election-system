@@ -102,7 +102,7 @@ export default function ImportVoters() {
     const handleImport = async () => {
         try {
             const dataToImport = selectedRows.map((i) => csvData[i]);
-            await axios.post("/voters/import", { voters: dataToImport });
+            await axios.post("/api/voters/import", { voters: dataToImport });
 
             Swal.fire({
                 icon: "success",

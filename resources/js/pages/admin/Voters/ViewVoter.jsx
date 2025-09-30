@@ -12,7 +12,7 @@ export default function ViewVoter() {
     useEffect(() => {
         const fetchVoter = async () => {
             try {
-                const res = await axios.get(`/voters/${voterId}`);
+                const res = await axios.get(`/api/voters/${voterId}`);
                 setVoter(res.data.data);
             } catch (error) {
                 Swal.fire(
@@ -31,7 +31,7 @@ export default function ViewVoter() {
 
     const handleSend = async (method) => {
         try {
-            const res = await axios.post(`/voters/${voterId}/send-pin`, {
+            const res = await axios.post(`/api/voters/${voterId}/send-pin`, {
                 method,
             });
             Swal.fire(
@@ -52,7 +52,7 @@ export default function ViewVoter() {
     const handleReset = async () => {
         setLoading(true);
         try {
-            const res = await axios.post(`/voters/${voterId}/reset-pin`);
+            const res = await axios.post(`/api/voters/${voterId}/reset-pin`);
             Swal.fire({
                 title: "PIN Reset!",
                 text: `New PIN: ${res.data.new_pin}`,

@@ -66,7 +66,7 @@ export default function EditChurch() {
     useEffect(() => {
         const fetchChurch = async () => {
             try {
-                const res = await axios.get(`/churches/${churchId}`);
+                const res = await axios.get(`/api/churches/${churchId}`);
                 reset(res.data);
                 setLoading(false);
             } catch (error) {
@@ -83,7 +83,7 @@ export default function EditChurch() {
 
     const onSubmit = async (data) => {
         try {
-            const res = await axios.put(`/churches/${churchId}`, data);
+            const res = await axios.put(`/api/churches/${churchId}`, data);
             Swal.fire({
                 icon: "success",
                 title: "Success",

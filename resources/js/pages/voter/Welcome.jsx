@@ -20,7 +20,7 @@ export default function WelcomePage() {
 
         const fetchVoter = async (voterId) => {
             try {
-                const res = await axios.get(`/voters/${voterId}`);
+                const res = await axios.get(`/api/voters/${voterId}`);
                 setVoter(res.data.data);
             } catch (error) {
                 Swal.fire(

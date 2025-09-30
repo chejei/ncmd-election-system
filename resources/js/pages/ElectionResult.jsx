@@ -12,7 +12,7 @@ export default function ElectionResult() {
         // function to fetch stats
         const fetchStats = async () => {
             try {
-                const res = await axios.get("/statistics");
+                const res = await axios.get("/api/statistics");
                 setStats(res.data);
             } catch (error) {
                 console.error("Error fetching statistics:", error);

@@ -48,7 +48,7 @@ export default function Ballot() {
     useEffect(() => {
         const fetchCandidates = async () => {
             try {
-                const res = await axios.get("/position-candidates");
+                const res = await axios.get("/api/position-candidates");
                 setPositions(res.data);
                 setLoading(false);
             } catch (error) {
@@ -149,7 +149,7 @@ export default function Ballot() {
             formData.append("photo", photo);
             formData.append("voter_id", voter_id);
 
-            await axios.post("/submit-ballot", formData, {
+            await axios.post("/api/submit-ballot", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             const updatedVoter = { ...voter, voted_photo: photo };

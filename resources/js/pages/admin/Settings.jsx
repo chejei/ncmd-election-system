@@ -21,7 +21,7 @@ export default function Settings() {
     });
 
     useEffect(() => {
-        axios.get("/settings").then((res) => {
+        axios.get("/api/settings").then((res) => {
             const data = res.data;
             if (data.site_logo) {
                 data.site_logo = `/storage/${data.site_logo}`;
@@ -83,7 +83,7 @@ export default function Settings() {
         }
 
         try {
-            await axios.post("/settings", settings, {
+            await axios.post("/api/settings", settings, {
                 headers: { "Content-Type": "application/json" },
             });
 
@@ -129,7 +129,7 @@ export default function Settings() {
         }
 
         try {
-            await axios.post("/account/update", userFormData, {
+            await axios.post("/api/account/update", userFormData, {
                 headers: { "Content-Type": "application/json" },
             });
 
@@ -158,7 +158,7 @@ export default function Settings() {
 
     const handleBackup = async () => {
         try {
-            const response = await axios.get("/backup", {
+            const response = await axios.get("/api/backup", {
                 responseType: "blob", // important for file download
             });
 

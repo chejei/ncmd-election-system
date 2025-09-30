@@ -21,8 +21,8 @@ export default function AddCandidate() {
     const [photoPreview, setPhotoPreview] = useState(null);
     const navigate = useNavigate();
     useEffect(() => {
-        axios.get("/churches").then((res) => setChurches(res.data));
-        axios.get("/positions").then((res) => setPositions(res.data));
+        axios.get("/api/churches").then((res) => setChurches(res.data));
+        axios.get("/api/positions").then((res) => setPositions(res.data));
     }, []);
 
     const handleFileChange = async (e, fieldName) => {
@@ -240,7 +240,7 @@ export default function AddCandidate() {
                 formData.append(key, data[key]);
             });
 
-            const res = await axios.post("/candidates", formData, {
+            const res = await axios.post("/api/candidates", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },

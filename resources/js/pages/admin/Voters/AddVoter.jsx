@@ -18,7 +18,7 @@ export default function AddVoter() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("/churches").then((res) => setChurches(res.data));
+        axios.get("/api/churches").then((res) => setChurches(res.data));
     }, []);
 
     const fields = [
@@ -86,7 +86,7 @@ export default function AddVoter() {
 
     const onSubmit = async (data) => {
         try {
-            const res = await axios.post("/voters", data);
+            const res = await axios.post("/api/voters", data);
             if (res.status === 200 || res.status === 201) {
                 Swal.fire({
                     icon: "success",

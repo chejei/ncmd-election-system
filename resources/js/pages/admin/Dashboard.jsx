@@ -7,7 +7,7 @@ export default function Dashboard() {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const res = await axios.get("/statistics");
+                const res = await axios.get("/api/statistics");
                 setStats(res.data);
                 setLoading(false);
             } catch (error) {

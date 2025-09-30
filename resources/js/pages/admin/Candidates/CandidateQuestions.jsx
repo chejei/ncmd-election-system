@@ -10,7 +10,9 @@ export default function CandidateQuestions({ candidateId, readOnly }) {
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
-                const res = await axios.get(`/questions/active/${candidateId}`);
+                const res = await axios.get(
+                    `/api/questions/active/${candidateId}`
+                );
                 setQuestions(res.data);
             } catch (err) {
                 console.error("Error fetching questions:", err);
@@ -24,7 +26,7 @@ export default function CandidateQuestions({ candidateId, readOnly }) {
 
     const handleSaveAll = async () => {
         try {
-            await axios.post(`/candidate-answers/bulk`, {
+            await axios.post(`/api/candidate-answers/bulk`, {
                 candidate_id: candidateId,
                 answers: questions.map((q) => ({
                     question_id: q.id,

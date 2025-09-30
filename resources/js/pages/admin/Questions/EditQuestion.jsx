@@ -45,7 +45,7 @@ export default function EditQuestion() {
     useEffect(() => {
         const fetchQuestion = async () => {
             try {
-                const res = await axios.get(`/questions/${questionId}`);
+                const res = await axios.get(`/api/questions/${questionId}`);
                 reset(res.data);
             } catch (error) {
                 console.error(error);
@@ -63,7 +63,7 @@ export default function EditQuestion() {
 
     const onSubmit = async (data) => {
         try {
-            const res = await axios.put(`/questions/${questionId}`, data);
+            const res = await axios.put(`/api/questions/${questionId}`, data);
             if (res.status === 200) {
                 Swal.fire({
                     icon: "success",

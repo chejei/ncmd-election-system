@@ -43,7 +43,7 @@ export default function AddPosition() {
 
     const onSubmit = async (data) => {
         try {
-            const res = await axios.post("/positions", data);
+            const res = await axios.post("/api/positions", data);
 
             if (res.status === 200 || res.status === 201) {
                 Swal.fire({

@@ -23,11 +23,11 @@ export default function EditVoter() {
         const fetchData = async () => {
             try {
                 // Fetch churches for dropdown
-                const churchRes = await axios.get("/churches");
+                const churchRes = await axios.get("/api/churches");
                 setChurches(churchRes.data);
 
                 // Fetch voter data
-                const voterRes = await axios.get(`/voters/${voterId}`);
+                const voterRes = await axios.get(`/api/voters/${voterId}`);
                 const voter = voterRes.data.data;
 
                 if (voter.restrict) {
@@ -141,7 +141,7 @@ export default function EditVoter() {
 
     const onSubmit = async (data) => {
         try {
-            const res = await axios.put(`/voters/${voterId}`, data);
+            const res = await axios.put(`/api/voters/${voterId}`, data);
             if (res.status === 200) {
                 Swal.fire(
                     "Success",

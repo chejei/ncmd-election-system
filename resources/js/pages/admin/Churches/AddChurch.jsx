@@ -62,7 +62,7 @@ export default function AddChurch() {
 
     const onSubmit = async (data) => {
         try {
-            const res = await axios.post("/churches", data);
+            const res = await axios.post("/api/churches", data);
 
             if (res.status === 200 || res.status === 201) {
                 Swal.fire({

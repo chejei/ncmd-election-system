@@ -38,7 +38,7 @@ export default function Positions() {
 
         // Update priorities in DB
         try {
-            await axios.post("/positions/reorder", {
+            await axios.post("/api/positions/reorder", {
                 positions: reordered.map((pos, index) => ({
                     id: pos.id,
                     priority: index + 1,
@@ -63,7 +63,7 @@ export default function Positions() {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`/positions/${id}`);
+                    await axios.delete(`/api/positions/${id}`);
                     fetchPositions(searchTerm);
 
                     Swal.fire({
@@ -115,7 +115,7 @@ export default function Positions() {
                 try {
                     await Promise.all(
                         selectedIds.map((id) =>
-                            axios.delete(`/positions/${id}`)
+                            axios.delete(`/api/positions/${id}`)
                         )
                     );
                     fetchPositions(searchTerm);

@@ -21,7 +21,7 @@ export default function EditPosition() {
     useEffect(() => {
         const fetchPosition = async () => {
             try {
-                const res = await axios.get(`/positions/${positionId}`);
+                const res = await axios.get(`/api/positions/${positionId}`);
                 const data = res.data;
 
                 setOriginalData(data);
@@ -88,11 +88,15 @@ export default function EditPosition() {
             });
             formData.append("_method", "PUT");
 
-            const res = await axios.post(`/positions/${positionId}`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            });
+            const res = await axios.post(
+                `/api/positions/${positionId}`,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
 
             if (res.status === 200 || res.status === 201) {
                 Swal.fire({

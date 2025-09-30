@@ -10,7 +10,7 @@ export default function Candidates() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get("/meet-candidates");
+                const res = await axios.get("/api/meet-candidates");
                 setPositions(res.data);
             } catch (err) {
                 console.error(err);
