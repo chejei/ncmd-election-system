@@ -26,7 +26,9 @@ use App\Http\Controllers\Api\BackupController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+Route::get('/db-test', function() {
+    return DB::connection()->getPdo() ? 'DB Connected!' : 'DB Failed!';
+});
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/voter/login', [VoterAuthController::class, 'login']);
 
