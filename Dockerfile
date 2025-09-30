@@ -9,8 +9,10 @@ WORKDIR /var/www/html
 # Install system dependencies & PHP extensions
 # --------------------------
 RUN apt-get update && apt-get install -y \
-    git unzip libzip-dev libonig-dev libpq-dev libxml2-dev libicu-dev libpng-dev libjpeg-dev curl \
-    && docker-php-ext-install pdo pdo_mysql zip mbstring bcmath intl xml gd curl tokenizer \
+    git unzip curl libzip-dev libonig-dev libpq-dev libxml2-dev libicu-dev \
+    libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_mysql zip mbstring bcmath intl xml gd \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # --------------------------
