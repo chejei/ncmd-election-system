@@ -44,54 +44,40 @@ EXPOSE 8080
 # --------------------------
 # Entrypoint: generate .env from Railway variables & start Laravel
 # --------------------------
-CMD bash -c "\
-    cat > .env <<EOL
-APP_NAME=${APP_NAME}
-APP_ENV=${APP_ENV}
-APP_KEY=${APP_KEY}
-APP_DEBUG=${APP_DEBUG}
-APP_URL=${APP_URL}
-DB_CONNECTION=${DB_CONNECTION}
-DB_HOST=${DB_HOST}
-DB_PORT=${DB_PORT}
-DB_DATABASE=${DB_DATABASE}
-DB_USERNAME=${DB_USERNAME}
-DB_PASSWORD=${DB_PASSWORD}
-LOG_CHANNEL=${LOG_CHANNEL:-stack}
-LOG_DEPRECATIONS_CHANNEL=${LOG_DEPRECATIONS_CHANNEL:-null}
-LOG_LEVEL=${LOG_LEVEL:-debug}
-BROADCAST_DRIVER=${BROADCAST_DRIVER:-log}
-CACHE_DRIVER=${CACHE_DRIVER:-file}
-FILESYSTEM_DISK=${FILESYSTEM_DISK:-local}
-QUEUE_CONNECTION=${QUEUE_CONNECTION:-sync}
-SESSION_DRIVER=${SESSION_DRIVER:-file}
-SESSION_LIFETIME=${SESSION_LIFETIME:-120}
-MEMCACHED_HOST=${MEMCACHED_HOST:-127.0.0.1}
-REDIS_HOST=${REDIS_HOST:-127.0.0.1}
-REDIS_PASSWORD=${REDIS_PASSWORD:-null}
-REDIS_PORT=${REDIS_PORT:-6379}
-MAIL_MAILER=${MAIL_MAILER:-smtp}
-MAIL_HOST=${MAIL_HOST}
-MAIL_PORT=${MAIL_PORT}
-MAIL_USERNAME=${MAIL_USERNAME}
-MAIL_PASSWORD=${MAIL_PASSWORD}
-MAIL_ENCRYPTION=${MAIL_ENCRYPTION:-tls}
-MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS}
-MAIL_FROM_NAME=${MAIL_FROM_NAME}
-AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-us-east-1}
-AWS_BUCKET=${AWS_BUCKET}
-AWS_USE_PATH_STYLE_ENDPOINT=${AWS_USE_PATH_STYLE_ENDPOINT:-false}
-PUSHER_APP_ID=${PUSHER_APP_ID}
-PUSHER_APP_KEY=${PUSHER_APP_KEY}
-PUSHER_APP_SECRET=${PUSHER_APP_SECRET}
-PUSHER_HOST=${PUSHER_HOST}
-PUSHER_PORT=${PUSHER_PORT:-443}
-PUSHER_SCHEME=${PUSHER_SCHEME:-https}
-PUSHER_APP_CLUSTER=${PUSHER_APP_CLUSTER:-mt1}
-EOL
-    php artisan config:cache && \
-    php artisan route:cache && \
-    php artisan serve --host=0.0.0.0 --port=${PORT:-8080} \
-"
+CMD ["sh", "-c", "\
+echo \"APP_NAME=${APP_NAME}\" > .env && \
+echo \"APP_ENV=${APP_ENV}\" >> .env && \
+echo \"APP_KEY=${APP_KEY}\" >> .env && \
+echo \"APP_DEBUG=${APP_DEBUG}\" >> .env && \
+echo \"APP_URL=${APP_URL}\" >> .env && \
+echo \"DB_CONNECTION=${DB_CONNECTION}\" >> .env && \
+echo \"DB_HOST=${DB_HOST}\" >> .env && \
+echo \"DB_PORT=${DB_PORT}\" >> .env && \
+echo \"DB_DATABASE=${DB_DATABASE}\" >> .env && \
+echo \"DB_USERNAME=${DB_USERNAME}\" >> .env && \
+echo \"DB_PASSWORD=${DB_PASSWORD}\" >> .env && \
+echo \"LOG_CHANNEL=${LOG_CHANNEL:-stack}\" >> .env && \
+echo \"LOG_DEPRECATIONS_CHANNEL=${LOG_DEPRECATIONS_CHANNEL:-null}\" >> .env && \
+echo \"LOG_LEVEL=${LOG_LEVEL:-debug}\" >> .env && \
+echo \"BROADCAST_DRIVER=${BROADCAST_DRIVER:-log}\" >> .env && \
+echo \"CACHE_DRIVER=${CACHE_DRIVER:-file}\" >> .env && \
+echo \"FILESYSTEM_DISK=${FILESYSTEM_DISK:-local}\" >> .env && \
+echo \"QUEUE_CONNECTION=${QUEUE_CONNECTION:-sync}\" >> .env && \
+echo \"SESSION_DRIVER=${SESSION_DRIVER:-file}\" >> .env && \
+echo \"SESSION_LIFETIME=${SESSION_LIFETIME:-120}\" >> .env && \
+echo \"MEMCACHED_HOST=${MEMCACHED_HOST:-127.0.0.1}\" >> .env && \
+echo \"REDIS_HOST=${REDIS_HOST:-127.0.0.1}\" >> .env && \
+echo \"REDIS_PASSWORD=${REDIS_PASSWORD:-null}\" >> .env && \
+echo \"REDIS_PORT=${REDIS_PORT:-6379}\" >> .env && \
+echo \"MAIL_MAILER=${MAIL_MAILER:-smtp}\" >> .env && \
+echo \"MAIL_HOST=${MAIL_HOST}\" >> .env && \
+echo \"MAIL_PORT=${MAIL_PORT}\" >> .env && \
+echo \"MAIL_USERNAME=${MAIL_USERNAME}\" >> .env && \
+echo \"MAIL_PASSWORD=${MAIL_PASSWORD}\" >> .env && \
+echo \"MAIL_ENCRYPTION=${MAIL_ENCRYPTION:-tls}\" >> .env && \
+echo \"MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS}\" >> .env && \
+echo \"MAIL_FROM_NAME=${MAIL_FROM_NAME}\" >> .env && \
+php artisan config:cache && \
+php artisan route:cache && \
+php artisan serve --host=0.0.0.0 --port=${PORT:-8080} \
+"]
