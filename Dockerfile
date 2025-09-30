@@ -1,0 +1,24 @@
+FROM php:8.1-fpm
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git curl zip unzip libpng-dev libjpeg-dev libfreetype6-dev libonig-dev libxml2-dev
+
+# Install PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd mbstring pdo pdo_mysql xml
+
+# Set working directory
+WORKDIR /var/www
+
+# Copy project files
+COPY . .
+
+# Install Composer
+COPY --from=composer:2.5 /usr/bin/composer /usr/bin/composer
+RUN composer install --no-dev --optimize-autoloader
+
+# Expose port
+EXPOSE 8000
+
+CMD php artisan serve --host=0.0.0.0 --port=8000
