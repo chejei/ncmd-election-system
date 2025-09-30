@@ -1,5 +1,5 @@
 # --------------------------
-# Base PHP image with FPM
+# Base PHP image
 # --------------------------
 FROM php:8.1-fpm
 
@@ -47,6 +47,6 @@ RUN mkdir -p storage bootstrap/cache && chown -R www-data:www-data storage boots
 EXPOSE 8080
 
 # --------------------------
-# Start Laravel server on $PORT
+# Start Laravel server on $PORT (Railway auto-assigns)
 # --------------------------
-CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"]
