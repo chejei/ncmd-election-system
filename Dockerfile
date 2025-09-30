@@ -1,9 +1,9 @@
 # --------------------------
-# Base PHP image with FPM
+# Base PHP CLI image
 # --------------------------
-FROM php:8.1-fpm
+FROM php:8.1-cli
 
-WORKDIR /var/www/html
+WORKDIR /app
 
 # --------------------------
 # Install system dependencies & PHP extensions
@@ -42,11 +42,12 @@ RUN php artisan config:cache && php artisan route:cache
 RUN mkdir -p storage bootstrap/cache && chown -R www-data:www-data storage bootstrap/cache
 
 # --------------------------
-# Expose port for PHP-FPM
+# Expose Railway port
 # --------------------------
-EXPOSE 9000
+ENV PORT 8080
+EXPOSE 8080
 
 # --------------------------
-# Start PHP-FPM
+# Start Laravel server (listen on $PORT)
 # --------------------------
-CMD ["php-fpm"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT}"]
