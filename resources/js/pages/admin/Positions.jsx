@@ -12,7 +12,7 @@ export default function Positions() {
     const fetchPositions = (search = "") => {
         setPositions([]);
         axios
-            .get(`/positions?search=${search}`)
+            .get(`/api/positions?search=${search}`)
             .then((response) => {
                 setPositions(response.data); // expect full array instead of paginated
             })

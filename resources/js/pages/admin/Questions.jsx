@@ -13,7 +13,7 @@ export default function Questions() {
     const fetchQuestions = (page = 1, search = "") => {
         setQuestions([]);
         axios
-            .get(`/questions?page=${page}&search=${search}`)
+            .get(`/api/questions?page=${page}&search=${search}`)
             .then((response) => {
                 setQuestions(response.data.data);
                 setCurrentPage(response.data.current_page);

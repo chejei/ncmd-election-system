@@ -14,7 +14,7 @@ export default function ViewCandidate() {
 
     useEffect(() => {
         axios
-            .get(`/candidates/${candidateId}`)
+            .get(`/api/candidates/${candidateId}`)
             .then((res) => {
                 setCandidate(res.data);
             })

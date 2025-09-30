@@ -7,7 +7,7 @@ export default function useSettings() {
 
     useEffect(() => {
         axios
-            .get("/settings")
+            .get("/api/settings")
             .then((res) => setSettings(res.data))
             .finally(() => setLoading(false));
     }, []);

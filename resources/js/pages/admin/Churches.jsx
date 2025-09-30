@@ -13,7 +13,7 @@ export default function Churches() {
     const fetchChurches = (page = 1, search = "") => {
         setChurches([]);
         axios
-            .get(`/churches?page=${page}&search=${search}`)
+            .get(`/api/churches?page=${page}&search=${search}`)
             .then((response) => {
                 setChurches(response.data.data);
                 setCurrentPage(response.data.current_page);

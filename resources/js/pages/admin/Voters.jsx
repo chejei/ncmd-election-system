@@ -13,7 +13,7 @@ export default function Voters() {
     const fetchVoters = (page = 1, search = "") => {
         setVoters([]);
         axios
-            .get(`/voters?page=${page}&search=${search}`)
+            .get(`/api/voters?page=${page}&search=${search}`)
             .then((response) => {
                 setVoters(response.data.data);
                 setCurrentPage(response.data.current_page);

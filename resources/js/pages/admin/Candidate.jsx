@@ -13,7 +13,9 @@ export default function Candidate() {
     const fetchCandidates = (page = 1, search = "") => {
         setCandidates([]);
         axios
-            .get(`/candidates?page=${page}&search=${search}&status=approved`)
+            .get(
+                `/api/candidates?page=${page}&search=${search}&status=approved`
+            )
             .then((response) => {
                 setCandidates(response.data.data);
                 setCurrentPage(response.data.current_page);
