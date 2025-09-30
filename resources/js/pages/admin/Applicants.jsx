@@ -118,7 +118,7 @@ export default function Candidate() {
 
     const handleStatusChange = async (id, action) => {
         const actionText = action === "approve" ? "Approved" : "Rejected";
-        const actionUrl = `/candidates/${id}/${action}`;
+        const actionUrl = `/api/candidates/${id}/${action}`;
 
         try {
             await axios.post(actionUrl);
