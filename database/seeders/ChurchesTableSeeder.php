@@ -12,9 +12,9 @@ class ChurchesTableSeeder extends Seeder
     {
         DB::table('churches')->insert([
             [
-                'name' => 'Grace Church',
-                'senior_ptr' => 'Ptr. John Doe',
-                'address' => '123 Main St, Zone 1',
+                'name' => 'City Alliance Church',
+                'senior_ptr' => 'Ptr.John Collins Labrador',
+                'address' => '187 Pres. Quirino Street, Barangay 31, Cagayan de Oro, Philippines',
                 'zone' => '1',
                 'created_at' => now(),
                 'updated_at' => now(),
