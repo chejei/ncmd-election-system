@@ -1,9 +1,9 @@
 # --------------------------
-# Base PHP CLI image
+# Base PHP image with FPM
 # --------------------------
-FROM php:8.1-cli
+FROM php:8.1-fpm
 
-WORKDIR /app
+WORKDIR /var/www/html
 
 # --------------------------
 # Install system dependencies & PHP extensions
@@ -42,12 +42,11 @@ RUN php artisan config:cache && php artisan route:cache
 RUN mkdir -p storage bootstrap/cache && chown -R www-data:www-data storage bootstrap/cache
 
 # --------------------------
-# Expose Railway port
+# Expose the port Railway uses
 # --------------------------
-ENV PORT 8080
 EXPOSE 8080
 
 # --------------------------
-# Start Laravel server (listen on $PORT)
+# Start Laravel server on $PORT
 # --------------------------
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT}"]
+CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
