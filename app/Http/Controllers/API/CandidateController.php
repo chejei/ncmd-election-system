@@ -1,7 +1,7 @@
 <?php
 // app/Http/Controllers/API/CandidateController.php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 use Carbon\Carbon;
 
 use App\Http\Controllers\Controller;

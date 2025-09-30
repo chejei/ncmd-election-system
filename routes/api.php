@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\CandidateController;
-use App\Http\Controllers\API\ChurchController;
-use App\Http\Controllers\API\PositionController;
+use App\Http\Controllers\Api\CandidateController;
+use App\Http\Controllers\Api\ChurchController;
+use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\VoterAuthController;
 use App\Http\Controllers\Api\QuestionController;
