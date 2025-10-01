@@ -117,7 +117,7 @@ export default function VoterLogin() {
                                         onKeyDown={(e) =>
                                             handleKeyDown(e, index)
                                         }
-                                        className="w-12 h-12 text-center border rounded-lg text-lg focus:ring-blue-500 focus:border-blue-500"
+                                        className="w-10 sm:w-12 h-12 text-center border rounded-lg text-lg focus:ring-blue-500 focus:border-blue-500"
                                     />
                                 ))}
                             </div>
