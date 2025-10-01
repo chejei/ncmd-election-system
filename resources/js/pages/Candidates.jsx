@@ -2,80 +2,92 @@ import { useEffect, useState } from "react";
 import ctaOverlay from "../assets/images/cta-img.jpg";
 import { ReadMoreIcon } from "../assets/icons/icon";
 import axios from "../api/axios";
-import headingBanner from "../assets/images/heading-background.png";
+import InnerBanner from "../components/InnerBanner";
 
 export default function Candidates() {
     const [positions, setPositions] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             try {
                 const res = await axios.get("/api/meet-candidates");
                 setPositions(res.data);
             } catch (err) {
                 console.error(err);
+            } finally {
+                setLoading(false);
             }
         };
         fetchData();
     }, []);
+
+    const hasCandidates = positions.some((pos) => pos.candidate_count > 0);
+    if (positions.length > 0 && !hasCandidates) {
+        return (
+            <>
+                <section className="bg-white flex flex-col items-center justify-center min-h-screen">
+                    <h2 className="text-3xl font-bold text-gray-800">
+                        Candidate lineup coming soon!
+                    </h2>
+                    <p className="text-gray-500 mt-3">
+                        Please check back later for updates.
+                    </p>
+                </section>
+            </>
+        );
+    }
+
     return (
         <>
-            <section
-                id="heading"
-                className="bg-white py-20 bg-cover bg-center"
-                style={{ backgroundImage: `url(${headingBanner})` }}
-            >
-                <div className="h-[200px]  mx-auto sm:px-7 px-4 max-w-screen-xl flex items-center">
-                    <h1 className="text-5xl text-white font-bold">
-                        Our Election Candidates
-                    </h1>
-                </div>
-            </section>
-            <section id="imageHero" className="bg-white py-10">
+            <InnerBanner title="Our Election Candidates" />
+            <section className="bg-white py-10">
                 <div className="mx-auto sm:px-7 px-4 max-w-screen-xl">
-                    {positions
-                        .filter((pos) => pos.candidate_count > 0)
-                        .map((pos) => (
-                            <div key={pos.id} className="mb-8">
-                                {/* Position Title */}
-                                <h2 className="text-3xl font-semibold mb-4">
-                                    {pos.title}
-                                </h2>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                    {pos.candidates.map((cand) => (
-                                        <div
-                                            key={cand.id}
-                                            className="border rounded-lg p-4 shadow hover:shadow-md transition"
-                                        >
-                                            <img
-                                                src={
-                                                    cand.photo
-                                                        ? `/storage/${cand.photo}`
-                                                        : "/images/user-placeholder.png"
-                                                }
-                                                alt={cand.first_name}
-                                                className="w-full h-100 object-cover object-top rounded-md mb-3"
-                                            />
-
-                                            <h3 className="text-lg font-medium">
-                                                {cand.full_name}
-                                            </h3>
-                                            <p className="text-sm text-gray-600 mb-3">
-                                                {cand.church_name}
-                                            </p>
-                                            <a
-                                                href={`candidate/${cand.slug}`}
-                                                className="inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-3xl text-sm px-5 py-2.5 me-2 mb-2"
+                    {positions.length === 0 ? (
+                        <p className="text-center text-gray-500">Loading...</p>
+                    ) : (
+                        positions
+                            .filter((pos) => pos.candidate_count > 0)
+                            .map((pos) => (
+                                <div key={pos.id} className="mb-8">
+                                    <h2 className="text-3xl font-semibold mb-4">
+                                        {pos.title}
+                                    </h2>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                        {pos.candidates.map((cand) => (
+                                            <div
+                                                key={cand.id}
+                                                className="border rounded-lg p-4 shadow hover:shadow-md transition"
                                             >
-                                                Read more
-                                                <ReadMoreIcon />
-                                            </a>
-                                        </div>
-                                    ))}
+                                                <img
+                                                    src={
+                                                        cand.photo
+                                                            ? `/storage/${cand.photo}`
+                                                            : "/images/user-placeholder.png"
+                                                    }
+                                                    alt={cand.first_name}
+                                                    className="w-full h-100 object-cover object-top rounded-md mb-3"
+                                                />
+                                                <h3 className="text-lg font-medium">
+                                                    {cand.full_name}
+                                                </h3>
+                                                <p className="text-sm text-gray-600 mb-3">
+                                                    {cand.church_name}
+                                                </p>
+                                                <a
+                                                    href={`candidate/${cand.slug}`}
+                                                    className="inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-3xl text-sm px-5 py-2.5 me-2 mb-2"
+                                                >
+                                                    Read more
+                                                    <ReadMoreIcon />
+                                                </a>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))
+                    )}
                 </div>
             </section>
             <section

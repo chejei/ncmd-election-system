@@ -551,3 +551,11 @@ ul {
         }
     }
 }
+
+#hero {
+    .hero-title {
+        @media (max-width: 470px) {
+            width: 100% !important;
+        }
+    }
+}

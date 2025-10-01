@@ -1,7 +1,7 @@
 import React from "react";
 import { useSetting } from "../components/SettingContext";
 import { formatDate } from "../utils/formatDate";
-import headingBanner from "../assets/images/heading-background.png";
+import InnerBanner from "../components/InnerBanner";
 
 export default function Guidelines() {
     const siteName = useSetting("site_name", "");
@@ -10,17 +10,7 @@ export default function Guidelines() {
     console.log(siteName);
     return (
         <>
-            <section
-                id="heading"
-                className="bg-white py-20 bg-cover bg-center"
-                style={{ backgroundImage: `url(${headingBanner})` }}
-            >
-                <div className="h-[200px]  mx-auto sm:px-7 px-4 max-w-screen-xl flex items-center">
-                    <h1 className="text-5xl text-white font-bold">
-                        Online Election Guidelines
-                    </h1>
-                </div>
-            </section>
+            <InnerBanner title="Online Election Guidelines" />
             <section
                 id="guidelines"
                 className="bg-white text-black gradiant-articles"

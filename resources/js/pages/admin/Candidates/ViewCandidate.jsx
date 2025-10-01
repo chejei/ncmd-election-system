@@ -74,7 +74,7 @@ export default function ViewCandidate() {
                                     </h2>
                                     {candidate.status === "approved" && (
                                         <a
-                                            class="bg-transparent action action-preview  hover:bg-blue-500 text-black-50 hover:text-white ml-2 py-1 px-1 border border-black-50 hover:border-transparent rounded"
+                                            className="bg-transparent action action-preview  hover:bg-blue-500 text-black-50 hover:text-white ml-2 py-1 px-1 border border-black-50 hover:border-transparent rounded"
                                             href={`/candidate/${candidate.slug}`}
                                             target="_blank"
                                             title="Preview"

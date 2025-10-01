@@ -21,15 +21,12 @@ export default function ElectionResult() {
 
         fetchStats();
 
-        // refresh stats every 60s
         const statsInterval = setInterval(fetchStats, 60000);
 
-        // update time every second
         const timeInterval = setInterval(() => {
             setDateTime(new Date());
         }, 1000);
 
-        // cleanup
         return () => {
             clearInterval(statsInterval);
             clearInterval(timeInterval);
@@ -62,6 +59,19 @@ export default function ElectionResult() {
         });
         return `${time} - ${formattedDate}`;
     };
+
+    if (totalVoted === 0) {
+        return (
+            <section className="h-full bg-white flex flex-col items-center justify-center py-20  h-screen">
+                <h2 className="text-3xl font-bold text-gray-800">
+                    Election Results Not Available Yet
+                </h2>
+                <p className="text-gray-500 mt-3">
+                    Please check back later once votes have started coming in.
+                </p>
+            </section>
+        );
+    }
 
     return (
         <>

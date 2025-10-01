@@ -16,15 +16,15 @@ export default function Home() {
                 className="bg-gradient-to-b from-black to-slate-950 overlay-wrapper"
             >
                 <div className="mx-auto sm:px-7 px-4 max-w-screen-xl overlay-text">
-                    <div className="gap-x-6 px-0 lg:px-4 py-16 pb-20 sm:pb-45 lg:pb-64 mx-auto lg:grid xl:px-0 lg:grid-cols-12">
+                    <div className="gap-x-6 px-0 lg:px-4 py-12 sm:py-15 pb-15 sm:pb-45 lg:pb-64 mx-auto lg:grid xl:px-0 lg:grid-cols-12">
                         <h1
                             id="typing"
                             className="font-sans font-semibold text-white lg:col-span-12"
                         >
                             Alliance Youth of the Philippines
                         </h1>
-                        <div className="mt-1 text-white lg:col-span-8 lg:mt-3">
-                            <h2 className="text-5xl font-medium lg:text-7xl">
+                        <div className="hero-title mt-1 text-white w-[60%] sm:w-[80%] md:w-[60%] lg:w-full lg:col-span-8 lg:mt-3">
+                            <h2 className="text-4xl font-medium sm:text-5xl lg:text-7xl">
                                 <span className="text-yellow-500">
                                     North Central Mindanao District{" "}
                                 </span>

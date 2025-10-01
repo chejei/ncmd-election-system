@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Outlet, useLocation, matchPath } from "react-router-dom";
 import { useSetting } from "../components/SettingContext";
+import NavLink from "../components/NavLink";
 import routeTitles from "../routes/routeTitles";
 import logo from "../assets/ncmd-election-logo.png";
 
@@ -54,7 +55,7 @@ export default function FrontendLayout() {
     };
     return (
         <>
-            <header className="">
+            <header className="border-gray-200 border-b-1 sticky top-0 z-50 bg-white shadow">
                 <div className="mx-auto sm:px-7 px-4 max-w-screen-xl py-10">
                     <nav
                         className="flex px-4 xl:px-0 justify-between items-center"
@@ -62,44 +63,29 @@ export default function FrontendLayout() {
                     >
                         <a className="text-2xl font-semibold" href="/">
                             <img
-                                className="object-contain h-[50px] sm:h-[80px] w-[200px]"
+                                className="object-contain h-[50px] sm:h-[80px] w-[100px] sm:w-[200px]"
                                 src={siteLogo ? `/storage/${siteLogo}` : logo}
                                 alt={siteName}
                             />
                         </a>
                         <ul
-                            className={`flex-row flex-1 items-center justify-end gap-5 nav-menu ml-auto hidden md:flex ${
+                            className={`flex-row flex-1 items-center justify-end gap-5 nav-menu ml-auto hidden md:flex border-gray-200 border-b-1 md:border-0 ${
                                 isMenuOpen ? "open" : ""
                             }`}
                         >
-                            <li>
-                                <a
-                                    className="font-medium"
-                                    href="/"
-                                    aria-current="page"
-                                >
-                                    Home
-                                </a>
+                            <li className="group">
+                                <NavLink href="/">Home</NavLink>
                             </li>
-                            <li>
-                                <a
-                                    className="font-medium"
-                                    href="/candidates"
-                                    aria-current="page"
-                                >
-                                    Candidates
-                                </a>
+                            <li className="group">
+                                <NavLink href="/candidates">Candidates</NavLink>
                             </li>
-                            <li>
-                                <a
-                                    className="font-medium"
-                                    href="/election-result"
-                                >
+                            <li className="group">
+                                <NavLink href="/election-result">
                                     Election Result
-                                </a>
+                                </NavLink>
                             </li>
 
-                            <li>
+                            <li className="btn-link">
                                 <a
                                     className="btn font-medium inline-block ml-0 lg:ml-auto bg-blue-500 text-white py-2 px-4 rounded-3xl hover:bg-blue-600"
                                     href="/vote"

@@ -35,7 +35,7 @@ export default function EditCandidate() {
     useEffect(() => {
         const fetchCandidate = async () => {
             try {
-                const res = await .get(`/api/candidates/${candidateId}`);
+                const res = await axios.get(`/api/candidates/${candidateId}`);
                 const data = res.data;
 
                 if (data.status !== "approved") {

@@ -1,10 +1,11 @@
 // Tailwind-like breakpoints
 $breakpoints: (
+    mobile: 400px,
     sm: 640px,
     md: 768px,
     lg: 1024px,
     xl: 1280px,
-    2xl: 1536px
+    2xl: 1536px,
 );
 
 // Mixin
@@ -15,9 +16,7 @@ $breakpoints: (
         @media (min-width: $breakpoint) {
             @content;
         }
-    }
-
-    @else {
+    } @else {
         @warn "No value found for #{$size}";
     }
 }
