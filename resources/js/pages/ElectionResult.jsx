@@ -62,7 +62,7 @@ export default function ElectionResult() {
 
     if (totalVoted === 0) {
         return (
-            <section className="h-full bg-white flex flex-col items-center justify-center py-20  h-screen">
+            <section className="h-full bg-white flex flex-col items-center text-center justify-center py-20  h-screen">
                 <h2 className="text-3xl font-bold text-gray-800">
                     Election Results Not Available Yet
                 </h2>

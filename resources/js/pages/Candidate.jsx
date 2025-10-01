@@ -171,7 +171,7 @@ export default function Candidate() {
                                 <h2 className="font-semibold text-gray-400 lg:col-span-12">
                                     Be Part of Choosing Servant Leaders.
                                 </h2>
-                                <h2 className="text-4xl font-medium lg:text-7xl">
+                                <h2 className="font-medium text-3xl md:text-4xl lg:text-7xl">
                                     Don't wait,
                                     <br /> your{" "}
                                     <span className="text-red-500 font-bold">

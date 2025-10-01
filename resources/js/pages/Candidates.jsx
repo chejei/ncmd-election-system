@@ -27,7 +27,7 @@ export default function Candidates() {
     if (positions.length > 0 && !hasCandidates) {
         return (
             <>
-                <section className="bg-white flex flex-col items-center justify-center min-h-screen">
+                <section className="bg-white flex flex-col items-center text-center justify-center min-h-screen">
                     <h2 className="text-3xl font-bold text-gray-800">
                         Candidate lineup coming soon!
                     </h2>
@@ -101,7 +101,7 @@ export default function Candidates() {
                                 <h2 className="font-semibold text-gray-400 lg:col-span-12">
                                     Be Part of Choosing Servant Leaders.
                                 </h2>
-                                <h2 className="text-4xl font-medium lg:text-7xl">
+                                <h2 className="font-medium text-3xl md:text-4xl lg:text-7xl">
                                     Don't wait,
                                     <br /> your{" "}
                                     <span className="text-red-500 font-bold">

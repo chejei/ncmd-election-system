@@ -112,7 +112,7 @@ export default function Home() {
             >
                 <div className="max-w-screen-xl sm:px-7 px-4 py-10 lg:py-20 mx-auto overlay-text">
                     <div className="p-10 md:p-15 lg:p-20 bg-opacity rounded-lg">
-                        <h2 className="text-4xl font-medium lg:text-7xl">
+                        <h2 className="font-medium text-3xl md:text-4xl lg:text-7xl">
                             Get to Know Your your{" "}
                             <span className="text-blue-500 font-bold">
                                 Candidates
@@ -145,7 +145,7 @@ export default function Home() {
                 className="bg-white text-black gradiant-articles"
             >
                 <div className="max-w-screen-xl sm:px-7 px-4 py-10 lg:py-20 mx-auto">
-                    <h3 className="text-5xl font-semibold mb-4  ">
+                    <h3 className="text-4xl font-semibold mb-4 lg:text-6xl">
                         Online Election Guidelines
                     </h3>
                     <ol className="list-decimal guidelines-list sm:px-7 px-4">
@@ -314,7 +314,7 @@ export default function Home() {
                                 <h2 className="font-semibold text-gray-400 lg:col-span-12">
                                     Be Part of Choosing Servant Leaders.
                                 </h2>
-                                <h2 className="text-4xl font-medium lg:text-7xl">
+                                <h2 className="font-medium text-3xl md:text-4xl lg:text-7xl">
                                     Don't wait,
                                     <br /> your{" "}
                                     <span className="text-red-500 font-bold">
