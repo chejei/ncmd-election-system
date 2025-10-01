@@ -522,17 +522,12 @@ ul {
     &.open {
         position: absolute;
         display: block;
-        top: 130px;
         left: 0;
         z-index: 99;
         background-color: #fff;
         width: 100%;
         text-align: center;
         padding-bottom: 20px;
-
-        @include respond(sm) {
-            top: 160px;
-        }
 
         li {
             flex: 0 0 1;

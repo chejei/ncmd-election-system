@@ -56,7 +56,7 @@ export default function FrontendLayout() {
     return (
         <>
             <header className="border-gray-200 border-b-1 sticky top-0 z-50 bg-white shadow">
-                <div className="mx-auto sm:px-7 px-4 max-w-screen-xl py-10">
+                <div className="mx-auto sm:px-7 px-4 max-w-screen-xl py-5 md:py-8 ld:py-10">
                     <nav
                         className="flex px-4 xl:px-0 justify-between items-center"
                         aria-label="Global"
@@ -69,7 +69,7 @@ export default function FrontendLayout() {
                             />
                         </a>
                         <ul
-                            className={`flex-row flex-1 items-center justify-end gap-5 nav-menu ml-auto hidden md:flex border-gray-200 border-b-1 md:border-0 ${
+                            className={`flex-row flex-1 items-center justify-end gap-5 nav-menu ml-auto hidden md:flex border-gray-200 border-b-1 md:border-0 top-[90px] sm:top-[120px] lg:top-[130px] ${
                                 isMenuOpen ? "open" : ""
                             }`}
                         >
