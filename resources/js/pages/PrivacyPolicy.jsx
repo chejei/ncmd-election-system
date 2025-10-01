@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
                     </p>
                     <ol className="list-decimal guidelines-list sm:px-7 px-4">
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Information We Collect
                             </h4>
                             <ul className="list-disc">
@@ -38,7 +38,7 @@ export default function PrivacyPolicy() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 How We Use Your Information
                             </h4>
                             <ul className="list-disc">
@@ -57,7 +57,7 @@ export default function PrivacyPolicy() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Confidentiality of Votes
                             </h4>
                             <ul className="list-disc">
@@ -72,7 +72,7 @@ export default function PrivacyPolicy() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Data Security
                             </h4>
                             <ul className="list-disc">
@@ -91,7 +91,7 @@ export default function PrivacyPolicy() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Data Sharing
                             </h4>
                             <ul className="list-disc">
@@ -106,7 +106,7 @@ export default function PrivacyPolicy() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Retention of Data
                             </h4>
                             <ul className="list-disc">
@@ -122,7 +122,7 @@ export default function PrivacyPolicy() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Policy Updates
                             </h4>
                             <p>

@@ -54,7 +54,7 @@ export default function Candidate() {
                             <h1 className="text-5xl font-bold mb-3 leading-6">
                                 {candidate.full_name}
                                 <br />
-                                <span className="text-2xl">
+                                <span className="text-xl sm:text-2xl">
                                     for {candidate.position_title}
                                 </span>
                             </h1>
@@ -79,7 +79,7 @@ export default function Candidate() {
                                 )}
                             </div>
                             <div className="mb-4">
-                                <h3 className="text-1xl font-bold mb-2">
+                                <h3 className="text-xl font-bold mb-2">
                                     Education Background
                                 </h3>
                                 {candidate.grade_year && (
@@ -103,7 +103,7 @@ export default function Candidate() {
                             </div>
                             {candidate.occupation && candidate.company && (
                                 <div className="mb-4">
-                                    <h3 className="text-1xl font-bold mb-2">
+                                    <h3 className="text-xl font-bold mb-2">
                                         Professional Information
                                     </h3>
                                     {candidate.occupation && (
@@ -179,7 +179,7 @@ export default function Candidate() {
                                     </span>{" "}
                                     matters!
                                 </h2>
-                                <span className="text-gray-600 pt-4 text-[20px] leading-[26px]">
+                                <span className="text-gray-600 pt-4 text-[18px] leading-[24px] md:text-[20px] md:leading-[26px]">
                                     Every vote is a step toward raising leaders
                                     who serve first, lead with compassion, and
                                     guide with faith.
@@ -188,7 +188,7 @@ export default function Candidate() {
                             <div className="mt-10 lg:mt-0 lg:col-start-9 lg:col-span-4 flex">
                                 <a
                                     href="/vote"
-                                    className="ml-0 lg:ml-auto bg-red-500 text-white font-bold py-2 px-8 rounded-3xl text-2xl hover:bg-blue-500"
+                                    className="ml-0 lg:ml-auto bg-red-500 text-white font-bold py-2 px-8 rounded-3xl text-xl sm:text-2xl hover:bg-blue-500"
                                 >
                                     Vote Now
                                 </a>

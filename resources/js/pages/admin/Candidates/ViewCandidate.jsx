@@ -69,7 +69,7 @@ export default function ViewCandidate() {
                             </div>
                             <div className="flex-1 p-4">
                                 <div className="mb-2 flex items-center">
-                                    <h2 className="text-xl font-bold leading-none text-gray-900 sm:text-2xl">
+                                    <h2 className="text-xl font-bold leading-none text-gray-900 md:text-xl">
                                         {candidate.full_name || "-"}
                                     </h2>
                                     {candidate.status === "approved" && (

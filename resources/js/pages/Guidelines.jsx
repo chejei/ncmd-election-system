@@ -18,7 +18,7 @@ export default function Guidelines() {
                 <div className="max-w-screen-xl sm:px-7 px-4 py-10 lg:py-20 mx-auto">
                     <ol className="list-decimal guidelines-list sm:px-7 px-4">
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Eligibility to Vote
                             </h4>
                             <ul className="list-disc">
@@ -37,7 +37,7 @@ export default function Guidelines() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Accessing the Election System
                             </h4>
                             <ul className="list-disc">
@@ -56,7 +56,7 @@ export default function Guidelines() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Voting Procedure
                             </h4>
                             <ul className="list-disc">
@@ -97,7 +97,7 @@ export default function Guidelines() {
                             </p>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Voting Period
                             </h4>
                             <ul className="list-disc">
@@ -116,7 +116,7 @@ export default function Guidelines() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Confidentiality & Integrity
                             </h4>
                             <ul className="list-disc">
@@ -137,7 +137,7 @@ export default function Guidelines() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Results Announcement
                             </h4>
                             <ul className="list-disc">
@@ -153,7 +153,7 @@ export default function Guidelines() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Theme Reminder
                             </h4>
                             <p>This election is guided by the principle:</p>

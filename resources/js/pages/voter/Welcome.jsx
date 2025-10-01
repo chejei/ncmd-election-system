@@ -176,7 +176,7 @@ export default function WelcomePage() {
                 >
                     <div className="max-w-screen-xl sm:px-7 px-4 py-10 lg:py-20 mx-auto">
                         <div>
-                            <h2 className="text-xl font-bold  mb-3 sm:text-2xl">
+                            <h2 className="text-xl font-bold  mb-3 md:text-2xl">
                                 Voter Information
                             </h2>
                             <h3 className="text-xl font-bold leading-none text-gray-900">

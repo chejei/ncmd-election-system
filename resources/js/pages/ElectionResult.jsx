@@ -177,7 +177,7 @@ export default function ElectionResult() {
                                 return (
                                     <div key={pos.id} className="mb-6">
                                         <div className="bg-red-600 text-white py-6 px-4 mb-2">
-                                            <h3 className="text-2xl font-bold">
+                                            <h3 className="text-xl sm:text-2xl font-bold">
                                                 {pos.title}
                                             </h3>
                                         </div>

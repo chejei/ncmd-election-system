@@ -19,7 +19,7 @@ export default function TermsConditions() {
                     </p>
                     <ol className="list-decimal guidelines-list sm:px-7 px-4">
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Eligibility
                             </h4>
                             <ul className="list-disc">
@@ -34,7 +34,7 @@ export default function TermsConditions() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Use of the System
                             </h4>
                             <ul className="list-disc">
@@ -53,7 +53,7 @@ export default function TermsConditions() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Confidentiality and Security
                             </h4>
                             <ul className="list-disc">
@@ -73,7 +73,7 @@ export default function TermsConditions() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Fairness and Integrity
                             </h4>
                             <ul className="list-disc">
@@ -89,7 +89,7 @@ export default function TermsConditions() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 System Availability
                             </h4>
                             <ul className="list-disc">
@@ -104,7 +104,7 @@ export default function TermsConditions() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Results
                             </h4>
                             <ul className="list-disc">
@@ -119,7 +119,7 @@ export default function TermsConditions() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Acceptance
                             </h4>
                             <p>

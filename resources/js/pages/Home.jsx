@@ -51,7 +51,7 @@ export default function Home() {
                             </span>{" "}
                             Leader
                         </h2>
-                        <span className="text-gray-600 pt-5 text-[20px] leading-[26px]">
+                        <span className="text-gray-600 pt-5 text-[18px] leading-[24px] md:text-[20px] md:leading-[26px]">
                             Choosing leaders who embody humility, integrity, and
                             Christ-like service. It is our mission to raise
                             leaders who serve first, lead with compassion, and
@@ -119,7 +119,7 @@ export default function Home() {
                             </span>
                             !
                         </h2>
-                        <p className="text-gray-600 pt-4 pb-6 text-[20px] leading-[26px]">
+                        <p className="text-gray-600 pt-4 pb-6 text-[18px] leading-[24px] md:text-[20px] md:leading-[26px]">
                             Before casting your vote, take time to learn about
                             the candidates—their background, values, and
                             commitment to servant leadership. An informed choice
@@ -127,7 +127,7 @@ export default function Home() {
                         </p>
                         <a
                             href="/candidates"
-                            className="bg-blue-500 text-white font-bold py-2 px-8 rounded-3xl text-2xl hover:bg-red-500"
+                            className="bg-blue-500 text-white font-bold py-2 px-8 rounded-3xl text-xl sm:text-2xl hover:bg-red-500"
                         >
                             Meet the Candidates
                         </a>
@@ -150,7 +150,7 @@ export default function Home() {
                     </h3>
                     <ol className="list-decimal guidelines-list sm:px-7 px-4">
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Eligibility to Vote
                             </h4>
                             <ul className="list-disc">
@@ -169,7 +169,7 @@ export default function Home() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Accessing the Election System
                             </h4>
                             <ul className="list-disc">
@@ -188,7 +188,7 @@ export default function Home() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Voting Procedure
                             </h4>
                             <ul className="list-disc">
@@ -229,7 +229,7 @@ export default function Home() {
                             </p>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Voting Period
                             </h4>
                             <ul className="list-disc">
@@ -248,7 +248,7 @@ export default function Home() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Confidentiality & Integrity
                             </h4>
                             <ul className="list-disc">
@@ -269,7 +269,7 @@ export default function Home() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Results Announcement
                             </h4>
                             <ul className="list-disc">
@@ -285,7 +285,7 @@ export default function Home() {
                             </ul>
                         </li>
                         <li>
-                            <h4 className="text-1xl font-semibold mb-2  ">
+                            <h4 className="text-xl font-semibold mb-2  ">
                                 Theme Reminder
                             </h4>
                             <p>This election is guided by the principle:</p>
@@ -322,7 +322,7 @@ export default function Home() {
                                     </span>{" "}
                                     matters!
                                 </h2>
-                                <span className="text-gray-600 pt-4 text-[20px] leading-[26px]">
+                                <span className="text-gray-600 pt-4 text-[18px] leading-[24px] md:text-[20px] md:leading-[26px]">
                                     Every vote is a step toward raising leaders
                                     who serve first, lead with compassion, and
                                     guide with faith.
@@ -331,7 +331,7 @@ export default function Home() {
                             <div className="mt-10 lg:mt-0 lg:col-start-9 lg:col-span-4 flex">
                                 <a
                                     href="/vote"
-                                    className="ml-0 lg:ml-auto bg-red-500 text-white font-bold py-2 px-8 rounded-3xl text-2xl hover:bg-blue-500"
+                                    className="ml-0 lg:ml-auto bg-red-500 text-white font-bold py-2 px-8 rounded-3xl text-xl sm:text-2xl hover:bg-blue-500"
                                 >
                                     Vote Now
                                 </a>

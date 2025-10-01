@@ -204,7 +204,7 @@ export default function CandidacyApplication() {
                                     <br />
                                     We Are Looking For?
                                 </h2>
-                                <span className="max-w-screen-md mx-auto mb-10 text-gray-600 pt-5 text-[20px] leading-[26px]">
+                                <span className="max-w-screen-md mx-auto mb-10 text-gray-600 pt-5 text-[18px] leading-[24px] md:text-[20px] md:leading-[26px]">
                                     The {siteName} is in search of new leaders
                                     who embody humility, integrity, and
                                     Christ-like service. It is our mission to
@@ -266,7 +266,7 @@ export default function CandidacyApplication() {
                                 </div>
                                 <button
                                     onClick={() => setShowForm(true)}
-                                    className="mx-auto bg-red-500 text-white font-bold py-2 px-8 rounded-3xl text-2xl hover:bg-blue-500"
+                                    className="mx-auto bg-red-500 text-white font-bold py-2 px-8 rounded-3xl text-xl sm:text-2xl hover:bg-blue-500"
                                 >
                                     Get started
                                 </button>
@@ -275,7 +275,7 @@ export default function CandidacyApplication() {
                     ) : (
                         <>
                             <section className="py-10">
-                                <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
                                     Welcome to {siteName} Candidacy Application
                                 </h2>
                                 <p className="text-gray-600 mb-6">
