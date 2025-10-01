@@ -27,7 +27,7 @@ export default function Candidates() {
     if (positions.length > 0 && !hasCandidates) {
         return (
             <>
-                <section className="bg-white flex flex-col items-center text-center justify-center min-h-screen">
+                <section className="bg-white flex flex-col items-center text-center justify-center px-4 min-h-[80vh] md:min-h-screen">
                     <h2 className="text-3xl font-bold text-gray-800">
                         Candidate lineup coming soon!
                     </h2>

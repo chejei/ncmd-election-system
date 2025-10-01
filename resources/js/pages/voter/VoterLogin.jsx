@@ -69,7 +69,7 @@ export default function VoterLogin() {
 
     return (
         <section className="bg-gray-50">
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen">
+            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto min-h-[80vh] md:h-screen">
                 <div className="w-full bg-white rounded-lg shadow sm:max-w-md p-6">
                     <h1 className="text-xl font-bold text-gray-900 mb-4">
                         Voter Login
