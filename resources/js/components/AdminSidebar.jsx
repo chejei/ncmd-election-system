@@ -12,7 +12,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axios";
 
-export default function AdminSidebar({ isOpen }) {
+export default function AdminSidebar({ isOpen, toggleSidebar, isSidebarOpen }) {
     const [openDropdown, setOpenDropdown] = useState(null);
     const navigate = useNavigate();
     const siteName = useSetting("site_name", "");
@@ -52,17 +52,30 @@ export default function AdminSidebar({ isOpen }) {
         ${isOpen ? "open" : ""}
       `}
         >
-            <a className="flex items-center justify-center" href="/">
-                <img
-                    className={`object-contain py-4 h-[120px]  
+            <div className="flex items-center justify-center">
+                <a className="flex items-center justify-center" href="/">
+                    <img
+                        className={`object-contain py-4 h-[90px] md:h-[120px]  
                         ${isOpen ? "w-100" : "w-[36px]"}
                     `}
-                    src={siteLogo ? `/storage/${siteLogo}` : logo}
-                    alt={siteName}
-                    title={siteName}
-                />
-            </a>
-
+                        src={siteLogo ? `/storage/${siteLogo}` : logo}
+                        alt={siteName}
+                        title={siteName}
+                    />
+                </a>
+                <div
+                    onClick={toggleSidebar}
+                    className={`
+                                sidebar-toggle cursor-pointer mr-2
+                                ${isSidebarOpen ? "open" : "hidden"}
+                                md:hidden                    
+                            `}
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
             <div className="nav-menu flex flex-col justify-between h-screen">
                 <ul>
                     <li className="mb-5">

@@ -76,7 +76,7 @@ class PositionController extends Controller
 
     public function meetCandidates()
     {
-        $positions = Position::with('candidates')->orderBy('priority', 'asc')->get();
+        $positions = Position::with('approvedCandidates')->orderBy('priority', 'asc')->get();
         return response()->json($positions);
     }
 

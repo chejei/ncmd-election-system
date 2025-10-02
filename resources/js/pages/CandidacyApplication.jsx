@@ -156,9 +156,14 @@ export default function CandidacyApplication() {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
+            console.log(res);
+            console.log(res.status);
+
             if (res.status === 200 || res.status === 201) {
                 sessionStorage.setItem("fromCandidacyForm", "true");
-                navigate("/candidacy-acknowledgement");
+                setTimeout(() => {
+                    navigate("/candidacy-acknowledgement");
+                }, 50);
             } else {
                 Swal.fire({
                     icon: "error",
@@ -335,11 +340,11 @@ export default function CandidacyApplication() {
                             >
                                 {currentStep === 1 && (
                                     <>
-                                        <div className="grid grid-cols-2 gap-4">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             {/* Photo */}
                                             <div
                                                 className={`row-span-8 ${
-                                                    errors.last_name
+                                                    errors.photo
                                                         ? "has-error"
                                                         : ""
                                                 }`}
@@ -550,6 +555,9 @@ export default function CandidacyApplication() {
                                             >
                                                 <label className="block font-medium mb-1">
                                                     Email
+                                                    <span className="text-red-500 error-notes">
+                                                        *
+                                                    </span>
                                                 </label>
                                                 <input
                                                     {...register("email", {
@@ -576,6 +584,9 @@ export default function CandidacyApplication() {
                                             >
                                                 <label className="block font-medium mb-1">
                                                     Phone Number
+                                                    <span className="text-red-500 error-notes">
+                                                        *
+                                                    </span>
                                                 </label>
                                                 <input
                                                     {...register(
@@ -614,8 +625,8 @@ export default function CandidacyApplication() {
                                 )}
                                 {currentStep === 2 && (
                                     <>
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <div className="col-span-2">
+                                        <div className="grid  grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div className="md:col-span-2">
                                                 <h2 className="text-lg font-bold">
                                                     Education Background
                                                 </h2>
@@ -645,7 +656,7 @@ export default function CandidacyApplication() {
                                                 />
                                             </div>
 
-                                            <div className="col-span-2">
+                                            <div className="md:col-span-2">
                                                 <label className="block font-medium mb-1">
                                                     School
                                                 </label>
@@ -656,7 +667,7 @@ export default function CandidacyApplication() {
                                                 />
                                             </div>
 
-                                            <div className="col-span-2">
+                                            <div className="md:col-span-2">
                                                 <h2 className="text-lg font-bold">
                                                     Professional Background
                                                 </h2>
@@ -765,10 +776,10 @@ export default function CandidacyApplication() {
                                         <div className="grid grid-cols-1 gap-4">
                                             {questions.map((q, idx) => (
                                                 <div key={q.id} className="">
-                                                    <h3 className="text-sm font-semibold text-gray-700 mb-2">
+                                                    <label className="block font-medium mb-1">
                                                         Q{idx + 1}.{" "}
                                                         {q.question_text}
-                                                    </h3>
+                                                    </label>
 
                                                     <TiptapEditor
                                                         value={q.answer}
@@ -798,7 +809,7 @@ export default function CandidacyApplication() {
                                 )}
                                 {currentStep === 5 && (
                                     <>
-                                        <div className="grid grid-cols-3 gap-4">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                             {/* Position */}
                                             <div
                                                 className={`${
@@ -882,163 +893,202 @@ export default function CandidacyApplication() {
                                             information is accurate, as this
                                             will be used for your candidacy.
                                         </p>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div className="">
+                                                {watch("photo") && (
+                                                    <img
+                                                        src={watch("photo")}
+                                                        alt="Uploaded"
+                                                        className="h-150 w-full h-[708px] rounded object-cover object-top border"
+                                                    />
+                                                )}
+                                            </div>
+                                            <div className="">
+                                                <table className="w-full mt-5 md:mt-0">
+                                                    <tbody>
+                                                        <tr className="border-b">
+                                                            <td
+                                                                className="text-lg font-semibold pt-0 p-3"
+                                                                colSpan="2"
+                                                            >
+                                                                Personal
+                                                                Information
+                                                            </td>
+                                                        </tr>
+                                                        {/* Name */}
+                                                        <tr className="border-b">
+                                                            <td className="font-medium p-3">
+                                                                Full Name
+                                                            </td>
+                                                            <td className="p-3">
+                                                                {watch(
+                                                                    "first_name"
+                                                                )}{" "}
+                                                                {watch(
+                                                                    "middle_name"
+                                                                )}{" "}
+                                                                {watch(
+                                                                    "last_name"
+                                                                )}{" "}
+                                                                {watch(
+                                                                    "suffix_name"
+                                                                )}
+                                                            </td>
+                                                        </tr>
 
-                                        {watch("photo") && (
-                                            <img
-                                                src={watch("photo")}
-                                                alt="Uploaded"
-                                                className="h-150 w-full rounded object-cover object-top border"
-                                            />
-                                        )}
-                                        <table className="w-full mt-10">
-                                            <tbody>
-                                                <tr className="border-b">
-                                                    <td
-                                                        className="text-lg font-semibold p-3"
-                                                        colSpan="2"
-                                                    >
-                                                        Personal Information
-                                                    </td>
-                                                </tr>
-                                                {/* Name */}
-                                                <tr className="border-b">
-                                                    <td className="font-medium p-3">
-                                                        Full Name
-                                                    </td>
-                                                    <td className="p-3">
-                                                        {watch("first_name")}{" "}
-                                                        {watch("middle_name")}{" "}
-                                                        {watch("last_name")}{" "}
-                                                        {watch("suffix_name")}
-                                                    </td>
-                                                </tr>
+                                                        {/* Age */}
+                                                        <tr className="border-b">
+                                                            <td className="font-medium p-3">
+                                                                Age
+                                                            </td>
+                                                            <td className="p-3">
+                                                                {watch("age")}
+                                                            </td>
+                                                        </tr>
 
-                                                {/* Age */}
-                                                <tr className="border-b">
-                                                    <td className="font-medium p-3">
-                                                        Age
-                                                    </td>
-                                                    <td className="p-3">
-                                                        {watch("age")}
-                                                    </td>
-                                                </tr>
+                                                        {/* Contact */}
+                                                        <tr className="border-b">
+                                                            <td className="font-medium p-3">
+                                                                Email
+                                                            </td>
+                                                            <td className="p-3">
+                                                                {watch("email")}
+                                                            </td>
+                                                        </tr>
+                                                        <tr className="border-b">
+                                                            <td className="font-medium p-3">
+                                                                Phone Number
+                                                            </td>
+                                                            <td className="p-3">
+                                                                {watch(
+                                                                    "phone_number"
+                                                                )}
+                                                            </td>
+                                                        </tr>
+                                                        <tr className="border-b">
+                                                            <td className="font-medium p-3">
+                                                                Address
+                                                            </td>
+                                                            <td className="p-3">
+                                                                {watch(
+                                                                    "address"
+                                                                )}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table className="w-full mt-5">
+                                                    <tbody>
+                                                        <tr className="border-b ">
+                                                            <td
+                                                                className="text-lg font-semibold p-3"
+                                                                colSpan="2"
+                                                            >
+                                                                Education &
+                                                                Professional
+                                                                Background
+                                                            </td>
+                                                        </tr>
 
-                                                {/* Contact */}
-                                                <tr className="border-b">
-                                                    <td className="font-medium p-3">
-                                                        Email
-                                                    </td>
-                                                    <td className="p-3">
-                                                        {watch("email")}
-                                                    </td>
-                                                </tr>
-                                                <tr className="border-b">
-                                                    <td className="font-medium p-3">
-                                                        Phone Number
-                                                    </td>
-                                                    <td className="p-3">
-                                                        {watch("phone_number")}
-                                                    </td>
-                                                </tr>
-                                                <tr className="border-b">
-                                                    <td className="font-medium p-3">
-                                                        Address
-                                                    </td>
-                                                    <td className="p-3">
-                                                        {watch("address")}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <table className="w-full mt-10">
-                                            <tbody>
-                                                <tr className="border-b ">
-                                                    <td
-                                                        className="text-lg font-semibold p-3"
-                                                        colSpan="2"
-                                                    >
-                                                        Education & Professional
-                                                        Background
-                                                    </td>
-                                                </tr>
+                                                        {/* Education */}
+                                                        <tr className="border-b">
+                                                            <td className="font-medium p-3">
+                                                                Education
+                                                            </td>
+                                                            <td className="p-3">
+                                                                {watch(
+                                                                    "grade_year"
+                                                                )}{" "}
+                                                                -{" "}
+                                                                {watch(
+                                                                    "course_strand"
+                                                                )}{" "}
+                                                                <br />
+                                                                {watch(
+                                                                    "school"
+                                                                )}
+                                                            </td>
+                                                        </tr>
 
-                                                {/* Education */}
-                                                <tr className="border-b">
-                                                    <td className="font-medium p-3">
-                                                        Education
-                                                    </td>
-                                                    <td className="p-3">
-                                                        {watch("grade_year")} -{" "}
-                                                        {watch("course_strand")}{" "}
-                                                        <br />
-                                                        {watch("school")}
-                                                    </td>
-                                                </tr>
+                                                        {/* Professional */}
+                                                        <tr className="border-b">
+                                                            <td className="font-medium p-3">
+                                                                Occupation
+                                                            </td>
+                                                            <td className="p-3">
+                                                                {watch(
+                                                                    "occupation"
+                                                                )}{" "}
+                                                                {watch(
+                                                                    "company"
+                                                                ) && (
+                                                                    <>
+                                                                        at{" "}
+                                                                        {watch(
+                                                                            "company"
+                                                                        )}
+                                                                    </>
+                                                                )}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table className="w-full mt-5">
+                                                    <tbody>
+                                                        <tr className="border-b ">
+                                                            <td
+                                                                className="text-lg font-semibold p-3"
+                                                                colSpan="2"
+                                                            >
+                                                                Ministry /
+                                                                Church
+                                                                Affiliation
+                                                            </td>
+                                                        </tr>
 
-                                                {/* Professional */}
-                                                <tr className="border-b">
-                                                    <td className="font-medium p-3">
-                                                        Occupation
-                                                    </td>
-                                                    <td className="p-3">
-                                                        {watch("occupation")} at{" "}
-                                                        {watch("company")}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <table className="w-full mt-10">
-                                            <tbody>
-                                                <tr className="border-b ">
-                                                    <td
-                                                        className="text-lg font-semibold p-3"
-                                                        colSpan="2"
-                                                    >
-                                                        Ministry / Church
-                                                        Affiliation
-                                                    </td>
-                                                </tr>
+                                                        {/* Church */}
+                                                        <tr className="border-b">
+                                                            <td className="font-medium p-3">
+                                                                Church
+                                                            </td>
+                                                            <td className="p-3">
+                                                                {
+                                                                    churches.find(
+                                                                        (c) =>
+                                                                            c.id ===
+                                                                            Number(
+                                                                                watch(
+                                                                                    "church_id"
+                                                                                )
+                                                                            )
+                                                                    )?.name
+                                                                }
+                                                            </td>
+                                                        </tr>
 
-                                                {/* Church */}
-                                                <tr className="border-b">
-                                                    <td className="font-medium p-3">
-                                                        Church
-                                                    </td>
-                                                    <td className="p-3">
-                                                        {
-                                                            churches.find(
-                                                                (c) =>
-                                                                    c.id ===
-                                                                    Number(
-                                                                        watch(
-                                                                            "church_id"
-                                                                        )
-                                                                    )
-                                                            )?.name
-                                                        }
-                                                    </td>
-                                                </tr>
-
-                                                {/* Ministry Involvement */}
-                                                <tr className="border-b">
-                                                    <td
-                                                        className="font-medium p-3"
-                                                        colSpan="2"
-                                                    >
-                                                        Ministry Involvement
-                                                        <div
-                                                            className="mt-5 font-normal"
-                                                            dangerouslySetInnerHTML={{
-                                                                __html: watch(
-                                                                    "ministry_involvement"
-                                                                ),
-                                                            }}
-                                                        />
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <table className="w-full mt-10">
+                                                        {/* Ministry Involvement */}
+                                                        <tr className="border-b">
+                                                            <td
+                                                                className="font-medium p-3"
+                                                                colSpan="2"
+                                                            >
+                                                                Ministry
+                                                                Involvement
+                                                                <div
+                                                                    className="mt-5 font-normal"
+                                                                    dangerouslySetInnerHTML={{
+                                                                        __html: watch(
+                                                                            "ministry_involvement"
+                                                                        ),
+                                                                    }}
+                                                                />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <table className="w-full mt-5">
                                             <tbody>
                                                 <tr className="border-b ">
                                                     <td
@@ -1073,7 +1123,7 @@ export default function CandidacyApplication() {
                                                 ))}
                                             </tbody>
                                         </table>
-                                        <table className="w-full my-10">
+                                        <table className="w-full my-5">
                                             <tbody>
                                                 <tr className="border-b">
                                                     <td

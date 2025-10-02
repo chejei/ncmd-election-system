@@ -15,8 +15,13 @@ class Position extends Model
         return $this->hasMany(Candidate::class);
     }
 
+    public function approvedCandidates()
+    {
+        return $this->hasMany(Candidate::class)->where('status', 'approved');
+    }
+
     public function getCandidateCountAttribute()
     {
-        return $this->candidates()->count();
+        return $this->approvedCandidates()->count();
     }
 }

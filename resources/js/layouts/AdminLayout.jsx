@@ -42,7 +42,11 @@ export default function AdminLayout({ children }) {
 
     return (
         <>
-            <AdminSidebar isOpen={isSidebarOpen} />
+            <AdminSidebar
+                isOpen={isSidebarOpen}
+                toggleSidebar={toggleSidebar}
+                isSidebarOpen={isSidebarOpen}
+            />
             <main
                 className={`w-full bg-gray-200 min-h-screen transition-all main
         ${

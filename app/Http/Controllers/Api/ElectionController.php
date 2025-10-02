@@ -29,7 +29,7 @@ class ElectionController extends Controller
                 ];
             });
 
-        $electionCountPerCandidate = Position::with(['candidates'])->get();
+        $electionCountPerCandidate = Position::with(['approvedCandidates'])->get();
 
 
         return response()->json([

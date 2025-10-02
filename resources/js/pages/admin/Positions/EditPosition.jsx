@@ -38,11 +38,17 @@ export default function EditPosition() {
 
     const fields = [
         {
+            name: "heading-1",
+            label: "Position Details",
+            type: "heading",
+            wrapperClass: "col-span-1 md:col-span-2 lg:col-span-3",
+        },
+        {
             name: "title",
             label: "Title",
             type: "text",
             className: "w-full border rounded px-3 py-2",
-            wrapperClass: "mb-3 col-span-2",
+            wrapperClass: "mb-3",
             required: true,
         },
         {
@@ -137,7 +143,7 @@ export default function EditPosition() {
         <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="grid grid-cols-2 gap-4"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
             >
                 <FormFields
                     fields={fields}
@@ -147,7 +153,7 @@ export default function EditPosition() {
                     handleFileChange={() => {}}
                     control={control}
                 />
-                <div className="col-span-2 flex justify-end">
+                <div className="col-span-1 md:col-span-2 lg:col-span-3 flex justify-end">
                     <button
                         type="submit"
                         className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"

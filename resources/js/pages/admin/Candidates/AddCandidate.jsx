@@ -62,7 +62,7 @@ export default function AddCandidate() {
             name: "heading-1",
             label: "Personal Information",
             type: "heading",
-            wrapperClass: "col-span-3",
+            wrapperClass: "col-span-1 md:col-span-2 lg:col-span-3",
         },
         {
             name: "photo",
@@ -137,7 +137,7 @@ export default function AddCandidate() {
             name: "heading-2",
             label: "Education Background",
             type: "heading",
-            wrapperClass: "col-span-3",
+            wrapperClass: "col-span-1 md:col-span-2 lg:col-span-3",
         },
         {
             name: "grade_year",
@@ -164,7 +164,7 @@ export default function AddCandidate() {
             name: "heading-3",
             label: "Professional Background",
             type: "heading",
-            wrapperClass: "col-span-3",
+            wrapperClass: "col-span-1 md:col-span-2 lg:col-span-3",
         },
         {
             name: "occupation",
@@ -184,7 +184,7 @@ export default function AddCandidate() {
             name: "heading-4",
             label: "Ministry / Church Affiliation",
             type: "heading",
-            wrapperClass: "col-span-3",
+            wrapperClass: "col-span-1 md:col-span-2 lg:col-span-3",
         },
         {
             name: "church_id",
@@ -200,13 +200,13 @@ export default function AddCandidate() {
             label: "Ministry Involvement",
             type: "wysiwyg",
             className: "w-full h-[400px] border rounded px-3 py-2",
-            wrapperClass: "col-span-3",
+            wrapperClass: "col-span-1 md:col-span-2 lg:col-span-3",
         },
         {
             name: "heading-5",
             label: "Election Details",
             type: "heading",
-            wrapperClass: "col-span-3",
+            wrapperClass: "col-span-1 md:col-span-2 lg:col-span-3",
         },
         {
             name: "position_id",
@@ -284,7 +284,7 @@ export default function AddCandidate() {
         <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="grid grid-cols-3 gap-4"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
             >
                 <FormFields
                     fields={fields}
@@ -295,7 +295,7 @@ export default function AddCandidate() {
                     control={control}
                     photoPreview={photoPreview}
                 />
-                <div className="col-span-3 flex justify-end items-center">
+                <div className="col-span-1 md:col-span-2 lg:col-span-3 flex justify-end items-center">
                     <button
                         type="submit"
                         className="bg-blue-500 text-white px-4 py-2 rounded"

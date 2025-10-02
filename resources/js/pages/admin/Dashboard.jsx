@@ -92,11 +92,11 @@ export default function Dashboard() {
                             Current Votes
                         </div>
                         {stats.election_count
-                            .filter((pos) => pos.candidates.length > 0)
+                            .filter((pos) => pos.approved_candidates.length > 0)
                             .map((pos) => {
-                                const sorted = [...pos.candidates].sort(
-                                    (a, b) => b.vote_count - a.vote_count
-                                );
+                                const sorted = [
+                                    ...pos.approved_candidates,
+                                ].sort((a, b) => b.vote_count - a.vote_count);
 
                                 let currentRank = 0;
                                 let lastVote = null;

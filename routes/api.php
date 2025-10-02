@@ -41,6 +41,10 @@ Route::get('/candidate/{slug}', [CandidateController::class, 'candidateBySlug'])
 Route::get('/settings', [SettingController::class, 'index']);
 Route::get('/settings/{option}', [SettingController::class, 'show']);
 
+Route::apiResource('churches', ChurchController::class)->only(['index', 'show']);
+Route::apiResource('positions', PositionController::class)->only(['index', 'show']);
+Route::get('/questions-active', [QuestionController::class, 'enableQuestions']);
+
 
 Route::middleware('auth:sanctum')->group(function () {
     // Admin-related
@@ -52,14 +56,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/backup', [BackupController::class, 'createBackup']);
     Route::apiResource('candidates', CandidateController::class);
-    Route::apiResource('positions', PositionController::class);
+    Route::apiResource('positions', PositionController::class)->except(['index', 'show']);
     Route::post('/positions/reorder', [PositionController::class, 'reorder']);
 
-    Route::apiResource('churches', ChurchController::class);
+    Route::apiResource('churches', ChurchController::class)->except(['index', 'show']);
 
     Route::apiResource('questions', QuestionController::class);
     Route::get('/questions/active/{candidateId}', [QuestionController::class, 'activeQuestions']);
-    Route::get('/questions-active', [QuestionController::class, 'enableQuestions']);
 
     Route::post('/candidate-answers/bulk', [CandidateAnswerController::class, 'storeBulk']);
 

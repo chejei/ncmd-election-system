@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function Header({ toggleSidebar, isSidebarOpen }) {
     return (
-        <div className="py-2 px-6 bg-[#f8f4f3] flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30 h-[120px]">
+        <div className="py-2 px-6 bg-[#f8f4f3] flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30 h-[90px] md:h-[120px]">
             <div
                 onClick={toggleSidebar}
                 className={`sidebar-toggle cursor-pointer ${

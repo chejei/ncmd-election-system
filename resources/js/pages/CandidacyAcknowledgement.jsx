@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSetting } from "../components/SettingContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CheckCircle } from "../assets/icons/icon";
@@ -7,11 +7,15 @@ export default function CandidacyAcknowledgement() {
     const navigate = useNavigate();
     const location = useLocation();
     const siteName = useSetting("site_name", "");
+    const hasChecked = useRef(false);
 
     useEffect(() => {
+        if (hasChecked.current) return; // Prevent double execution in Strict Mode
+        hasChecked.current = true;
+
         const fromForm = sessionStorage.getItem("fromCandidacyForm");
 
-        if (!fromForm) {
+        if (fromForm !== "true") {
             navigate("/apply-candidacy");
         } else {
             sessionStorage.removeItem("fromCandidacyForm");

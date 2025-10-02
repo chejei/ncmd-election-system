@@ -23,7 +23,7 @@ export default function EditChurch() {
             name: "heading-1",
             label: "Church Details",
             type: "heading",
-            wrapperClass: "col-span-3",
+            wrapperClass: "col-span-1 md:col-span-2 lg:col-span-3",
         },
         {
             name: "name",
@@ -106,7 +106,7 @@ export default function EditChurch() {
         <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="grid grid-cols-3 gap-4"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
             >
                 <FormFields
                     fields={fields}
@@ -115,7 +115,7 @@ export default function EditChurch() {
                     watch={watch}
                     control={control}
                 />
-                <div className="col-span-3 flex justify-end items-center">
+                <div className="col-span-1 md:col-span-2 lg:col-span-3 flex justify-end items-center">
                     <button
                         type="submit"
                         className="bg-blue-500 text-white px-4 py-2 rounded"
