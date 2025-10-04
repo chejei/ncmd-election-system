@@ -82,7 +82,7 @@ export default function EditCandidate() {
                 setOriginalData(data);
 
                 const photoUrl = data.photo
-                    ? `${import.meta.env.VITE_STORAGE_BASE}/${data.photo}`
+                    ? `/storage/${data.photo}`
                     : "";
 
                 reset({
