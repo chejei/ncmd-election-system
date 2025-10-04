@@ -101,7 +101,8 @@ class CandidateController extends Controller
             'address' => $request->address,
             'occupation' => $request->occupation,
             'company' => $request->company,
-            'political_color' => $request->political_color
+            'political_color' => $request->political_color,
+            'status' => $request->status ?? 'pending',
         ]);
 
         return response()->json([

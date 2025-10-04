@@ -81,8 +81,12 @@ export default function FormFields({
                                             rules={validation}
                                             render={({ field }) => (
                                                 <TiptapEditor
-                                                    value={field.value || ""}
-                                                    onChange={field.onChange}
+                                                    value={field.value ?? ""}
+                                                    onChange={(val) =>
+                                                        field.onChange(
+                                                            val ?? ""
+                                                        )
+                                                    }
                                                     placeholder={`Enter ${label}`}
                                                     className={className}
                                                 />
@@ -145,7 +149,6 @@ export default function FormFields({
                                                     accept="image/*"
                                                     {...register(name, {
                                                         validate: (value) => {
-                                                            console.log(value);
                                                             if (
                                                                 value instanceof
                                                                 FileList

@@ -37,5 +37,16 @@ class AppServiceProvider extends ServiceProvider
             // Optionally log for debugging:
             // \Log::warning("Settings unavailable during boot: " . $e->getMessage());
         }
+
+        try {
+            if (app()->environment('production')) {
+                if (!Storage::disk('public')->exists('')) {
+                    \Artisan::call('storage:link');
+                }
+            }
+        } catch (\Exception $e) {
+            // Optional: Log it if needed
+            // \Log::warning("Failed to create storage link: " . $e->getMessage());
+        }
     }
 }

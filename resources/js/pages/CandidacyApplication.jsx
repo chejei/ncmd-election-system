@@ -156,9 +156,6 @@ export default function CandidacyApplication() {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
-            console.log(res);
-            console.log(res.status);
-
             if (res.status === 200 || res.status === 201) {
                 sessionStorage.setItem("fromCandidacyForm", "true");
                 setTimeout(() => {

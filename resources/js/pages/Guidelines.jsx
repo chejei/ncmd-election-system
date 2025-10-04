@@ -7,7 +7,6 @@ export default function Guidelines() {
     const siteName = useSetting("site_name", "");
     const startDate = formatDate(useSetting("start_date", ""));
     const endDate = formatDate(useSetting("end_date", ""));
-    console.log(siteName);
     return (
         <>
             <InnerBanner title="Online Election Guidelines" />

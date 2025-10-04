@@ -237,9 +237,11 @@ export default function AddCandidate() {
         try {
             const formData = new FormData();
             Object.keys(data).forEach((key) => {
-                formData.append(key, data[key]);
+                const value = data[key] === undefined ? "" : data[key];
+                console.log(key, value);
+                formData.append(key, value);
             });
-
+            formData.append("status", "approved");
             const res = await axios.post("/api/candidates", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
