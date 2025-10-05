@@ -29,7 +29,8 @@ class Candidate extends Model
         'position_id',
         'endorsed',
         'photo',
-        'political_color'
+        'political_color',
+        'status'
     ];
     protected $appends = ['church_name', 'position_title' , 'full_name', 'restrict', 'vote_count'];
 

@@ -21,6 +21,9 @@ WORKDIR /var/www
 # Copy project files
 COPY . .
 
+# Generate storage link
+RUN php artisan storage:link || true
+
 # ✅ Install dependencies
 RUN composer install --no-dev --optimize-autoloader
 RUN npm install && npm run build

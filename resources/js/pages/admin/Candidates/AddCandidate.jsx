@@ -238,7 +238,6 @@ export default function AddCandidate() {
             const formData = new FormData();
             Object.keys(data).forEach((key) => {
                 const value = data[key] === undefined ? "" : data[key];
-                console.log(key, value);
                 formData.append(key, value);
             });
             formData.append("status", "approved");
