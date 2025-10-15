@@ -87,7 +87,7 @@ export default function FrontendLayout() {
 
                             <li className="btn-link">
                                 <a
-                                    className="btn font-medium inline-block ml-0 lg:ml-auto bg-blue-500 text-white py-2 px-4 rounded-3xl hover:bg-blue-600"
+                                    className="btn font-medium inline-block ml-0 lg:ml-auto bg-blue-500 text-white py-2 px-4 rounded-3xl hover:bg-blue-800 cursor-pointer"
                                     href="/vote"
                                 >
                                     Vote Now!
@@ -157,25 +157,25 @@ export default function FrontendLayout() {
                             <div className="flex flex-col items-start mt-5 space-y-2">
                                 <a
                                     href="/vote"
-                                    className="text-gray-600 hover:underline hover:text-purple-600"
+                                    className="text-gray-600 hover:underline hover:text-blue-500"
                                 >
                                     Vote
                                 </a>
                                 <a
                                     href="/election-result"
-                                    className="text-gray-600 hover:underline hover:text-purple-600"
+                                    className="text-gray-600 hover:underline hover:text-blue-500"
                                 >
                                     Election Result
                                 </a>
                                 <a
-                                    href="/candidate"
-                                    className="text-gray-600 hover:underline hover:text-purple-600"
+                                    href="/candidates"
+                                    className="text-gray-600 hover:underline hover:text-blue-500"
                                 >
                                     Candidate
                                 </a>
                                 <a
                                     href="/guidelines"
-                                    className="text-gray-600 hover:underline hover:text-purple-600"
+                                    className="text-gray-600 hover:underline hover:text-blue-500"
                                 >
                                     Guidelines
                                 </a>

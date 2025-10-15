@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import { useSetting } from "../components/SettingContext";
 import logo from "../assets/ncmd-election-logo.png";
 import {
@@ -19,6 +20,18 @@ export default function AdminSidebar({ isOpen, toggleSidebar, isSidebarOpen }) {
     const siteLogo = useSetting("site_logo", "");
 
     const handleLogout = async () => {
+        const result = await Swal.fire({
+            title: "Are you sure?",
+            text: "You will be logged out of your session.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, logout",
+        });
+
+        if (!result.isConfirmed) return; // If canceled, stop here
+
         try {
             await api.post(
                 "/logout",

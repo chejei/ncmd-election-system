@@ -160,7 +160,7 @@ export default function WelcomePage() {
                             className={`w-full py-3 px-6 rounded-lg font-semibold shadow-md 
               ${
                   agree
-                      ? "bg-blue-600 text-white hover:bg-blue-700"
+                      ? "bg-blue-600 text-white hover:bg-blue-800 cursor-pointer"
                       : "bg-gray-400 text-gray-200 cursor-not-allowed"
               }`}
                             disabled={!agree}
@@ -275,7 +275,7 @@ export default function WelcomePage() {
                         <div className="flex justify-start mt-6">
                             <button
                                 onClick={handleLogout}
-                                className="bg-blue-500 text-white px-4 py-2 rounded"
+                                className="bg-blue-500 hover:bg-blue-800 text-white px-4 py-2 rounded cursor-pointer"
                             >
                                 {" "}
                                 Logout

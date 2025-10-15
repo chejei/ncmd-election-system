@@ -41,8 +41,8 @@ export default function Guidelines() {
                             </h4>
                             <ul className="list-disc">
                                 <li>
-                                    Go to the official election site:{" "}
-                                    {siteName | ""}.
+                                    Go to the official election site: {siteName}
+                                    .
                                 </li>
                                 <li>
                                     Log in using your assigned voter

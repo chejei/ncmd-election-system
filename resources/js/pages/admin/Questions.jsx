@@ -117,16 +117,39 @@ export default function Questions() {
     };
 
     const handleToggleEnable = async (item, newValue) => {
+        const actionText = newValue ? "Enable" : "Disable";
+
+        // Show confirmation first
+        const result = await Swal.fire({
+            title: `Are you sure?`,
+            text: `Do you want to ${actionText.toLowerCase()} this question?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: `Yes, ${actionText}`,
+            cancelButtonText: "Cancel",
+        });
+
+        if (!result.isConfirmed) return; // Stop if user cancels
+
         try {
             await axios.put(`/api/questions/${item.id}`, {
                 question_text: item.question_text,
                 enable: newValue,
             });
+
             setQuestions((prev) =>
                 prev.map((q) =>
                     q.id === item.id ? { ...q, enable: newValue } : q
                 )
             ); // ✅ Update UI
+
+            Swal.fire({
+                icon: "success",
+                title: `${actionText}d!`,
+                text: `The question has been ${actionText.toLowerCase()}d.`,
+                timer: 1500,
+                showConfirmButton: false,
+            });
         } catch (err) {
             Swal.fire({
                 icon: "error",

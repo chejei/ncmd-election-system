@@ -74,6 +74,20 @@ export default function FormFields({
                                             className={className}
                                             placeholder={`Enter ${label}`}
                                         />
+                                    ) : type === "email" ? (
+                                        <input
+                                            type="email"
+                                            {...register(name, {
+                                                ...validation,
+                                                pattern: {
+                                                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                                    message:
+                                                        "Please enter a valid email address",
+                                                },
+                                            })}
+                                            className={className}
+                                            placeholder={`Enter ${label}`}
+                                        />
                                     ) : type === "wysiwyg" ? (
                                         <Controller
                                             control={control}

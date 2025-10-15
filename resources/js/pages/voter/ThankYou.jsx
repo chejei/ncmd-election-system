@@ -43,13 +43,13 @@ export default function ThankYouPage() {
                 <div className="flex justify-center gap-2">
                     <a
                         href="/"
-                        className="inline-block bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 transition"
+                        className="inline-block bg-gray-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-800 transition cursor-pointer"
                     >
                         Back to Home
                     </a>
                     <a
                         href="/vote"
-                        className="inline-block bg-blue-800 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 transition"
+                        className="inline-block bg-blue-800 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-800 transition cursor-pointer"
                     >
                         Dashboard
                     </a>

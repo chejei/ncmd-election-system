@@ -156,7 +156,7 @@ export default function EditPosition() {
                 <div className="col-span-1 md:col-span-2 lg:col-span-3 flex justify-end">
                     <button
                         type="submit"
-                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-800 cursor-pointer"
                     >
                         Save Changes
                     </button>

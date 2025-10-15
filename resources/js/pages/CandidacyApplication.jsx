@@ -560,6 +560,11 @@ export default function CandidacyApplication() {
                                                     {...register("email", {
                                                         required:
                                                             "Email is required",
+                                                        pattern: {
+                                                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                                            message:
+                                                                "Please enter a valid email address",
+                                                        },
                                                     })}
                                                     className="w-full border rounded px-3 py-2"
                                                     placeholder="Enter Email"
@@ -1255,7 +1260,7 @@ export default function CandidacyApplication() {
                                 )}
                                 <button
                                     onClick={() => handleNext()}
-                                    className="px-6 py-3 mx-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700"
+                                    className="px-6 py-3 mx-2 rounded-xl bg-blue-600 text-white hover:bg-blue-800 cursor-pointer"
                                 >
                                     {currentStep === 6 ? "Submit" : "Next"}
                                 </button>

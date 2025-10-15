@@ -176,6 +176,20 @@ export default function Settings() {
         }
     };
 
+    const getPasswordStrength = (password) => {
+        let score = 0;
+        if (password.length >= 6) score++;
+        if (password.length >= 10) score++;
+        if (/[A-Z]/.test(password)) score++;
+        if (/[0-9]/.test(password)) score++;
+        if (/[^A-Za-z0-9]/.test(password)) score++;
+
+        if (score === 0) return { label: "", color: "" };
+        if (score <= 2) return { label: "Weak", color: "bg-red-500" };
+        if (score <= 4) return { label: "Moderate", color: "bg-yellow-500" };
+        return { label: "Strong", color: "bg-green-500" };
+    };
+
     return (
         <>
             <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
@@ -271,7 +285,7 @@ export default function Settings() {
                                 <div className="col-span-1 sm:col-span-2 flex justify-end">
                                     <button
                                         type="submit"
-                                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-800 cursor-pointer"
                                     >
                                         Save Election
                                     </button>
@@ -315,6 +329,42 @@ export default function Settings() {
                                         placeholder="••••••••"
                                         className="w-full border rounded px-3 py-2"
                                     />
+                                    {/* ✅ Password Strength Indicator */}
+                                    {userFormData.password &&
+                                        (() => {
+                                            const strength =
+                                                getPasswordStrength(
+                                                    userFormData.password
+                                                );
+                                            return (
+                                                <div className="mt-1">
+                                                    <div className="w-full h-2 bg-gray-200 rounded">
+                                                        <div
+                                                            className={`h-2 rounded ${strength.color}`}
+                                                            style={{
+                                                                width: `${
+                                                                    strength.label ===
+                                                                    "Weak"
+                                                                        ? 33
+                                                                        : strength.label ===
+                                                                          "Moderate"
+                                                                        ? 66
+                                                                        : 100
+                                                                }%`,
+                                                            }}
+                                                        ></div>
+                                                    </div>
+                                                    <p
+                                                        className={`text-sm mt-1 ${strength.color.replace(
+                                                            "bg-",
+                                                            "text-"
+                                                        )}`}
+                                                    >
+                                                        {strength.label}
+                                                    </p>
+                                                </div>
+                                            );
+                                        })()}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700">
@@ -334,7 +384,7 @@ export default function Settings() {
 
                                 <button
                                     type="submit"
-                                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-800 cursor-pointer"
                                 >
                                     Save Changes
                                 </button>
@@ -345,7 +395,7 @@ export default function Settings() {
                         <div className="p-4">
                             <button
                                 onClick={handleBackup}
-                                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-800 cursor-pointer"
                             >
                                 Backup Now
                             </button>

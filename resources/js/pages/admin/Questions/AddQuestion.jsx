@@ -86,7 +86,7 @@ export default function AddQuestion() {
                 <div className="col-span-1 md:col-span-2 lg:col-span-3 flex justify-end items-center">
                     <button
                         type="submit"
-                        className="bg-blue-500 text-white px-4 py-2 rounded"
+                        className="bg-blue-500 hover:bg-blue-800 text-white px-4 py-2 rounded cursor-pointer"
                     >
                         Save Question
                     </button>

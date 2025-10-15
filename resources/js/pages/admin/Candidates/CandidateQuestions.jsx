@@ -105,7 +105,7 @@ export default function CandidateQuestions({ candidateId, readOnly }) {
                 <div className="text-right">
                     <button
                         onClick={handleSaveAll}
-                        className={`mt-4 px-6 py-2 rounded text-white bg-blue-500 hover:bg-blue-600`}
+                        className={`mt-4 px-6 py-2 rounded text-white bg-blue-500 hover:bg-blue-800 cursor-pointer`}
                     >
                         Save All Answers
                     </button>

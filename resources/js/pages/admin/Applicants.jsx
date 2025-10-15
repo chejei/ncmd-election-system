@@ -117,16 +117,28 @@ export default function Candidate() {
     };
 
     const handleStatusChange = async (id, action) => {
-        const actionText = action === "approve" ? "Approved" : "Rejected";
+        const actionText = action === "approve" ? "Approve" : "Reject";
         const actionUrl = `/api/candidates/${id}/${action}`;
+
+        // Ask for confirmation first
+        const result = await Swal.fire({
+            title: `Are you sure?`,
+            text: `Do you want to ${actionText.toLowerCase()} this candidate?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: `Yes, ${actionText}`,
+            cancelButtonText: "Cancel",
+        });
+
+        if (!result.isConfirmed) return; // Stop if cancelled
 
         try {
             await axios.post(actionUrl);
             fetchCandidates(currentPage, searchTerm);
 
             Swal.fire({
-                title: `${actionText}!`,
-                text: `Candidate has been ${actionText.toLowerCase()}.`,
+                title: `${actionText}d!`,
+                text: `Candidate has been ${actionText.toLowerCase()}d.`,
                 icon: action === "approve" ? "success" : "info",
                 timer: 1500,
                 showConfirmButton: false,

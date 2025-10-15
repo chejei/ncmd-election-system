@@ -97,7 +97,11 @@ export default function Ballot() {
     const handleNext = () => {
         if (currentStep === 1) {
             const allSelected = positions
-                .filter((pos) => pos.candidates && pos.candidates.length > 0)
+                .filter(
+                    (pos) =>
+                        pos.approved_candidates &&
+                        pos.approved_candidates.length > 0
+                )
                 .every((pos) => {
                     return pos.max_winners > 1
                         ? selections[pos.id] && selections[pos.id].length > 0
@@ -200,8 +204,8 @@ export default function Ballot() {
                             {positions
                                 .filter(
                                     (position) =>
-                                        position.candidates &&
-                                        position.candidates.length > 0
+                                        position.approved_candidates &&
+                                        position.approved_candidates.length > 0
                                 )
                                 .map((position) => (
                                     <div key={position.id} className="mb-8">
@@ -215,7 +219,7 @@ export default function Ballot() {
                                             )}
                                         </h2>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                            {position.candidates.map(
+                                            {position.approved_candidates.map(
                                                 (candidate) => (
                                                     <label
                                                         key={candidate.id}
@@ -343,8 +347,9 @@ export default function Ballot() {
                                     {positions
                                         .filter(
                                             (position) =>
-                                                position.candidates &&
-                                                position.candidates.length > 0
+                                                position.approved_candidates &&
+                                                position.approved_candidates
+                                                    .length > 0
                                         )
                                         .map((position) => {
                                             // Normalize selections (array or single)
@@ -358,7 +363,7 @@ export default function Ballot() {
 
                                             // Get selected candidates
                                             const selectedCandidates =
-                                                position.candidates.filter(
+                                                position.approved_candidates.filter(
                                                     (c) =>
                                                         selectedIds.includes(
                                                             c.id
@@ -493,7 +498,7 @@ export default function Ballot() {
                                     <div className="flex justify-center mt-2 ">
                                         <button
                                             onClick={capture}
-                                            className="w-10 h-10 bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 mx-auto rounded camera-button"
+                                            className="w-10 h-10 bg-blue-500 hover:bg-blue-800 cursor-pointer text-white px-2 py-1 mx-auto rounded camera-button"
                                             aria-label="Take a Photo"
                                         >
                                             <CameraIcon />
@@ -510,7 +515,7 @@ export default function Ballot() {
                                     <div className="flex justify-center mt-2">
                                         <button
                                             onClick={() => setPhoto(null)}
-                                            className="w-10 h-10 bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 mx-auto rounded camera-button"
+                                            className="w-10 h-10 bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 mx-auto rounded camera-button cursor-pointer"
                                             aria-label="Retake"
                                         >
                                             <RetakeIcon />
@@ -527,14 +532,14 @@ export default function Ballot() {
                     {currentStep > 1 && (
                         <button
                             onClick={() => handleBack()}
-                            className="px-6 py-3 mx-2 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100"
+                            className="px-6 py-3 mx-2 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100 cursor-pointer"
                         >
                             Back
                         </button>
                     )}
                     <button
                         onClick={() => handleNext()}
-                        className="px-6 py-3 mx-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700"
+                        className="px-6 py-3 mx-2 rounded-xl bg-blue-600 text-white hover:bg-blue-800 cursor-pointer"
                     >
                         {currentStep === 3 ? "Submit Ballot" : "Next"}
                     </button>

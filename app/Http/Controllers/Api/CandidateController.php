@@ -178,7 +178,7 @@ class CandidateController extends Controller
             if ( \Storage::exists('public/candidates/' . $photoFile)) {
                 \Storage::delete('public/candidates/' . $photoFile);
             }
-        }
+        } 
 
         $candidate->delete();
 
@@ -188,10 +188,7 @@ class CandidateController extends Controller
     public function positionCandidates()
     {
         // Fetch positions with their candidates
-        $positions = Position::with(['candidates' => function ($query) {
-            $query->select('candidates.*');
-        }])->orderBy('priority', 'asc')->get();
-
+        $positions = Position::with('approvedCandidates')->orderBy('priority', 'asc')->get();
         return response()->json($positions);
     }
 

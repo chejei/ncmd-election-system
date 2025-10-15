@@ -6,6 +6,7 @@ export default function VoterLogin() {
     const [lastName, setLastName] = useState("");
     const [pinDigits, setPinDigits] = useState(["", "", "", "", "", ""]); // 6-digit PIN
     const [error, setError] = useState("");
+    const [fieldErrors, setFieldErrors] = useState({});
     const navigate = useNavigate();
 
     const inputRefs = useRef([]);
@@ -16,7 +17,10 @@ export default function VoterLogin() {
             newDigits[index] = value;
             setPinDigits(newDigits);
 
-            // Auto move to next input
+            if (fieldErrors.pin) {
+                setFieldErrors((prev) => ({ ...prev, pin: "" }));
+            }
+
             if (value && index < pinDigits.length - 1) {
                 inputRefs.current[index + 1].focus();
             }
@@ -31,12 +35,17 @@ export default function VoterLogin() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setFieldErrors({});
         setError("");
 
         const pin = pinDigits.join("");
+        const errors = {};
 
-        if (pin.length !== 6) {
-            setError("PIN must be 6 digits.");
+        if (!lastName.trim()) errors.lastName = "Last name is required.";
+        if (pin.length !== 6) errors.pin = "PIN must be 6 digits.";
+
+        if (Object.keys(errors).length > 0) {
+            setFieldErrors(errors);
             return;
         }
 
@@ -81,22 +90,43 @@ export default function VoterLogin() {
                         </div>
                     )}
 
-                    <form className="space-y-4" onSubmit={handleLogin}>
-                        <div>
+                    <form
+                        className="space-y-4 md:space-y-6"
+                        onSubmit={handleLogin}
+                    >
+                        <div
+                            className={`${
+                                fieldErrors.lastName ? "has-error" : ""
+                            }`}
+                        >
                             <label className="block mb-2 text-sm font-medium text-gray-900">
                                 Last Name
                             </label>
                             <input
                                 type="text"
                                 className="w-full border rounded-lg p-2.5"
-                                required
                                 placeholder="Last Name"
                                 value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
+                                onChange={(e) => {
+                                    setLastName(e.target.value);
+                                    if (fieldErrors.lastName) {
+                                        setFieldErrors((prev) => ({
+                                            ...prev,
+                                            lastName: "",
+                                        }));
+                                    }
+                                }}
                             />
+                            {fieldErrors.lastName && (
+                                <p className="text-red-500 error-notes">
+                                    {fieldErrors.lastName}
+                                </p>
+                            )}
                         </div>
 
-                        <div>
+                        <div
+                            className={`${fieldErrors.pin ? "has-error" : ""}`}
+                        >
                             <label className="block mb-2 text-sm font-medium text-gray-900">
                                 6-Digit PIN
                             </label>
@@ -121,11 +151,16 @@ export default function VoterLogin() {
                                     />
                                 ))}
                             </div>
+                            {fieldErrors.pin && (
+                                <p className="text-red-500 error-notes">
+                                    {fieldErrors.pin}
+                                </p>
+                            )}
                         </div>
 
                         <button
                             type="submit"
-                            className="w-full bg-blue-500 text-white rounded-lg py-2.5 font-medium hover:bg-blue-600"
+                            className="w-full bg-blue-500 text-white rounded-lg py-2.5 font-medium hover:bg-blue-800 cursor-pointer"
                         >
                             Sign in
                         </button>
