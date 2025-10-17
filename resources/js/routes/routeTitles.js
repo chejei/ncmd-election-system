@@ -34,7 +34,8 @@ const routeTitles = {
   "/privacy-policy": "Privacy Policy",
   "/guidelines": "Guidelines",
   "/apply-candidacy": "Candidacy Application",
-  "/candidacy-acknowledgement": "Candidacy Acknowledgement"
+  "/candidacy-acknowledgement": "Candidacy Acknowledgement",
+  "/how-to-vote": "How to Vote"
 };
 
 export default routeTitles;

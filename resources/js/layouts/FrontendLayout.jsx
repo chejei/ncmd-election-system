@@ -80,6 +80,11 @@ export default function FrontendLayout() {
                                 <NavLink href="/candidates">Candidates</NavLink>
                             </li>
                             <li className="group">
+                                <NavLink href="/how-to-vote">
+                                    How to Vote
+                                </NavLink>
+                            </li>
+                            <li className="group">
                                 <NavLink href="/election-result">
                                     Election Result
                                 </NavLink>
@@ -156,10 +161,10 @@ export default function FrontendLayout() {
 
                             <div className="flex flex-col items-start mt-5 space-y-2">
                                 <a
-                                    href="/vote"
+                                    href="/candidates"
                                     className="text-gray-600 hover:underline hover:text-blue-500"
                                 >
-                                    Vote
+                                    Candidate
                                 </a>
                                 <a
                                     href="/election-result"
@@ -168,16 +173,22 @@ export default function FrontendLayout() {
                                     Election Result
                                 </a>
                                 <a
-                                    href="/candidates"
+                                    href="/how-to-vote"
                                     className="text-gray-600 hover:underline hover:text-blue-500"
                                 >
-                                    Candidate
+                                    How to Vote
                                 </a>
                                 <a
                                     href="/guidelines"
                                     className="text-gray-600 hover:underline hover:text-blue-500"
                                 >
                                     Guidelines
+                                </a>
+                                <a
+                                    href="/vote"
+                                    className="text-gray-600 hover:underline hover:text-blue-500"
+                                >
+                                    Vote
                                 </a>
                             </div>
                         </div>

@@ -10,6 +10,7 @@ import CandidateSingle from "./pages/Candidate";
 import ElectionResult from "./pages/ElectionResult";
 import CandidacyApplication from "./pages/CandidacyApplication";
 import CandidacyThankYou from "./pages/CandidacyAcknowledgement";
+import HowToVote from "./pages/HowToVote";
 
 import VoterLogin from "./pages/voter/VoterLogin";
 import Welcome from "./pages/voter/Welcome";
@@ -88,6 +89,7 @@ export default function App() {
                             path="election-result"
                             element={<ElectionResult />}
                         />
+                        <Route path="how-to-vote" element={<HowToVote />} />
                     </Route>
 
                     {/* Protected admin */}
