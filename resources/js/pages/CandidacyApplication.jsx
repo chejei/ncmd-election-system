@@ -596,8 +596,20 @@ export default function CandidacyApplication() {
                                                         {
                                                             required:
                                                                 "Phone Number is required",
+                                                            pattern: {
+                                                                value: /^(09|\+639)\d{9}$/,
+                                                                message:
+                                                                    "Please enter a valid Philippine phone number (e.g., 09123456789 or +639123456789)",
+                                                            },
                                                         }
                                                     )}
+                                                    onInput={(e) =>
+                                                        (e.target.value =
+                                                            e.target.value.replace(
+                                                                /[^0-9+]/g,
+                                                                ""
+                                                            ))
+                                                    }
                                                     className="w-full border rounded px-3 py-2"
                                                     placeholder="Enter Phone Number"
                                                 />

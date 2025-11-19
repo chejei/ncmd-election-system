@@ -34,8 +34,8 @@ export default function Questions() {
             text: "This question will be permanently deleted.",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
+            confirmButtonColor: "#e7000b",
+            cancelButtonColor: "#2b7fff",
             confirmButtonText: "Yes, delete it!",
         }).then(async (result) => {
             if (result.isConfirmed) {
@@ -83,8 +83,8 @@ export default function Questions() {
             text: `Delete ${selectedIds.length} question(s)?`,
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
+            confirmButtonColor: "#e7000b",
+            cancelButtonColor: "#2b7fff",
             confirmButtonText: "Yes, delete them!",
         }).then(async (result) => {
             if (result.isConfirmed) {

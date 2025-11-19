@@ -198,6 +198,27 @@ export default function FormFields({
                                                 />
                                             </label>
                                         </div>
+                                    ) : type === "phone_number" ? (
+                                        <input
+                                            type="text"
+                                            {...register(name, {
+                                                ...validation,
+                                                pattern: {
+                                                    value: /^(09|\+639)\d{9}$/,
+                                                    message:
+                                                        "Please enter a valid Philippine phone number (e.g., 09123456789 or +639123456789)",
+                                                },
+                                            })}
+                                            onInput={(e) =>
+                                                (e.target.value =
+                                                    e.target.value.replace(
+                                                        /[^0-9+]/g,
+                                                        ""
+                                                    ))
+                                            }
+                                            className={className}
+                                            placeholder={`Enter ${label}`}
+                                        />
                                     ) : (
                                         <input
                                             type={type || "text"}

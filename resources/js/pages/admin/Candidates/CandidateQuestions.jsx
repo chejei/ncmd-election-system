@@ -38,7 +38,7 @@ export default function CandidateQuestions({ candidateId, readOnly }) {
                 icon: "success",
                 title: "Saved!",
                 text: "All answers have been saved successfully.",
-                confirmButtonColor: "#3085d6",
+                confirmButtonColor: "#2b7fff",
             });
         } catch (err) {
             console.error("Failed to save:", err);
@@ -46,7 +46,7 @@ export default function CandidateQuestions({ candidateId, readOnly }) {
                 icon: "error",
                 title: "Oops...",
                 text: "Failed to save answers. Please try again.",
-                confirmButtonColor: "#d33",
+                confirmButtonColor: "#e7000b",
             });
         } finally {
         }

@@ -25,8 +25,8 @@ export default function AdminSidebar({ isOpen, toggleSidebar, isSidebarOpen }) {
             text: "You will be logged out of your session.",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
+            confirmButtonColor: "#e7000b",
+            cancelButtonColor: "#2b7fff",
             confirmButtonText: "Yes, logout",
         });
 

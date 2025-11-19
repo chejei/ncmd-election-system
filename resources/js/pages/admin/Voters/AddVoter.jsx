@@ -69,7 +69,7 @@ export default function AddVoter() {
         {
             name: "phone_number",
             label: "Phone Number",
-            type: "text",
+            type: "phone_number",
             className: "w-full border rounded px-3 py-2",
             wrapperClass: "mb-3",
             required: true,

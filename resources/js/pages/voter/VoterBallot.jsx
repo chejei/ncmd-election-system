@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import Webcam from "react-webcam";
 import { CameraIcon, RetakeIcon } from "../../assets/icons/icon";
 import Stepper from "../../components/Stepper";
-
 const steps = [
     { number: 1, label: "Election Ballot" },
     { number: 2, label: "Review" },
@@ -170,6 +169,32 @@ export default function Ballot() {
         }
     };
 
+    const exitVoting = () => {
+        Swal.fire({
+            title: "Are you sure you want to leave?",
+            text: "You can come back later to finish voting but only while the voting schedule is still open.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, leave",
+            cancelButtonText: "No, continue voting",
+            reverseButtons: true,
+            allowOutsideClick: false,
+            confirmButtonColor: "#e7000b",
+            cancelButtonColor: "#2b7fff",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Clear user session data
+                localStorage.removeItem("user");
+                localStorage.removeItem("token");
+                localStorage.removeItem("role");
+
+                // Navigate to voter page
+                navigate("/voter");
+            }
+        });
+        return; // stop execution
+    };
+
     if (loading) {
         return <p className="text-center mt-10">Loading ballot...</p>;
     }
@@ -177,6 +202,17 @@ export default function Ballot() {
     return (
         <div className="min-h-screen bg-gray-100 p-6">
             <div className="max-w-screen-xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
+                <div className="flex items-center justify-between mb-8">
+                    <h1 className="text-2xl font-bold text-gray-900">
+                        Voter's Ballot
+                    </h1>
+                    <button
+                        onClick={exitVoting}
+                        className="px-6 py-3 mx-2 rounded-xl bg-red-600 text-white hover:bg-red-800 cursor-pointer"
+                    >
+                        Exit Voting
+                    </button>
+                </div>
                 {/* Stepper */}
                 <Stepper steps={steps} currentStep={currentStep} />
 

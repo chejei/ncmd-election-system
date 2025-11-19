@@ -34,8 +34,8 @@ export default function Candidate() {
             text: "You won't be able to revert this action!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
+            confirmButtonColor: "#e7000b",
+            cancelButtonColor: "#2b7fff",
             confirmButtonText: "Yes, delete it!",
         }).then(async (result) => {
             if (result.isConfirmed) {
@@ -83,8 +83,8 @@ export default function Candidate() {
             text: `Delete ${selectedIds.length} candidate(s)?`,
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
+            confirmButtonColor: "#e7000b",
+            cancelButtonColor: "#2b7fff",
             confirmButtonText: "Yes, delete them!",
         }).then(async (result) => {
             if (result.isConfirmed) {
@@ -128,6 +128,8 @@ export default function Candidate() {
             showCancelButton: true,
             confirmButtonText: `Yes, ${actionText}`,
             cancelButtonText: "Cancel",
+            confirmButtonColor: "#e7000b",
+            cancelButtonColor: "#2b7fff",
         });
 
         if (!result.isConfirmed) return; // Stop if cancelled
@@ -163,7 +165,7 @@ export default function Candidate() {
         }
 
         const actionText = action === "approve" ? "Approve" : "Reject";
-        const confirmColor = action === "approve" ? "#28a745" : "#d33";
+        const confirmColor = action === "approve" ? "#28a745" : "#e7000b";
 
         Swal.fire({
             title: "Are you sure?",
@@ -171,7 +173,7 @@ export default function Candidate() {
             icon: action === "approve" ? "question" : "warning",
             showCancelButton: true,
             confirmButtonColor: confirmColor,
-            cancelButtonColor: "#3085d6",
+            cancelButtonColor: "#2b7fff",
             confirmButtonText: `Yes, ${actionText.toLowerCase()} them!`,
         }).then(async (result) => {
             if (result.isConfirmed) {

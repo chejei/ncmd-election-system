@@ -57,8 +57,8 @@ export default function Positions() {
             text: "You won't be able to revert this action!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
+            confirmButtonColor: "#e7000b",
+            cancelButtonColor: "#2b7fff",
             confirmButtonText: "Yes, delete it!",
         }).then(async (result) => {
             if (result.isConfirmed) {
@@ -107,8 +107,8 @@ export default function Positions() {
             text: `Delete ${selectedIds.length} position(s)?`,
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
+            confirmButtonColor: "#e7000b",
+            cancelButtonColor: "#2b7fff",
             confirmButtonText: "Yes, delete them!",
         }).then(async (result) => {
             if (result.isConfirmed) {
