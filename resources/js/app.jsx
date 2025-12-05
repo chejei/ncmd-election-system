@@ -43,6 +43,7 @@ import AddVoter from "./pages/admin/Voters/AddVoter";
 import EditVoter from "./pages/admin/Voters/EditVoter";
 import ViewVoter from "./pages/admin/Voters/ViewVoter";
 import ImportVoters from "./pages/admin/Import";
+import ImportByChurch from "./pages/admin/ImportByChurch";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -175,6 +176,11 @@ export default function App() {
                         <Route
                             path="/admin/voters/import"
                             element={<ImportVoters />}
+                        />
+
+                        <Route
+                            path="/admin/voters/import-by-church"
+                            element={<ImportByChurch />}
                         />
 
                         <Route path="/admin/settings" element={<Settings />} />

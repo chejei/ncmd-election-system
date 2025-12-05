@@ -28,6 +28,8 @@ export default function Table({
     onStatusChange,
     bulkActions,
     handleBulkAction,
+    filters,
+    onFilterChange,
 }) {
     const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
     return (
@@ -49,6 +51,37 @@ export default function Table({
                             placeholder={`Search for ${tableName}`}
                         />
                     </div>
+
+                    {/* Filters */}
+                    {filters &&
+                        filters.map((filter) => (
+                            <div key={filter.name} className="ms-4">
+                                <label
+                                    htmlFor={filter.name}
+                                    className="sr-only"
+                                >
+                                    {filter.label}
+                                </label>
+                                <select
+                                    onChange={(e) =>
+                                        onFilterChange(
+                                            filter.name,
+                                            e.target.value
+                                        )
+                                    }
+                                    className="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                                >
+                                    {filter.options.map((opt) => (
+                                        <option
+                                            key={opt.value}
+                                            value={opt.value}
+                                        >
+                                            {opt.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        ))}
                 </div>
 
                 <div className="flex flex-column justify-end">

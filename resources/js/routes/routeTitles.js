@@ -20,6 +20,7 @@ const routeTitles = {
   "/admin/voters/edit/:voterId": "Edit Voter",
   "/admin/voters/view/:voterId": "View Voter",
   "/admin/voters/import": "Bulk Import",
+  "/admin/voters/import-by-church": "Import Voters By Church",
   "/admin/settings": "Settings",
   "/": "NCMD Elections 2025",
   "/election-result": "Elections Result",

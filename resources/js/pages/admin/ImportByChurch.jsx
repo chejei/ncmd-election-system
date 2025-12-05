@@ -4,11 +4,12 @@ import Swal from "sweetalert2";
 import axios from "../../api/axios";
 import { InfoCircle } from "../../assets/icons/icon";
 
-export default function ImportVoters() {
+export default function ImportByChurch() {
     const [csvData, setCsvData] = useState([]);
     const [selectedRows, setSelectedRows] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
     const [churches, setChurches] = useState([]);
+    const [selectedChurch, setSelectedChurch] = useState("");
     const [importErrors, setImportErrors] = useState({});
     const fileInputRef = useRef(null);
     const requiredHeaders = [
@@ -18,7 +19,6 @@ export default function ImportVoters() {
         "suffix_name",
         "email",
         "phone_number",
-        "church_name",
     ];
     useEffect(() => {
         axios.get("/api/churches").then((res) => {
@@ -96,7 +96,7 @@ export default function ImportVoters() {
 
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", "voters_template.csv");
+        link.setAttribute("download", "voters_template_by_church.csv");
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -110,14 +110,10 @@ export default function ImportVoters() {
             // Select only valid rows (no errors)
             const validRowIndexes = csvData
                 .map((row, index) => {
-                    const existsChurch = churches.some(
-                        (c) => c.name === row.church_name
-                    );
                     const validEmail = isValidEmail(row.email);
                     const validPhone = isValidPhone(row.phone_number);
 
-                    const hasErrors =
-                        !existsChurch || !validEmail || !validPhone;
+                    const hasErrors = !validEmail || !validPhone;
 
                     return hasErrors ? null : index;
                 })
@@ -130,6 +126,15 @@ export default function ImportVoters() {
     };
 
     const handleImport = async () => {
+        if (!selectedChurch) {
+            Swal.fire({
+                icon: "warning",
+                title: "No Church Selected",
+                text: "Please select a church before importing voters.",
+            });
+            return;
+        }
+
         if (selectedRows.length === 0) {
             Swal.fire({
                 icon: "warning",
@@ -138,13 +143,13 @@ export default function ImportVoters() {
             });
             return;
         }
-
         try {
             const dataToImport = selectedRows.map((csvIndex) => {
                 const row = csvData[csvIndex];
                 return {
                     ...row,
                     csv_index: csvIndex,
+                    church_name: selectedChurch,
                 };
             });
 
@@ -184,12 +189,12 @@ export default function ImportVoters() {
             setCsvData(updatedCsv);
             setSelectedRows([]);
             setSelectAll(false);
+            setSelectedChurch("");
 
             if (fileInputRef.current) {
                 fileInputRef.current.value = null;
             }
         } catch (error) {
-            console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Import Failed",
@@ -214,6 +219,7 @@ export default function ImportVoters() {
                 setSelectedRows([]);
                 setImportErrors([]);
                 setSelectAll(false);
+                setSelectedChurch("");
                 if (fileInputRef.current) {
                     fileInputRef.current.value = null; // reset file input
                 }
@@ -231,28 +237,47 @@ export default function ImportVoters() {
             <h2 className="text-lg font-bold mb-3">Upload Voters CSV</h2>
 
             <div className="flex items-center mb-6 justify-between">
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                        Upload file
-                    </label>
-                    <input
-                        ref={fileInputRef}
-                        className="block w-[300px] border border-gray-300 rounded 
+                <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-4">
+                    <div className="">
+                        <label className="block text-sm font-medium text-gray-700">
+                            Upload file
+                        </label>
+                        <input
+                            ref={fileInputRef}
+                            className="block w-[300px] border border-gray-300 rounded 
                                 focus:z-10 focus:border-blue-500 focus:ring-blue-500 focus:ring-2
                                 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4
                                 disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
-                        aria-describedby="file_input_help"
-                        id="file_input"
-                        type="file"
-                        accept=".csv"
-                        onChange={handleFileUpload}
-                    />
-                    <p
-                        className="mt-1 text-sm text-gray-500"
-                        id="file_input_help"
-                    >
-                        Accept CSV file format only.
-                    </p>
+                            aria-describedby="file_input_help"
+                            id="file_input"
+                            type="file"
+                            accept=".csv"
+                            onChange={handleFileUpload}
+                        />
+                        <p
+                            className="mt-1 text-sm text-gray-500"
+                            id="file_input_help"
+                        >
+                            Accept CSV file format only.
+                        </p>
+                    </div>
+                    <div className="">
+                        <label className="block text-sm font-medium text-gray-700">
+                            Church
+                        </label>
+                        <select
+                            value={selectedChurch}
+                            onChange={(e) => setSelectedChurch(e.target.value)}
+                            className="border border-gray-300 rounded px-3 py-2 w-72 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        >
+                            <option value="">Select Church</option>
+                            {churches.map((church) => (
+                                <option key={church.id} value={church.name}>
+                                    {church.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
 
                 <div className="flex gap-2">
@@ -284,21 +309,13 @@ export default function ImportVoters() {
                                         checked={selectAll}
                                         onChange={handleSelectAll}
                                         disabled={csvData.every((row) => {
-                                            const existsChurch = churches.some(
-                                                (c) =>
-                                                    c.name === row.church_name
-                                            );
                                             const validEmail = isValidEmail(
                                                 row.email
                                             );
                                             const validPhone = isValidPhone(
                                                 row.phone_number
                                             );
-                                            return (
-                                                !existsChurch ||
-                                                !validEmail ||
-                                                !validPhone
-                                            );
+                                            return !validEmail || !validPhone;
                                         })}
                                     />
                                 </th>
@@ -312,14 +329,6 @@ export default function ImportVoters() {
                         <tbody>
                             {csvData.map((row, rowIndex) => {
                                 const clientErrors = [];
-                                const existsChurch = churches.some(
-                                    (c) => c.name === row.church_name
-                                );
-
-                                if (!existsChurch)
-                                    clientErrors.push(
-                                        `Church not found: ${row.church_name}`
-                                    );
                                 if (!isValidEmail(row.email))
                                     clientErrors.push(
                                         `Invalid email: ${row.email}`
@@ -337,7 +346,6 @@ export default function ImportVoters() {
                                     ...backendErrors,
                                 ];
                                 const hasErrors = rowErrors.length > 0;
-
                                 return (
                                     <tr
                                         key={rowIndex}

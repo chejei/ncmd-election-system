@@ -9,11 +9,24 @@ export default function Voters() {
     const [totalPages, setTotalPages] = useState(1);
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedIds, setSelectedIds] = useState([]);
+    const [churches, setChurches] = useState([]);
+    const [filterValues, setFilterValues] = useState({
+        church: "",
+    });
 
-    const fetchVoters = (page = 1, search = "") => {
+    const churchFilterOptions = [
+        { label: "All Churches", value: "" },
+        ...churches.map((c) => ({ label: c.name, value: c.id })),
+    ];
+    const fetchVoters = (page = 1, search = "", filters = {}) => {
         setVoters([]);
+        let query = `?page=${page}&search=${search}`;
+        Object.entries(filters).forEach(([key, val]) => {
+            if (val) query += `&${key}=${val}`;
+        });
+
         axios
-            .get(`/api/voters?page=${page}&search=${search}`)
+            .get(`/api/voters${query}`)
             .then((response) => {
                 setVoters(response.data.data);
                 setCurrentPage(response.data.current_page);
@@ -23,8 +36,18 @@ export default function Voters() {
     };
 
     useEffect(() => {
-        fetchVoters(currentPage, searchTerm);
-    }, [currentPage, searchTerm]);
+        axios.get("/api/churches").then((res) => {
+            const filtered = res.data.map((church) => ({
+                id: church.id,
+                name: church.name,
+            }));
+            setChurches(filtered);
+        });
+    }, []);
+
+    useEffect(() => {
+        fetchVoters(currentPage, searchTerm, filterValues);
+    }, [currentPage, searchTerm, filterValues]);
 
     const handleDelete = async (id) => {
         Swal.fire({
@@ -114,6 +137,15 @@ export default function Voters() {
         });
     };
 
+    const handleFilterChange = (filterName, value) => {
+        setFilterValues((prev) => ({
+            ...prev,
+            [filterName]: value,
+        }));
+        // Reset to page 1
+        setCurrentPage(1);
+    };
+
     const bulkActions = {
         add: true,
         delete: true,
@@ -153,6 +185,14 @@ export default function Voters() {
                         link="/admin/voters"
                         actions={actions}
                         bulkActions={bulkActions}
+                        filters={[
+                            {
+                                label: "Church",
+                                name: "church",
+                                options: churchFilterOptions,
+                            },
+                        ]}
+                        onFilterChange={handleFilterChange}
                     />
                 </div>
             </div>

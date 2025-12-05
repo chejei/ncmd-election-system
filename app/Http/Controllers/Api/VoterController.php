@@ -16,17 +16,24 @@ class VoterController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('search', '');
+        $church = $request->query('church', '');
         $voters = Voter::with([
             'church',
             'votes.candidate.position' // eager load candidate and its position
         ])
+            // Only apply search on name/email if search exists
             ->when($search, function ($query, $search) {
-                $query->where('first_name', 'like', "%{$search}%")
-                        ->orWhere('last_name', 'like', "%{$search}%")
-                        ->orWhere('email', 'like', "%{$search}%")
-                        ->orWhereHas('church', function ($cq) use ($search) {
-                          $cq->where('name', 'like', "%{$search}%");
-                      });
+                $query->where(function ($q) use ($search) {
+                    $q->where('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+                });
+            })
+            // Strictly filter by church if value provided
+            ->when($church, function ($query, $church) {
+                $query->whereHas('church', function ($cq) use ($church) {
+                    $cq->where('id', $church); // strict by church id
+                });
             })
             ->orderBy('last_name')
             ->paginate(10);
@@ -138,32 +145,85 @@ class VoterController extends Controller
             'voters.*.last_name' => 'required|string',
             'voters.*.email' => 'nullable|email',
             'voters.*.phone_number' => 'nullable|string',
-            'voters.*.church_name' => 'nullable|string',
+            'voters.*.church_name' => 'required|string',
+            'voters.*.csv_index' => 'required|integer'
         ]);
 
         $voters = $request->input('voters');
 
-        foreach ($voters as $voterData) {
-            // Find or create church
-            $church = Church::firstOrCreate(
-                ['name' => $voterData['church_name']],
-                ['senior_ptr' => null, 'address' => null, 'zone' => null]
-            );
+        $results = [];
+        $success_rows = [];
+        $error_rows = [];
 
-            Voter::create([
-                'first_name'   => $voterData['first_name'],
-                'last_name'    => $voterData['last_name'],
-                'middle_name'  => $voterData['middle_name'] ?? null,
-                'suffix_name'  => $voterData['suffix_name'] ?? null,
-                'email'        => $voterData['email'] ?? null,
-                'phone_number' => $voterData['phone_number'] ?? null,
-                'church_id'    => $church->id,
-            ]);
+        foreach ($voters as $voterData) {
+            $csvIndex = $voterData['csv_index']; // preserve row index
+            $message = "";
+            $success = false;
+
+            /** CHECK 1: Duplicate Email */
+            if (!empty($voterData['email'])) {
+                $existing = Voter::where('email', $voterData['email'])->first();
+                if ($existing) {
+                    $message = "Duplicate email '{$voterData['email']}' found.";
+                    $error_rows[] = $csvIndex;
+
+                    $results[] = [
+                        "voter" => $voterData,
+                        "message" => $message,
+                        "success" => false
+                    ];
+                    continue;
+                }
+            }
+
+            /** CHECK 2: Church Exists */
+            $church = Church::where('name', $voterData['church_name'])->first();
+            if (!$church) {
+                $message = "Church '{$voterData['church_name']}' does not exist.";
+                $error_rows[] = $csvIndex;
+
+                $results[] = [
+                    "voter" => $voterData,
+                    "message" => $message,
+                    "success" => false
+                ];
+                continue;
+            }
+
+            /** INSERT VOTER */
+            try {
+                Voter::create([
+                    'first_name'   => $voterData['first_name'],
+                    'last_name'    => $voterData['last_name'],
+                    'middle_name'  => $voterData['middle_name'] ?? null,
+                    'suffix_name'  => $voterData['suffix_name'] ?? null,
+                    'email'        => $voterData['email'] ?? null,
+                    'phone_number' => $voterData['phone_number'] ?? null,
+                    'church_id'    => $church->id,
+                ]);
+
+                $message = "Inserted successfully.";
+                $success = true;
+                $success_rows[] = $csvIndex;
+            } catch (\Exception $e) {
+                $message = "Insert failed: " . $e->getMessage();
+                $error_rows[] = $csvIndex;
+                $success = false;
+            }
+
+            $results[] = [
+                "voter" => $voterData,
+                "message" => $message,
+                "success" => $success
+            ];
         }
 
         return response()->json([
-            'success' => true,
-            'message' => 'Voters imported successfully!'
+            "success_count" => count($success_rows),
+            "error_count" => count($error_rows),
+            "success_rows" => $success_rows,
+            "error_rows" => $error_rows,
+            "data" => $results
         ]);
     }
 

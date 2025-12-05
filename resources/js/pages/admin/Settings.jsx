@@ -7,7 +7,8 @@ import Swal from "sweetalert2";
 const tabItems = [
     { key: "settings", label: "General Settings" },
     { key: "account", label: "Account Settings" },
-    { key: "backup", label: "Backup" },
+    { key: "election", label: "Election Settings" },
+    // { key: "backup", label: "Backup" },
 ];
 export default function Settings() {
     const [activeTab, setActiveTab] = useState("settings");
@@ -399,6 +400,39 @@ export default function Settings() {
                             >
                                 Backup Now
                             </button>
+                        </div>
+                    )}
+                    {activeTab === "election" && (
+                        <div className="p-4">
+                            <form
+                                onSubmit={handleSubmit}
+                                className="grid grid-cols-1 sm:grid-cols-4 sm:gap-4"
+                            >
+                                <div className="flex items-center ">
+                                    <label className="block text-md font-medium text-gray-700">
+                                        Show result on (percentage)
+                                    </label>
+                                </div>
+                                <div className="">
+                                    <input
+                                        type="number"
+                                        name="show_result"
+                                        value={settings.show_result || ""}
+                                        onChange={handleChange}
+                                        placeholder="Enter percentage to show result"
+                                        required
+                                        className="w-full border rounded px-3 py-2"
+                                    />
+                                </div>
+                                <div className="col-span-1 sm:col-span-4 flex justify-end">
+                                    <button
+                                        type="submit"
+                                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-800 cursor-pointer"
+                                    >
+                                        Save Election
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     )}
                 </div>

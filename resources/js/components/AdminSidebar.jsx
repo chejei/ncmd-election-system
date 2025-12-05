@@ -244,6 +244,14 @@ export default function AdminSidebar({ isOpen, toggleSidebar, isSidebarOpen }) {
                                     <span>Import Bulk</span>
                                 </Link>
                             </li>
+                            <li className="mb-4 flex">
+                                <Link
+                                    to="/admin/voters/import-by-church"
+                                    className="py-4 px-8 flex-1"
+                                >
+                                    <span>Import By Church</span>
+                                </Link>
+                            </li>
                         </ul>
                     </li>
                 </ul>
