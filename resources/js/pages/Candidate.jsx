@@ -29,18 +29,28 @@ export default function Candidate() {
             </div>
         );
     }
-
+    const bannerImage = candidate.electoral_group?.banner_image;
     return (
         <>
             <section
                 id="profile"
-                className={`${
-                    (candidate.political_color && "") || "bg-gray-300"
-                } text-black`}
-                style={{ backgroundColor: candidate.political_color }}
+                className="bg-gray-300 text-black candidate-bg-banner"
+                style={{
+                    backgroundColor:
+                        candidate.electoral_group?.color || "#d1d5dc",
+                    backgroundImage: candidate.electoral_group?.banner_image
+                        ? `url(${
+                              bannerImage.startsWith("/storage/")
+                                  ? bannerImage
+                                  : `/storage/${bannerImage}`
+                          })`
+                        : "none",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                }}
             >
-                <div className="max-w-screen-xl  px-0  md:px-7 mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 items-center">
+                <div className="max-w-screen-xl  px-0  md:px-7 mx-auto pt-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-2">
                         <div className="">
                             {candidate.photo && (
                                 <img
@@ -50,7 +60,16 @@ export default function Candidate() {
                                 />
                             )}
                         </div>
-                        <div className="px-5 py-10 bg-white w-full md:rounded my-0 md:my-20 mx-auto">
+                        <div className="px-5 py-10 bg-white w-full md:rounded my-0 md:my-20 mx-auto relative">
+                            {candidate.electoral_group && (
+                                <div className="political-group-logo">
+                                    <img
+                                        src={`/storage/${candidate.electoral_group.logo}`}
+                                        alt={candidate.electoral_group.name}
+                                        className="w-30 h-30 object-cover rounded-lg object-top md:object-bottom h-[500px] md:h-auto"
+                                    />
+                                </div>
+                            )}
                             <h1 className="text-5xl font-bold mb-3 leading-6">
                                 {candidate.full_name}
                                 <br />

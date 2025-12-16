@@ -37,6 +37,9 @@ import EditChurch from "./pages/admin/Churches/EditChurch";
 import Questions from "./pages/admin/Questions";
 import AddQuestion from "./pages/admin/Questions/AddQuestion";
 import EditQuestion from "./pages/admin/Questions/EditQuestion";
+import ElectoralGroup from "./pages/admin/ElectoralGroup";
+import AddElectoralGroup from "./pages/admin/ElectoralGroup/AddElectoralGroup";
+import EditElectoralGroup from "./pages/admin/ElectoralGroup/EditElectoralGroup";
 
 import Voters from "./pages/admin/Voters";
 import AddVoter from "./pages/admin/Voters/AddVoter";
@@ -159,6 +162,18 @@ export default function App() {
                         <Route
                             path="/admin/candidate/questions/edit/:questionId"
                             element={<EditQuestion />}
+                        />
+                        <Route
+                            path="/admin/candidate/electoral-group"
+                            element={<ElectoralGroup />}
+                        />
+                        <Route
+                            path="/admin/candidate/electoral-group/add"
+                            element={<AddElectoralGroup />}
+                        />
+                        <Route
+                            path="/admin/candidate/electoral-group/edit/:electoralGroupId"
+                            element={<EditElectoralGroup />}
                         />
                         <Route path="/admin/voters" element={<Voters />} />
                         <Route

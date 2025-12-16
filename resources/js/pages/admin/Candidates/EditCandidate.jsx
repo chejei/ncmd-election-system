@@ -22,14 +22,20 @@ export default function EditCandidate() {
     const [churches, setChurches] = useState([]);
     const [positions, setPositions] = useState([]);
     const [originalData, setOriginalData] = useState({});
+    const [electoralGroups, setElectoralGroups] = useState([]);
     const { candidateId } = useParams();
     const [activeTab, setActiveTab] = useState("profile");
-    const [photoPreview, setPhotoPreview] = useState(null);
+    const [photoPreview, setPhotoPreview] = useState({
+        photo: null,
+    });
     const navigate = useNavigate();
 
     useEffect(() => {
         axios.get("/api/churches").then((res) => setChurches(res.data));
         axios.get("/api/positions").then((res) => setPositions(res.data));
+        axios
+            .get("/api/electoral-groups")
+            .then((res) => setElectoralGroups(res.data));
     }, []);
 
     useEffect(() => {
@@ -87,7 +93,10 @@ export default function EditCandidate() {
                     ...data,
                     photo: photoUrl,
                 });
-                setPhotoPreview(photoUrl);
+                setPhotoPreview((prev) => ({
+                    ...prev,
+                    photo: photoUrl,
+                }));
             } catch (error) {
                 console.error("Error fetching candidate:", error);
             }
@@ -103,7 +112,10 @@ export default function EditCandidate() {
                 shouldDirty: true,
             });
             await trigger(fieldName);
-            setPhotoPreview(null);
+            setPhotoPreview((prev) => ({
+                ...prev,
+                [fieldName]: null,
+            }));
             return;
         }
         if (file) {
@@ -116,7 +128,10 @@ export default function EditCandidate() {
                 });
                 clearErrors(fieldName);
                 await trigger(fieldName);
-                setPhotoPreview(reader.result);
+                setPhotoPreview((prev) => ({
+                    ...prev,
+                    [fieldName]: reader.result,
+                }));
             };
             reader.readAsDataURL(file);
         } else {
@@ -380,10 +395,14 @@ export default function EditCandidate() {
             wrapperClass: "mb-3",
         },
         {
-            name: "political_color",
-            label: "Political Color",
-            type: "color",
-            className: " h-10 w-10 border rounded px-2 py-2",
+            name: "electoral_group_id",
+            label: "Electoral Group",
+            type: "select",
+            options: electoralGroups.map((c) => ({
+                value: c.id,
+                label: c.name,
+            })),
+            className: "w-full border rounded px-3 py-2",
             wrapperClass: "mb-3",
         },
     ];

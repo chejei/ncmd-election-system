@@ -191,6 +191,14 @@ export default function AdminSidebar({ isOpen, toggleSidebar, isSidebarOpen }) {
                                     <span>Questions</span>
                                 </Link>
                             </li>
+                            <li className="mb-4 flex">
+                                <Link
+                                    to="/admin/candidate/electoral-group"
+                                    className=" py-4 px-8 flex-1"
+                                >
+                                    <span>Electoral Group</span>
+                                </Link>
+                            </li>
                         </ul>
                     </li>
                     <li

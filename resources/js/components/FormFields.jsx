@@ -138,9 +138,10 @@ export default function FormFields({
                                                 htmlFor={name}
                                                 className="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
                                             >
-                                                {photoPreview ? (
+                                                {photoPreview &&
+                                                photoPreview?.[name] ? (
                                                     <img
-                                                        src={photoPreview}
+                                                        src={photoPreview[name]}
                                                         alt="Preview"
                                                         className={className}
                                                     />

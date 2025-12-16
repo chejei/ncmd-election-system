@@ -66,9 +66,23 @@ export default function ElectionResult() {
                 <h2 className="text-3xl font-bold text-gray-800">
                     Election Results Not Available Yet
                 </h2>
-                <p className="text-gray-500 mt-3">
+                <p className="text-gray-500 mt-3 mb-4">
                     Please check back later once votes have started coming in.
                 </p>
+                <div className="flex flex-row gap-4 items-center text-center">
+                    <a
+                        className="btn font-medium inline-block bg-blue-500 text-white py-2 px-4 rounded-3xl hover:bg-blue-800 cursor-pointer"
+                        href="/"
+                    >
+                        Back to Home
+                    </a>
+                    <a
+                        className="btn font-medium inline-block bg-red-500 text-white py-2 px-4 rounded-3xl hover:bg-blue-800 cursor-pointer"
+                        href="/candidates"
+                    >
+                        Meet the Candidates
+                    </a>
+                </div>
             </section>
         );
     }
@@ -160,9 +174,9 @@ export default function ElectionResult() {
                         {stats.election_count
                             .filter((pos) => pos.approved_candidates.length > 0)
                             .map((pos) => {
-                                const sorted = [...pos.approved_candidates].sort(
-                                    (a, b) => b.vote_count - a.vote_count
-                                );
+                                const sorted = [
+                                    ...pos.approved_candidates,
+                                ].sort((a, b) => b.vote_count - a.vote_count);
 
                                 let currentRank = 0;
                                 let lastVote = null;

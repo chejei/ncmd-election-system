@@ -15,6 +15,8 @@ use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\ElectionController;
 use App\Http\Controllers\Api\BackupController;
+use App\Http\Controllers\Api\ElectoralGroupController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,7 @@ Route::get('/settings', [SettingController::class, 'index']);
 Route::get('/settings/{option}', [SettingController::class, 'show']);
 
 Route::apiResource('churches', ChurchController::class)->only(['index', 'show']);
+Route::apiResource('electoral-groups', ElectoralGroupController::class)->only(['index', 'show']);
 Route::apiResource('positions', PositionController::class)->only(['index', 'show']);
 Route::get('/questions-active', [QuestionController::class, 'enableQuestions']);
 
@@ -60,6 +63,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/positions/reorder', [PositionController::class, 'reorder']);
 
     Route::apiResource('churches', ChurchController::class)->except(['index', 'show']);
+
+    Route::apiResource('electoral-groups', ElectoralGroupController::class)->except(['index', 'show']);
 
     Route::apiResource('questions', QuestionController::class);
     Route::get('/questions/active/{candidateId}', [QuestionController::class, 'activeQuestions']);

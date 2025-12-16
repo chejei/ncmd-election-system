@@ -64,9 +64,9 @@ class CandidateController extends Controller
             'school' => 'nullable|string|max:255',
             'church_id' => 'required|integer|exists:churches,id',
             'position_id' => 'required|integer|exists:positions,id',
+            'electoral_group_id' => 'required|integer|exists:electoral_groups,id',
             'photo' => 'nullable|string', // Base64 string
             'endorsed' => 'nullable|string|max:255',
-            'political_color'  => ['nullable', 'regex:/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/'],
         ]);
 
         $photoPath = null;
@@ -101,7 +101,7 @@ class CandidateController extends Controller
             'address' => $request->address,
             'occupation' => $request->occupation,
             'company' => $request->company,
-            'political_color' => $request->political_color,
+            'electoral_group_id' => $request->electoral_group_id,
             'status' => $request->status ?? 'pending',
         ]);
 
@@ -142,9 +142,9 @@ class CandidateController extends Controller
             'school' => 'nullable|string|max:255',
             'church_id' => 'required|integer|exists:churches,id',
             'position_id' => 'required|integer|exists:positions,id',
+            'electoral_group_id' => 'required|integer|exists:electoral_groups,id',
             'photo' => 'nullable|string', // Base64 string
             'endorsed' => 'nullable|string|max:255',
-            'political_color'  => ['nullable', 'regex:/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/'],
         ]);
 
         // Update fields
@@ -194,7 +194,7 @@ class CandidateController extends Controller
 
     public function candidateBySlug($slug)
     {   
-        $candidate = Candidate::with(['answers.question'])
+        $candidate = Candidate::with(['answers.question','electoralGroup'])
             ->where('slug', $slug)->firstOrFail();
 
         return response()->json($candidate);

@@ -31,6 +31,21 @@ class ElectionController extends Controller
 
         $electionCountPerCandidate = Position::with(['approvedCandidates'])->get();
 
+        $recentChurchImports = Church::withCount('voters')
+            ->withMax('voters', 'created_at')
+            ->orderByDesc('voters_max_created_at')
+            ->limit(10)
+            ->get()
+            ->map(function ($church) {
+                return [
+                    'church_id'   => $church->id,
+                    'church_name' => $church->name,
+                    'total_voters'=> $church->voters_count,
+                    'last_import' => $church->voters_max_created_at,
+                ];
+            });
+
+
 
         return response()->json([
             'total_voters'     => Voter::count(),
@@ -38,7 +53,8 @@ class ElectionController extends Controller
             'start_date'       => Setting::getValue('start_date'),
             'end_date'         => Setting::getValue('end_date'),
             'zones'            => $zones,
-            'election_count'   => $electionCountPerCandidate
+            'election_count'   => $electionCountPerCandidate,
+            'recentChurchImports' => $recentChurchImports
         ]);
     }
 }

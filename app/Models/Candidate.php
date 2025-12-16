@@ -27,9 +27,9 @@ class Candidate extends Model
         'company',
         'church_id',
         'position_id',
+        'electoral_group_id',
         'endorsed',
         'photo',
-        'political_color',
         'status'
     ];
     protected $appends = ['church_name', 'position_title' , 'full_name', 'restrict', 'vote_count'];
@@ -101,6 +101,11 @@ class Candidate extends Model
     public function answers()
     {
         return $this->hasMany(CandidateAnswer::class);
+    }
+
+    public function electoralGroup()
+    {
+        return $this->belongsTo(ElectoralGroup::class);
     }
 
     public function getChurchNameAttribute()

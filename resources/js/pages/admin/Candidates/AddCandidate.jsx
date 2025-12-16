@@ -17,11 +17,17 @@ export default function AddCandidate() {
         control,
     } = useForm();
     const [churches, setChurches] = useState([]);
+    const [electoralGroups, setElectoralGroups] = useState([]);
     const [positions, setPositions] = useState([]);
-    const [photoPreview, setPhotoPreview] = useState(null);
+    const [photoPreview, setPhotoPreview] = useState({
+        photo: null,
+    });
     const navigate = useNavigate();
     useEffect(() => {
         axios.get("/api/churches").then((res) => setChurches(res.data));
+        axios
+            .get("/api/electoral-groups")
+            .then((res) => setElectoralGroups(res.data));
         axios.get("/api/positions").then((res) => setPositions(res.data));
     }, []);
 
@@ -34,7 +40,10 @@ export default function AddCandidate() {
                 shouldDirty: true,
             });
             await trigger(fieldName);
-            setPhotoPreview(null);
+            setPhotoPreview((prev) => ({
+                ...prev,
+                [fieldName]: null,
+            }));
             return;
         }
 
@@ -49,7 +58,10 @@ export default function AddCandidate() {
                 });
                 clearErrors(fieldName);
                 await trigger(fieldName);
-                setPhotoPreview(base64String);
+                setPhotoPreview((prev) => ({
+                    ...prev,
+                    [fieldName]: base64String,
+                }));
             };
             reader.readAsDataURL(file);
         } else {
@@ -225,10 +237,14 @@ export default function AddCandidate() {
             wrapperClass: "mb-3",
         },
         {
-            name: "political_color",
-            label: "Political Color",
-            type: "color",
-            className: " h-10 w-10 border rounded px-2 py-2",
+            name: "electoral_group_id",
+            label: "Electoral Group",
+            type: "select",
+            options: electoralGroups.map((c) => ({
+                value: c.id,
+                label: c.name,
+            })),
+            className: "w-full border rounded px-3 py-2",
             wrapperClass: "mb-3",
         },
     ];

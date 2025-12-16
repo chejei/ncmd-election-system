@@ -37,6 +37,7 @@ export default function CandidacyApplication() {
     const [currentStep, setCurrentStep] = useState(1);
     const [showForm, setShowForm] = useState(false);
     const [photoPreview, setPhotoPreview] = useState(null);
+    const [electoralGroups, setElectoralGroups] = useState([]);
     const siteName = useSetting("site_name", "");
     const navigate = useNavigate();
 
@@ -46,6 +47,9 @@ export default function CandidacyApplication() {
         axios
             .get("/api/questions-active")
             .then((res) => setQuestions(res.data));
+        axios
+            .get("/api/electoral-groups")
+            .then((res) => setElectoralGroups(res.data));
     }, []);
 
     // Handle file uploads
@@ -115,7 +119,7 @@ export default function CandidacyApplication() {
                 fieldsToValidate = [
                     "position_id",
                     "endorsed",
-                    "political_color",
+                    "electoral_group_id",
                 ];
                 break;
             case 6: // Review
@@ -883,18 +887,32 @@ export default function CandidacyApplication() {
                                                 />
                                             </div>
 
-                                            {/* Political Color */}
+                                            {/* Electoral Group */}
                                             <div>
                                                 <label className="block font-medium mb-1">
-                                                    Political Color
+                                                    Electoral Group
                                                 </label>
-                                                <input
-                                                    type="color"
+                                                <select
                                                     {...register(
-                                                        "political_color"
+                                                        "electoral_group_id"
                                                     )}
-                                                    className="h-10 w-10 border rounded px-2 py-2"
-                                                />
+                                                    className="w-full border rounded px-3 py-2"
+                                                    defaultValue=""
+                                                >
+                                                    <option value="">
+                                                        Select Electoral Group
+                                                    </option>
+                                                    {electoralGroups.map(
+                                                        (c) => (
+                                                            <option
+                                                                key={c.id}
+                                                                value={c.id}
+                                                            >
+                                                                {c.name}
+                                                            </option>
+                                                        )
+                                                    )}
+                                                </select>
                                             </div>
                                         </div>
                                     </>
@@ -1178,21 +1196,23 @@ export default function CandidacyApplication() {
                                                     </td>
                                                 </tr>
 
-                                                {/* Political Color */}
+                                                {/* Electoral Group */}
                                                 <tr>
                                                     <td className="font-medium p-3">
-                                                        Political Color
+                                                        Electoral Group
                                                     </td>
                                                     <td className="p-3">
-                                                        <div
-                                                            className="h-6 w-16 rounded border"
-                                                            style={{
-                                                                backgroundColor:
-                                                                    watch(
-                                                                        "political_color"
-                                                                    ),
-                                                            }}
-                                                        ></div>
+                                                        {
+                                                            electoralGroups.find(
+                                                                (c) =>
+                                                                    c.id ===
+                                                                    Number(
+                                                                        watch(
+                                                                            "electoral_group_id"
+                                                                        )
+                                                                    )
+                                                            )?.name
+                                                        }
                                                     </td>
                                                 </tr>
                                             </tbody>

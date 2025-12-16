@@ -35,7 +35,7 @@ export default function Dashboard() {
 
     return (
         <>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
                 <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
                     <div className="flex justify-between mb-4 items-start">
                         <div className="text-2xl font-semibold">Statistics</div>
@@ -140,6 +140,49 @@ export default function Dashboard() {
                                     </div>
                                 );
                             })}
+                    </div>
+                </div>
+                <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+                    <div className="overflow-x-auto">
+                        <div className="text-lg font-semibold">
+                            Most Recent Voters Import
+                        </div>
+                        <table class="w-full text-sm text-left rtl:text-right text-body">
+                            <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
+                                <tr>
+                                    <th
+                                        scope="col"
+                                        class="pl-0  px-6 py-3 font-medium"
+                                    >
+                                        Church Name
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        class="px-6 py-3 font-medium"
+                                    >
+                                        Voters
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {stats.recentChurchImports.map((church) => (
+                                    <tr
+                                        key={church.id}
+                                        class="bg-neutral-primary border-b border-default"
+                                    >
+                                        <th
+                                            scope="row"
+                                            class="pl-0 px-6 py-4 font-medium text-heading whitespace-nowrap"
+                                        >
+                                            {church.church_name}
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            {church.total_voters}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
