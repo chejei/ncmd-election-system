@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Candidate;
 use App\Models\Position;
 
@@ -64,7 +65,7 @@ class CandidateController extends Controller
             'school' => 'nullable|string|max:255',
             'church_id' => 'required|integer|exists:churches,id',
             'position_id' => 'required|integer|exists:positions,id',
-            'electoral_group_id' => 'integer|exists:electoral_groups,id',
+            'electoral_group_id' => 'required|integer|exists:electoral_groups,id',
             'photo' => 'nullable|string', // Base64 string
             'endorsed' => 'nullable|string|max:255',
         ]);
@@ -142,7 +143,7 @@ class CandidateController extends Controller
             'school' => 'nullable|string|max:255',
             'church_id' => 'required|integer|exists:churches,id',
             'position_id' => 'required|integer|exists:positions,id',
-            'electoral_group_id' => 'integer|exists:electoral_groups,id',
+            'electoral_group_id' => 'required|integer|exists:electoral_groups,id',
             'photo' => 'nullable|string', // Base64 string
             'endorsed' => 'nullable|string|max:255',
         ]);

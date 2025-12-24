@@ -21,6 +21,10 @@ export { ReactComponent as ResetIcon } from './reset.svg?react';
 export { ReactComponent as ReadMoreIcon } from './arrow-read-more.svg?react';
 export { ReactComponent as EyeIcon } from './Eye.svg?react';
 export { ReactComponent as InfoCircle } from './info-circle.svg?react';
+export { ReactComponent as VisibilityOff } from './visibility-off.svg?react';
+export { ReactComponent as Visibility } from './visibility.svg?react';
+
+
 
 
 

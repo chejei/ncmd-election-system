@@ -159,6 +159,7 @@ export default function Voters() {
 
     // headers
     const tableHeaders = {
+        registration_num: "Registration #",
         full_name: "Name",
         email: "Email",
         church_name: "Church",

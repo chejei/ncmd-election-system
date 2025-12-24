@@ -1,15 +1,74 @@
 import { useState, useRef } from "react";
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
-
+import { useSetting } from "../../components/SettingContext";
+import { formatDate } from "../../utils/formatDate";
 export default function VoterLogin() {
+    const inputRefs = useRef([]);
     const [lastName, setLastName] = useState("");
     const [pinDigits, setPinDigits] = useState(["", "", "", "", "", ""]); // 6-digit PIN
     const [error, setError] = useState("");
     const [fieldErrors, setFieldErrors] = useState({});
     const navigate = useNavigate();
+    const startDateRaw = useSetting("start_date", null);
+    const endDateRaw = useSetting("end_date", null);
+    const today = new Date();
+    const startDateObj = startDateRaw ? new Date(startDateRaw) : null;
+    const endDateObj = endDateRaw ? new Date(endDateRaw) : null;
 
-    const inputRefs = useRef([]);
+    // Determine voting status
+    const hasVotingStarted = startDateObj ? today >= startDateObj : false;
+    const hasVotingEnded = endDateObj ? today > endDateObj : false;
+
+    if (!hasVotingStarted || hasVotingEnded) {
+        return (
+            <section className="bg-white flex flex-col items-center text-center justify-center px-4 min-h-[80vh] md:min-h-screen">
+                <h2 className="text-3xl font-bold text-gray-800">
+                    {!hasVotingStarted
+                        ? "Voting Not Yet Open"
+                        : "Voting Period Has Ended"}
+                </h2>
+                <p className="text-gray-500 mt-3 mb-4">
+                    {!hasVotingStarted && (
+                        <>
+                            Voting will begin on{" "}
+                            <span className="font-medium text-gray-700">
+                                {formatDate(startDateObj)}
+                            </span>
+                            . Please check back later.
+                        </>
+                    )}
+                    {hasVotingEnded && (
+                        <>
+                            The election period was from{" "}
+                            <span className="font-medium text-gray-700">
+                                {formatDate(startDateObj)}
+                            </span>{" "}
+                            to{" "}
+                            <span className="font-medium text-gray-700">
+                                {formatDate(endDateObj)}
+                            </span>
+                            . Voting is now closed.
+                        </>
+                    )}
+                </p>
+                <div className="flex flex-row gap-4 items-center text-center">
+                    <a
+                        className="btn font-medium inline-block bg-blue-500 text-white py-2 px-4 rounded-3xl hover:bg-blue-800 cursor-pointer"
+                        href="/"
+                    >
+                        Back to Home
+                    </a>
+                    <a
+                        className="btn font-medium inline-block bg-red-500 text-white py-2 px-4 rounded-3xl hover:bg-blue-800 cursor-pointer"
+                        href="/candidates"
+                    >
+                        Meet the Candidates
+                    </a>
+                </div>
+            </section>
+        );
+    }
 
     const handleChange = (value, index) => {
         if (/^\d?$/.test(value)) {

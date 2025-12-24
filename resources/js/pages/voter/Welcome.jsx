@@ -86,6 +86,17 @@ export default function WelcomePage() {
                             You are now logged in as a registered voter. Please
                             read the following carefully before proceeding.
                         </p>
+                        {voter?.is_voting_open === false && (
+                            <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 px-4 py-2 mb-3 rounded">
+                                <p className="text-xs">
+                                    <span className="font-semibold">
+                                        Notice:
+                                    </span>{" "}
+                                    Voting is not yet open. Please wait for the
+                                    official announcement.
+                                </p>
+                            </div>
+                        )}
 
                         {/* Warning */}
                         <div className="bg-red-100 border-l-4 border-red-500 text-red-700 px-4 py-2 mb-6 rounded">
@@ -159,11 +170,11 @@ export default function WelcomePage() {
                             onClick={handleStartVoting}
                             className={`w-full py-3 px-6 rounded-lg font-semibold shadow-md 
               ${
-                  agree
+                  agree && voter?.is_voting_open !== false
                       ? "bg-blue-600 text-white hover:bg-blue-800 cursor-pointer"
                       : "bg-gray-400 text-gray-200 cursor-not-allowed"
               }`}
-                            disabled={!agree}
+                            disabled={!agree || voter?.is_voting_open === false}
                         >
                             Start Voting
                         </button>

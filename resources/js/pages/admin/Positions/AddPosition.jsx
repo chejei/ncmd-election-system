@@ -51,7 +51,7 @@ export default function AddPosition() {
                     title: "Success",
                     text: "Position saved successfully!",
                 }).then(() => {
-                    navigate("/admin/candidate/positions");
+                    navigate("/admin/candidate/position");
                 });
             } else {
                 Swal.fire({

@@ -28,6 +28,12 @@ export default function Candidate() {
         fetchCandidates(currentPage, searchTerm);
     }, [currentPage, searchTerm]);
 
+    const toggleSelect = (id) => {
+        setSelectedIds((prev) =>
+            prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+        );
+    };
+
     const handleDelete = async (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -60,12 +66,6 @@ export default function Candidate() {
                 }
             }
         });
-    };
-
-    const toggleSelect = (id) => {
-        setSelectedIds((prev) =>
-            prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-        );
     };
 
     const handleDeleteSelected = () => {
@@ -118,6 +118,7 @@ export default function Candidate() {
 
     const handleStatusChange = async (id, action) => {
         const actionText = action === "approve" ? "Approve" : "Reject";
+        const confirmColor = action === "approve" ? "#28a745" : "#e7000b";
         const actionUrl = `/api/candidates/${id}/${action}`;
 
         // Ask for confirmation first
@@ -128,7 +129,7 @@ export default function Candidate() {
             showCancelButton: true,
             confirmButtonText: `Yes, ${actionText}`,
             cancelButtonText: "Cancel",
-            confirmButtonColor: "#e7000b",
+            confirmButtonColor: confirmColor,
             cancelButtonColor: "#2b7fff",
         });
 
@@ -217,6 +218,7 @@ export default function Candidate() {
         approve: true,
         reject: true,
         view: true,
+        delete: true,
     };
     const tableHeaders = {
         full_name: "Name",

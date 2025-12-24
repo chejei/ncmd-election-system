@@ -33,6 +33,8 @@ Route::get('/db-test', function() {
 });
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/voter/login', [VoterAuthController::class, 'login']);
+Route::post('/voter/verify', [VoterController::class, 'verify']);
+
 
 Route::post('/apply-candidacy', [CandidateController::class, 'store']);
 

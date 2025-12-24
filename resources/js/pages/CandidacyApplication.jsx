@@ -30,6 +30,9 @@ export default function CandidacyApplication() {
         reset,
     } = useForm({
         mode: "onChange",
+        defaultValues: {
+            ministry_involvement: null,
+        },
     });
     const [churches, setChurches] = useState([]);
     const [positions, setPositions] = useState([]);
@@ -152,8 +155,22 @@ export default function CandidacyApplication() {
     const onSubmit = async (data) => {
         try {
             const formData = new FormData();
-            Object.keys(data).forEach((key) => {
-                formData.append(key, data[key]);
+
+            Object.entries(data).forEach(([key, value]) => {
+                // Convert undefined to null
+                const normalizedValue = value === undefined ? null : value;
+
+                if (normalizedValue === null) {
+                    formData.append(key, ""); // Laravel treats empty string as null (if nullable)
+                    return;
+                }
+
+                if (typeof normalizedValue === "boolean") {
+                    formData.append(key, normalizedValue ? 1 : 0);
+                    return;
+                }
+
+                formData.append(key, normalizedValue);
             });
 
             const res = await axios.post("/api/apply-candidacy", formData, {
@@ -777,8 +794,12 @@ export default function CandidacyApplication() {
                                                                 field.value ||
                                                                 ""
                                                             }
-                                                            onChange={
-                                                                field.onChange
+                                                            onChange={(value) =>
+                                                                field.onChange(
+                                                                    value?.trim()
+                                                                        ? value
+                                                                        : null
+                                                                )
                                                             }
                                                             placeholder="Enter Ministry Involvement"
                                                             className="w-full h-[400px] border rounded px-3 py-2"
@@ -888,13 +909,26 @@ export default function CandidacyApplication() {
                                             </div>
 
                                             {/* Electoral Group */}
-                                            <div>
+                                            <div
+                                                className={`${
+                                                    errors.electoral_group_id
+                                                        ? "has-error"
+                                                        : ""
+                                                }`}
+                                            >
                                                 <label className="block font-medium mb-1">
-                                                    Electoral Group
+                                                    Electoral Group{" "}
+                                                    <span className="text-red-500 error-notes">
+                                                        *
+                                                    </span>
                                                 </label>
                                                 <select
                                                     {...register(
-                                                        "electoral_group_id"
+                                                        "electoral_group_id",
+                                                        {
+                                                            required:
+                                                                "Electoral Group is required",
+                                                        }
                                                     )}
                                                     className="w-full border rounded px-3 py-2"
                                                     defaultValue=""
@@ -913,6 +947,15 @@ export default function CandidacyApplication() {
                                                         )
                                                     )}
                                                 </select>
+                                                {errors.electoral_group_id && (
+                                                    <p className="text-red-500 error-notes">
+                                                        {
+                                                            errors
+                                                                .electoral_group_id
+                                                                .message
+                                                        }
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
                                     </>
