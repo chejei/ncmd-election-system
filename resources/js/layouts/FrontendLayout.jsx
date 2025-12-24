@@ -63,7 +63,7 @@ export default function FrontendLayout() {
                     >
                         <a className="text-2xl font-semibold" href="/">
                             <img
-                                className="object-contain h-[50px] sm:h-[80px] w-[100px] sm:w-[200px]"
+                                className="object-contain h-[50px] sm:h-[80px] w-[100px] sm:w-[150px]"
                                 src={siteLogo ? `/storage/${siteLogo}` : logo}
                                 alt={siteName}
                             />
@@ -92,7 +92,7 @@ export default function FrontendLayout() {
 
                             <li className="btn-link">
                                 <a
-                                    className="btn font-medium inline-block ml-0 lg:ml-auto bg-blue-500 text-white py-2 px-4 rounded-3xl hover:bg-blue-800 cursor-pointer"
+                                    className="btn font-medium inline-block text-sm lg:text-base ml-0 lg:ml-auto bg-blue-500 text-white py-2 px-4 rounded-3xl hover:bg-blue-800 cursor-pointer"
                                     href="/vote"
                                 >
                                     Vote Now!
@@ -189,6 +189,12 @@ export default function FrontendLayout() {
                                     className="text-gray-600 hover:underline hover:text-blue-500"
                                 >
                                     Vote
+                                </a>
+                                <a
+                                    href="/voter-verification"
+                                    className="text-gray-600 hover:underline hover:text-blue-500"
+                                >
+                                    Voter Verification
                                 </a>
                             </div>
                         </div>

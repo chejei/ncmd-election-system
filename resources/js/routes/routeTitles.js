@@ -40,6 +40,7 @@ const routeTitles = {
   "/apply-candidacy": "Candidacy Application",
   "/candidacy-acknowledgement": "Candidacy Acknowledgement",
   "/how-to-vote": "How to Vote",
+  "/voter-verification": "Voter Verification",
 };
 
 export default routeTitles;

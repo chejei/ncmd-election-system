@@ -12,6 +12,7 @@ export default function ImportVoters() {
     const [importErrors, setImportErrors] = useState({});
     const fileInputRef = useRef(null);
     const requiredHeaders = [
+        "registration_num",
         "first_name",
         "last_name",
         "middle_name",
@@ -115,9 +116,15 @@ export default function ImportVoters() {
                     );
                     const validEmail = isValidEmail(row.email);
                     const validPhone = isValidPhone(row.phone_number);
+                    const validRegistrationNum = isValidRegistrationNum(
+                        row.registration_num
+                    );
 
                     const hasErrors =
-                        !existsChurch || !validEmail || !validPhone;
+                        !existsChurch ||
+                        !validEmail ||
+                        !validPhone ||
+                        !validRegistrationNum;
 
                     return hasErrors ? null : index;
                 })
@@ -152,8 +159,6 @@ export default function ImportVoters() {
                 voters: dataToImport,
             });
 
-            console.log(response);
-
             const { success_count, error_count, success_rows, data } =
                 response.data;
 
@@ -173,15 +178,21 @@ export default function ImportVoters() {
                     <p><strong>Successful:</strong> ${success_count}</p>
                     <p><strong>Errors:</strong> ${error_count}</p>
                 `,
+                didClose: () => {
+                    const updatedCsv = csvData.map((row, index) => {
+                        if (success_rows.includes(index)) {
+                            return {
+                                ...row,
+                                _imported: true, // flag
+                            };
+                        }
+                        return row;
+                    });
+
+                    setCsvData(updatedCsv);
+                },
             });
 
-            // Remove only successfully imported rows
-            const updatedCsv = csvData.filter(
-                (_, index) =>
-                    !success_rows.includes(selectedRows.indexOf(index))
-            );
-
-            setCsvData(updatedCsv);
             setSelectedRows([]);
             setSelectAll(false);
 
@@ -189,7 +200,6 @@ export default function ImportVoters() {
                 fileInputRef.current.value = null;
             }
         } catch (error) {
-            console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Import Failed",
@@ -222,9 +232,19 @@ export default function ImportVoters() {
         });
     };
 
-    const isValidPhone = (number) => /^(09|\+639)\d{9}$/.test(number);
+    const isValidPhone = (number) => {
+        if (!number) return true; // allow empty
+        return /^(09|\+639)\d{9}$/.test(number);
+    };
 
-    const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const isValidEmail = (email) => {
+        if (!email) return true; // allow empty
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
+
+    const isValidRegistrationNum = (registrationNum) => {
+        return registrationNum && registrationNum.trim() !== "";
+    };
 
     return (
         <div className="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
@@ -288,6 +308,10 @@ export default function ImportVoters() {
                                                 (c) =>
                                                     c.name === row.church_name
                                             );
+                                            const validRegistrationNum =
+                                                isValidRegistrationNum(
+                                                    row.registration_num
+                                                );
                                             const validEmail = isValidEmail(
                                                 row.email
                                             );
@@ -297,25 +321,37 @@ export default function ImportVoters() {
                                             return (
                                                 !existsChurch ||
                                                 !validEmail ||
-                                                !validPhone
+                                                !validPhone ||
+                                                !validRegistrationNum
                                             );
                                         })}
                                     />
                                 </th>
-                                {Object.keys(csvData[0]).map((key, idx) => (
-                                    <th key={idx} className="border p-2">
-                                        {key}
-                                    </th>
-                                ))}
+                                {Object.keys(csvData[0]).map((key, idx) => {
+                                    if (key == "_imported") return null;
+                                    return (
+                                        <th key={idx} className="border p-2">
+                                            {key}
+                                        </th>
+                                    );
+                                })}
                             </tr>
                         </thead>
                         <tbody>
                             {csvData.map((row, rowIndex) => {
+                                if (row._imported) return null;
                                 const clientErrors = [];
                                 const existsChurch = churches.some(
                                     (c) => c.name === row.church_name
                                 );
-
+                                if (
+                                    !isValidRegistrationNum(
+                                        row.registration_num
+                                    )
+                                )
+                                    clientErrors.push(
+                                        `Registration Number is required.`
+                                    );
                                 if (!existsChurch)
                                     clientErrors.push(
                                         `Church not found: ${row.church_name}`

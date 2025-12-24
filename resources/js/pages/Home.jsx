@@ -159,6 +159,11 @@ export default function Home() {
                                     and delegates of NCMD are eligible to vote.
                                 </li>
                                 <li>
+                                    Voters must be physically present at the
+                                    camp during the election period to be
+                                    allowed to participate.
+                                </li>
+                                <li>
                                     Each voter is entitled to one vote per
                                     position.
                                 </li>

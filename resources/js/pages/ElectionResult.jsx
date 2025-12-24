@@ -40,11 +40,36 @@ export default function ElectionResult() {
     }
 
     if (!stats) {
-        return navigate(-1);
+        // return navigate(-1);
+        return (
+            <section className="bg-white flex flex-col items-center text-center justify-center px-4 min-h-[80vh] md:min-h-screen">
+                <div className="text-center py-16">
+                    <h2 className="text-3xl font-bold text-gray-800">
+                        No candidates available
+                    </h2>
+                    <p className="text-gray-500 mt-3 mb-4">
+                        Results will appear once candidates are approved.
+                    </p>
+                    <div className="flex flex-row gap-4 items-center text-center">
+                        <a
+                            className="btn font-medium inline-block bg-blue-500 text-white py-2 px-4 rounded-3xl hover:bg-blue-800 cursor-pointer"
+                            href="/"
+                        >
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+            </section>
+        );
     }
 
     const registeredVoters = stats.total_voters;
     const totalVoted = stats.total_returns;
+
+    const votingPercentage =
+        registeredVoters > 0
+            ? (totalVoted / registeredVoters).toFixed(2) * 100
+            : 0;
 
     const formatDateTime = (date) => {
         const time = date.toLocaleTimeString([], {
@@ -60,7 +85,10 @@ export default function ElectionResult() {
         return `${time} - ${formattedDate}`;
     };
 
-    if (totalVoted === 0) {
+    if (
+        totalVoted === 0 ||
+        votingPercentage <= Math.round(stats.show_result_percentage)
+    ) {
         return (
             <section className="bg-white flex flex-col items-center text-center justify-center px-4 min-h-[80vh] md:min-h-screen">
                 <h2 className="text-3xl font-bold text-gray-800">

@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { EmailIcon, PhoneIcon, ResetIcon } from "../../../assets/icons/icon";
+import {
+    EmailIcon,
+    PhoneIcon,
+    ResetIcon,
+    Visibility,
+    VisibilityOff,
+} from "../../../assets/icons/icon";
 import axios from "../../../api/axios";
 import Swal from "sweetalert2";
 
@@ -9,6 +15,7 @@ export default function ViewVoter() {
     const navigate = useNavigate();
     const [voter, setVoter] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [showPin, setShowPin] = useState(false);
     useEffect(() => {
         const fetchVoter = async () => {
             try {
@@ -93,6 +100,9 @@ export default function ViewVoter() {
         return acc;
     }, {});
 
+    const pin = voter?.pin_code;
+    const maskedPin = pin ? "*".repeat(pin.length) : "-";
+
     return (
         <div className="bg-white border border-gray-100 shadow-md p-6 rounded-md lg:col-span-2">
             <div>
@@ -104,6 +114,14 @@ export default function ViewVoter() {
                 </h3>
                 <div className="flex flex-1 pb-4">
                     <div className="py-4 flex-1">
+                        <dl className="mb-2">
+                            <dt className="font-semibold text-gray-900">
+                                Registration Number
+                            </dt>
+                            <dd className="text-gray-500">
+                                {voter.registration_num || "-"}
+                            </dd>
+                        </dl>
                         <dl className="mb-2">
                             <dt className="font-semibold text-gray-900">
                                 Email
@@ -167,6 +185,30 @@ export default function ViewVoter() {
                                     <ResetIcon />
                                     <span className="sr-only">Send Email</span>
                                 </button>
+                            </div>
+                            <div className="flex flex-row items-center gap-2 mb-2 pin-notif pin-notif-visibility">
+                                <p className="text-sm italic">Pin code: </p>
+                                {showPin ? pin || "-" : maskedPin}
+                                {pin && (
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setShowPin((prev) => !prev)
+                                        }
+                                        className="text-gray-700 border border-gray-700 hover:bg-gray-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2 inline-flex items-center"
+                                    >
+                                        {showPin ? (
+                                            <Visibility />
+                                        ) : (
+                                            <VisibilityOff />
+                                        )}
+                                        <span className="sr-only">
+                                            {showPin
+                                                ? "Hide pin code"
+                                                : "Show pin code"}
+                                        </span>
+                                    </button>
+                                )}
                             </div>
                         </dl>
                     </div>

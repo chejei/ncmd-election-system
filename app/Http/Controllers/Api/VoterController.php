@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Mail\SendPinMail;
 use App\Mail\PinResetMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Validator;
 
 class VoterController extends Controller
 {
@@ -26,6 +28,7 @@ class VoterController extends Controller
                 $query->where(function ($q) use ($search) {
                     $q->where('first_name', 'like', "%{$search}%")
                     ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('registration_num', 'like', "%{$search}%")
                     ->orWhere('email', 'like', "%{$search}%");
                 });
             })
@@ -48,9 +51,10 @@ class VoterController extends Controller
             'last_name'    => 'required|string|max:255',
             'middle_name'  => 'nullable|string|max:255',
             'suffix_name'  => 'nullable|string|max:50',
-            'email'        => 'required|email|unique:voters,email',
+            'email'        => 'nullable|email',
             'phone_number' => 'nullable|string|max:20',
             'church_id'    => 'nullable|exists:churches,id',
+            'registration_num' => 'required|string|unique:voters,registration_num',
         ]);
 
         $voter = Voter::create($data);
@@ -70,9 +74,10 @@ class VoterController extends Controller
             'last_name'    => 'required|string|max:255',
             'middle_name'  => 'nullable|string|max:255',
             'suffix_name'  => 'nullable|string|max:50',
-            'email'        => 'required|email|unique:voters,email,' . $voter->id,
+            'email'        => 'nullable|email',
             'phone_number' => 'nullable|string|max:20',
             'church_id'    => 'nullable|exists:churches,id',
+            // 'registration_num' => 'required|string|unique:voters,registration_num',
         ]);
 
         $voter->update($data);
@@ -146,6 +151,7 @@ class VoterController extends Controller
             'voters.*.email' => 'nullable|email',
             'voters.*.phone_number' => 'nullable|string',
             'voters.*.church_name' => 'required|string',
+            'voters.*.registration_num' => 'required|string',
             'voters.*.csv_index' => 'required|integer'
         ]);
 
@@ -160,20 +166,18 @@ class VoterController extends Controller
             $message = "";
             $success = false;
 
-            /** CHECK 1: Duplicate Email */
-            if (!empty($voterData['email'])) {
-                $existing = Voter::where('email', $voterData['email'])->first();
-                if ($existing) {
-                    $message = "Duplicate email '{$voterData['email']}' found.";
-                    $error_rows[] = $csvIndex;
+            /** CHECK 1: Duplicate registration_num */
+            $existing = Voter::where('registration_num', $voterData['registration_num'])->first();
+            if ($existing) {
+                $message = "Duplicate registration number '{$voterData['registration_num']}' found.";
+                $error_rows[] = $csvIndex;
 
-                    $results[] = [
-                        "voter" => $voterData,
-                        "message" => $message,
-                        "success" => false
-                    ];
-                    continue;
-                }
+                $results[] = [
+                    "voter" => $voterData,
+                    "message" => $message,
+                    "success" => false
+                ];
+                continue;
             }
 
             /** CHECK 2: Church Exists */
@@ -199,16 +203,27 @@ class VoterController extends Controller
                     'suffix_name'  => $voterData['suffix_name'] ?? null,
                     'email'        => $voterData['email'] ?? null,
                     'phone_number' => $voterData['phone_number'] ?? null,
+                    'registration_num' => $voterData['registration_num'],
                     'church_id'    => $church->id,
                 ]);
 
                 $message = "Inserted successfully.";
                 $success = true;
                 $success_rows[] = $csvIndex;
+
             } catch (\Exception $e) {
                 $message = "Insert failed: " . $e->getMessage();
                 $error_rows[] = $csvIndex;
                 $success = false;
+
+                // Record the error in results and continue to next voter
+                $results[] = [
+                    "voter" => $voterData,
+                    "message" => $message,
+                    "success" => false
+                ];
+
+                continue; // skip to next voter
             }
 
             $results[] = [
@@ -227,7 +242,38 @@ class VoterController extends Controller
         ]);
     }
 
+    public function verify(Request $request)
+    {
+         $validator = Validator::make($request->all(), [
+            'last_name' => 'required|string',
+            'first_name' => 'required|string',
+            'registration_num'  => 'required|string|size:6',
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+       $voter = Voter::where('first_name', $request->first_name)
+            ->where('last_name', $request->last_name)
+            ->where('registration_num', $request->registration_num)
+            ->first();
+
+        if (!$voter) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No matching record found.'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'pin_code' => $voter->pin_code, // or masked version
+        ]);
+    }
 
 
 }

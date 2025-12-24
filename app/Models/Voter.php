@@ -19,8 +19,10 @@ class Voter extends Model
         'church_id',
         'pin_code',
         'voted_photo',
-        'email',          
+        'email',         
+        'registration_num', 
         'phone_number',   
+        'pin_code'
     ];
 
     protected $appends = ['church_name' , 'full_name', 'restrict'];

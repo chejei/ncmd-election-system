@@ -69,7 +69,7 @@ export default function CandidacyAcknowledgement() {
                 <div className="flex gap-2">
                     <a
                         href="/"
-                        className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-red-700 transition"
+                        className="btn font-medium inline-block text-sm lg:text-base ml-0 lg:ml-auto bg-blue-600 text-white py-2 px-4 rounded-3xl hover:bg-red-700 cursor-pointer"
                     >
                         Back to Home
                     </a>

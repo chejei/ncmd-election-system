@@ -119,7 +119,6 @@ export default function EditVoter() {
             type: "email",
             className: "w-full border rounded px-3 py-2",
             wrapperClass: "mb-3",
-            required: true,
         },
         {
             name: "phone_number",
@@ -127,7 +126,6 @@ export default function EditVoter() {
             type: "phone_number",
             className: "w-full border rounded px-3 py-2",
             wrapperClass: "mb-3",
-            required: true,
         },
         {
             name: "church_id",
@@ -137,6 +135,14 @@ export default function EditVoter() {
             className: "w-full border rounded px-3 py-2",
             wrapperClass: "mb-3",
         },
+        // {
+        //     name: "registration_num",
+        //     label: "Registration Number",
+        //     type: "text",
+        //     className: "w-full border rounded px-3 py-2",
+        //     wrapperClass: "mb-3",
+        //     required: true,
+        // },
     ];
 
     const onSubmit = async (data) => {

@@ -246,6 +246,7 @@ export default function AddCandidate() {
             })),
             className: "w-full border rounded px-3 py-2",
             wrapperClass: "mb-3",
+            required: true,
         },
     ];
 

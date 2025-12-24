@@ -45,7 +45,25 @@ export default function Candidates() {
             <section className="bg-white py-10">
                 <div className="mx-auto sm:px-7 px-4 max-w-screen-xl">
                     {positions.length === 0 ? (
-                        <p className="text-center text-gray-500">Loading...</p>
+                        <>
+                            <div className="flex flex-col items-center justify-center py-16 text-center">
+                                <h2 className="text-3xl font-bold text-gray-800">
+                                    No Data Found
+                                </h2>
+
+                                <p className="text-gray-500 mt-3 mb-4">
+                                    There is currently no data to display.
+                                </p>
+                                <div className="flex flex-row gap-4 items-center text-center">
+                                    <a
+                                        className="btn font-medium inline-block bg-blue-500 text-white py-2 px-4 rounded-3xl hover:bg-blue-800 cursor-pointer"
+                                        href="/"
+                                    >
+                                        Back to Home
+                                    </a>
+                                </div>
+                            </div>
+                        </>
                     ) : (
                         positions
                             .filter((pos) => pos.candidate_count > 0)

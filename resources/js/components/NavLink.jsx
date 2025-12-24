@@ -8,7 +8,7 @@ export default function NavLink({ href, children }) {
     return (
         <a
             href={href}
-            className={`relative font-medium transition-all hover:text-blue-600 ${
+            className={`relative font-medium transition-all hover:text-blue-600 text-sm lg:text-base ${
                 isActive ? "text-blue-600" : "text-gray-800"
             }`}
         >

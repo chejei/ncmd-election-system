@@ -11,6 +11,7 @@ import ElectionResult from "./pages/ElectionResult";
 import CandidacyApplication from "./pages/CandidacyApplication";
 import CandidacyThankYou from "./pages/CandidacyAcknowledgement";
 import HowToVote from "./pages/HowToVote";
+import VoterVerification from "./pages/VoterVerification";
 
 import VoterLogin from "./pages/voter/VoterLogin";
 import Welcome from "./pages/voter/Welcome";
@@ -94,6 +95,11 @@ export default function App() {
                             element={<ElectionResult />}
                         />
                         <Route path="how-to-vote" element={<HowToVote />} />
+                        <Route
+                            path="voter-verification"
+                            element={<VoterVerification />}
+                        />
+                        <Route path="*" element={<NotFound />} />
                     </Route>
 
                     {/* Protected admin */}
@@ -222,7 +228,6 @@ export default function App() {
                     </Route>
 
                     {/* Global 404 fallback */}
-                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>
         </>

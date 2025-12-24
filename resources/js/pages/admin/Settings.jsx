@@ -44,10 +44,11 @@ export default function Settings() {
 
     // Handle text/date inputs
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, type, value, checked } = e.target;
+
         setSettings((prev) => ({
             ...prev,
-            [name]: value,
+            [name]: type === "checkbox" ? checked : value,
         }));
     };
 
@@ -406,8 +407,26 @@ export default function Settings() {
                         <div className="p-4">
                             <form
                                 onSubmit={handleSubmit}
-                                className="grid grid-cols-1 sm:grid-cols-4 sm:gap-4"
+                                className="grid grid-cols-1 sm:grid-cols-2 sm:gap-4"
                             >
+                                <div className="flex items-center ">
+                                    <label className="block text-md font-medium text-gray-700">
+                                        Allow voters to proceed with voting
+                                    </label>
+                                </div>
+                                <div className="">
+                                    <input
+                                        type="checkbox"
+                                        className="toggle-switch"
+                                        id="allow-voting-checkbox"
+                                        name="is_voting_open"
+                                        checked={!!settings.is_voting_open}
+                                        onChange={handleChange}
+                                    />
+                                    <label htmlFor="allow-voting-checkbox">
+                                        <span className="sw"></span>
+                                    </label>
+                                </div>
                                 <div className="flex items-center ">
                                     <label className="block text-md font-medium text-gray-700">
                                         Show result on (percentage)
@@ -424,7 +443,8 @@ export default function Settings() {
                                         className="w-full border rounded px-3 py-2"
                                     />
                                 </div>
-                                <div className="col-span-1 sm:col-span-4 flex justify-end">
+
+                                <div className="col-span-1 sm:col-span-2 flex justify-end">
                                     <button
                                         type="submit"
                                         className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-800 cursor-pointer"

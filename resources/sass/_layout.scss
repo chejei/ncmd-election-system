@@ -480,6 +480,17 @@ ul {
             }
         }
     }
+    &-visibility {
+        button {
+            &:hover {
+                svg {
+                    path {
+                        fill: #fff;
+                    }
+                }
+            }
+        }
+    }
 }
 
 .guidelines-list {

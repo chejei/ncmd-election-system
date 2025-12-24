@@ -104,7 +104,7 @@ export default function Table({
                     )}
                     {bulkActions?.approve && (
                         <button
-                            className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 mx-1 rounded cursor-pointer"
+                            className="bg-green-500  disabled:bg-gray-400 hover:bg-green-600 text-white px-2 py-1 mx-1 rounded cursor-pointer"
                             onClick={() => handleBulkAction("approve")}
                             disabled={selectedIds.length === 0}
                         >
@@ -113,7 +113,7 @@ export default function Table({
                     )}
                     {bulkActions?.reject && (
                         <button
-                            className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 mx-1 rounded cursor-pointer"
+                            className="bg-red-500  disabled:bg-gray-400  hover:bg-red-600 text-white px-2 py-1 mx-1 rounded cursor-pointer"
                             onClick={() => handleBulkAction("reject")}
                             disabled={selectedIds.length === 0}
                         >
