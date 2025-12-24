@@ -20,7 +20,7 @@ export default function HowToVote() {
     const items = [
         {
             title: "Step 1: Secure Your Login Credentials",
-            text: "Your Login Credentials consist of your Last Name and PIN. Make sure you have them ready before voting. If you did not receive your PIN or are having trouble logging in, please contact the Election Committee immediately.",
+            text: "To securely obtain your login credentials: please visit <a href=`/voter-verification`>Voter Verification</a> and provide the required information. Once submitted, your PIN code will be issued, which you can use to access your account.",
             img: step1img,
         },
         {
@@ -72,7 +72,30 @@ export default function HowToVote() {
                         Follow these steps to cast your vote securely and
                         successfully:
                     </h4>
-                    <Slider items={items} />
+                    {/* <Slider items={items} /> */}
+                    {items.map((item, index) => (
+                        <div
+                            key={index}
+                            className="flex flex-col text-left border-b border-gray-200 items-start lg:items-center gap-6 bg-white p-6 "
+                        >
+                            <h3 className="text-xl font-semibold mb-2">
+                                {item.title}
+                            </h3>
+                            <img
+                                src={item.img}
+                                alt={item.title}
+                                className="w-full  h-auto object-contain rounded-md"
+                            />
+                            <div className="flex-1">
+                                <p
+                                    className="text-gray-700"
+                                    dangerouslySetInnerHTML={{
+                                        __html: item.text,
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </section>
         </>
