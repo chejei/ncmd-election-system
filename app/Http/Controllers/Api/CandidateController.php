@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Candidate;
 use App\Models\Position;
-
+use App\Models\CandidateAnswer;
 
 
 class CandidateController extends Controller
@@ -105,6 +105,22 @@ class CandidateController extends Controller
             'electoral_group_id' => $request->electoral_group_id,
             'status' => $request->status ?? 'pending',
         ]);
+
+        if ($request->filled('questions')) {
+            $questions = json_decode($request->questions, true);
+
+            if (is_array($questions)) {
+                foreach ($questions as $q) {
+                    if (!empty($q['answer'])) {
+                        CandidateAnswer::create([
+                            'candidate_id' => $candidate->id,
+                            'question_id' => $q['id'],
+                            'answer' => $q['answer'],
+                        ]);
+                    }
+                }
+            }
+        }
 
         return response()->json([
             'message' => 'Candidate created successfully.',

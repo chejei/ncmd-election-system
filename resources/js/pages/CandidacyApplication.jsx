@@ -155,7 +155,6 @@ export default function CandidacyApplication() {
     const onSubmit = async (data) => {
         try {
             const formData = new FormData();
-
             Object.entries(data).forEach(([key, value]) => {
                 // Convert undefined to null
                 const normalizedValue = value === undefined ? null : value;
@@ -172,6 +171,16 @@ export default function CandidacyApplication() {
 
                 formData.append(key, normalizedValue);
             });
+
+            formData.append(
+                "questions",
+                JSON.stringify(
+                    questions.map((q) => ({
+                        id: q.id,
+                        answer: q.answer,
+                    }))
+                )
+            );
 
             const res = await axios.post("/api/apply-candidacy", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
