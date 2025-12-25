@@ -65,11 +65,7 @@ class CandidateController extends Controller
             'school' => 'nullable|string|max:255',
             'church_id' => 'required|integer|exists:churches,id',
             'position_id' => 'required|integer|exists:positions,id',
-<<<<<<< HEAD
-            'electoral_group_id' => 'nullable|exists:electoral_groups,id',
-=======
             'electoral_group_id' => 'required|integer|exists:electoral_groups,id',
->>>>>>> 1ee2158991ef254a14e6b28b9aa8f8ac0f8b8e30
             'photo' => 'nullable|string', // Base64 string
             'endorsed' => 'nullable|string|max:255',
         ]);
@@ -147,11 +143,7 @@ class CandidateController extends Controller
             'school' => 'nullable|string|max:255',
             'church_id' => 'required|integer|exists:churches,id',
             'position_id' => 'required|integer|exists:positions,id',
-<<<<<<< HEAD
-            'electoral_group_id' => 'nullable|exists:electoral_groups,id',
-=======
             'electoral_group_id' => 'required|integer|exists:electoral_groups,id',
->>>>>>> 1ee2158991ef254a14e6b28b9aa8f8ac0f8b8e30
             'photo' => 'nullable|string', // Base64 string
             'endorsed' => 'nullable|string|max:255',
         ]);
