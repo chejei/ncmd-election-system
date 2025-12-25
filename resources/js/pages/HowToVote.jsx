@@ -20,7 +20,7 @@ export default function HowToVote() {
     const items = [
         {
             title: "Step 1: Secure Your Login Credentials",
-            text: "To securely obtain your login credentials: please visit <a href=`/voter-verification`>Voter Verification</a> and provide the required information. Once submitted, your PIN code will be issued, which you can use to access your account.",
+            text: "To securely obtain your login credentials: please visit <a class='no-underline hover:underline' href='/voter-verification'>Voter Verification</a> and provide the required information. Once submitted, your PIN code will be issued, which you can use to access your account.",
             img: step1img,
         },
         {
