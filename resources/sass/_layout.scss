@@ -568,8 +568,21 @@ ul {
 
 .political-group-logo {
     position: absolute;
-    right: -60px;
+    right: 5px;
     top: -60px;
     background-color: #fff;
     border-radius: 50%;
+
+    @include respond(sm) {
+        top: -60px;
+    }
+
+    @include respond(md) {
+        right: -20px;
+        top: -80px;
+    }
+
+    @include respond(lg) {
+        top: -60px;
+    }
 }

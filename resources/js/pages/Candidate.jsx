@@ -50,13 +50,13 @@ export default function Candidate() {
                 }}
             >
                 <div className="max-w-screen-xl  px-0  md:px-7 mx-auto pt-10">
-                    <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-0 md:gap-2">
                         <div className="">
                             {candidate.photo && (
                                 <img
                                     src={`/storage/${candidate.photo}`}
                                     alt={candidate.first_name}
-                                    className="w-full object-cover rounded-lg object-top md:object-bottom h-[500px] md:h-auto"
+                                    className="w-full object-contain md:object-cover rounded-lg object-top md:object-bottom h-[700px] md:h-auto"
                                 />
                             )}
                         </div>
@@ -66,14 +66,14 @@ export default function Candidate() {
                                     <img
                                         src={`/storage/${candidate.electoral_group.logo}`}
                                         alt={candidate.electoral_group.name}
-                                        className="w-30 h-30 object-cover rounded-lg object-top md:object-bottom h-[500px] md:h-auto"
+                                        className="w-30 h-30 object-cover rounded-lg object-top md:object-bottom h-auto"
                                     />
                                 </div>
                             )}
-                            <h1 className="text-5xl font-bold mb-3 leading-6">
+                            <h1 className="text-5xl md:text-4xl  lg:text-5xl font-bold mb-3 ">
                                 {candidate.full_name}
                                 <br />
-                                <span className="text-xl sm:text-2xl">
+                                <span className="text-xl sm:text-2xl mt-6 md:mt-2 lg:mt-0">
                                     for {candidate.position_title}
                                 </span>
                             </h1>
